@@ -4,6 +4,11 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
+    field: {
+        'backgroundColor': 'rgba(255,0,0,0.5)',
+        flex: 1,
+        minHeight: 800,
+    },
     item: {
         backgroundColor: '#FFFFFF',
         alignItems: 'center',
@@ -31,6 +36,7 @@ const styles = StyleSheet.create({
     cell: {
         backgroundColor: '#FFFFFF',
         alignItems: 'center',
+        borderWidth: 2,
         justifyContent: 'center',
         position: 'absolute',
         flex: 0,

@@ -16,7 +16,10 @@ const RNApp = createSwitchNavigator(
         },
         Options: {
             screen: Options,
-            navigationOptions: { header: null, gesturesEnabled: false }
+            navigationOptions: { 
+                header: null,
+                gesturesEnabled: false,
+            }
         }
     },
     {

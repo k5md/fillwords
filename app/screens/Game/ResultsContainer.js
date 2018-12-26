@@ -18,9 +18,8 @@ class ResultsContainer extends Component {
                     animationType="slide"
                     transparent={false}
                     visible={this.state.modalVisible}
-                    onRequestClose={() => {
-                    Alert.alert('Modal has been closed.');
-                }}>
+                    onRequestClose={() => {}}
+                >
                     <View style={{marginTop: 22}}>
                         <View>
                             <Text>Hello World!</Text>

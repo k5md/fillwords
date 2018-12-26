@@ -129,11 +129,7 @@ class FieldView extends Component {
         } = this.props;
 
         return (
-            <View nativeID="field" {...this._panResponder.panHandlers} style={{
-                'backgroundColor': 'rgba(255,0,0,0.5)',
-                flex: 1,
-                minHeight: 800,
-            }}>
+            <View style={styles.field} {...this._panResponder.panHandlers} >
                 {cells.map((item, index) => <CellContainer key={item.row+''+item.col} cellIndex={index} />)}
             </View>           
         );   

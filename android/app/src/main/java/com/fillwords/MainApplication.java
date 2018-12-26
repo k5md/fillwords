@@ -12,6 +12,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.pgsqlite.SQLitePluginPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
+import com.horcrux.svg.SvgPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -25,6 +27,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new SQLitePluginPackage(),
+          new VectorIconsPackage(),
+          new SvgPackage(),
           new MainReactPackage()
       );
     }

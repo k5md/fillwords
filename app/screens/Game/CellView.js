@@ -20,8 +20,6 @@ class CellView extends React.PureComponent {
         }
     }
 
- 
-
     render() {
         const { selected, flipped, value, y, x, width, height } = this.props.cell;
 
@@ -55,23 +53,14 @@ class CellView extends React.PureComponent {
           ]
         }
 
-        const measuresStyle = StyleSheet.create({
-            cell: {
-                top: y,
-                left: x,
-                width,
-                height
-            },
-
- 
-        });
-
         return (
-            <View style={{
-            }}>
+            <View>
                 <Animated.View style={[frontAnimatedStyle, {
                     ...styles.cell,
-                    ...measuresStyle.cell,
+                    top: y,
+                    left: x,
+                    width,
+                    height,
                     backgroundColor: selected ? 'rgba(125,75,255,1)' : 'rgba(11,125,125,0.5)',
                     opacity: frontOpacity,
                 }]} >
@@ -79,7 +68,10 @@ class CellView extends React.PureComponent {
                 </Animated.View>
                 <Animated.View style={[backAnimatedStyle, {
                     ...styles.cell,
-                    ...measuresStyle.cell,
+                    top: y,
+                    left: x,
+                    width,
+                    height,
                     backgroundColor: '#FFFFFF',
                     opacity: backOpacity,
                 }]} >
@@ -90,3 +82,4 @@ class CellView extends React.PureComponent {
 }
 
 export default CellView;
+
