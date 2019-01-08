@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, FlatList, StyleSheet, Dimensions, PanResponder, Animated, Easing } from 'react-native';
 import styles from './styles';
-import classnames from 'classnames';
 
 class CellView extends React.PureComponent {
     state = {
@@ -42,39 +41,49 @@ class CellView extends React.PureComponent {
         })         
         
         const frontAnimatedStyle = {
-          transform: [
-            { rotateY: frontInterpolate }
-          ]
+            transform: [
+                { rotateY: frontInterpolate }
+            ],
+            opacity: frontOpacity,
         }
 
         const backAnimatedStyle = {
-          transform: [
-            { rotateY: backInterpolate }
-          ]
+            transform: [
+                { rotateY: backInterpolate }
+            ],
+            opacity: backOpacity,
         }
 
         return (
             <View>
-                <Animated.View style={[frontAnimatedStyle, {
-                    ...styles.cell,
-                    top: y,
-                    left: x,
-                    width,
-                    height,
-                    backgroundColor: selected ? 'rgba(125,75,255,1)' : 'rgba(11,125,125,0.5)',
-                    opacity: frontOpacity,
-                }]} >
-                    <Text style={styles.itemText}>{value}</Text>
+                <Animated.View style={[
+                    frontAnimatedStyle,
+                    styles.cell_outer_container,
+                    selected && styles.cell_selected, 
+                    {
+                        top: y,
+                        left: x,
+                        width,
+                        height,
+                    },
+                ]}>
+                    <View style={styles.cell_container}>
+                    <View style={styles.cell}>
+                        <Text style={styles.cell_text}>{value}</Text>
+                    </View>
+                    </View>
                 </Animated.View>
-                <Animated.View style={[backAnimatedStyle, {
-                    ...styles.cell,
-                    top: y,
-                    left: x,
-                    width,
-                    height,
-                    backgroundColor: '#FFFFFF',
-                    opacity: backOpacity,
-                }]} >
+                <Animated.View style={[
+                    backAnimatedStyle,
+                    styles.cell_outer_container,
+                    styles.cell_backface,
+                    {
+                        top: y,
+                        left: x,
+                        width,
+                        height,
+                    },
+                ]}>
                 </Animated.View>                
             </View>
        );

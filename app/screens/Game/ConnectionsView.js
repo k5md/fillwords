@@ -36,7 +36,7 @@ class ConnectionsView extends PureComponent {
                     <View key={_.uniqueId()} style={{
                         "position": 'absolute',
                         "height": thickness,
-                        "backgroundColor": "rgba(0, 255, 255, 0.1)",
+                        "backgroundColor": "rgba(255, 1, 1, 0.1)",
                         "left": cx,
                         "top": cy,
                         "width": length,

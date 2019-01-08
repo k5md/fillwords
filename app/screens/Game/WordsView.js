@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ViewPagerAndroid } from 'react-native';
+import { View, Text, ViewPagerAndroid, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
 
@@ -18,11 +18,16 @@ class WordsView extends Component {
         } = this.props;
 
         return (
-            <View nativeID="words" style={{
-                flex: 1,
-                height: 100
-            }}>
-                {words.length > 0 && <ViewPagerAndroid 
+            words.length > 0 && <View nativeID="words" style={styles.words}>
+                <View style={[styles.button_left, currentWordIndex <= 0 && styles.button_disabled]}>
+                    <TouchableOpacity 
+                        onPress={() => setCurrentWordIndex(currentWordIndex - 1)}
+                        disabled={currentWordIndex <= 0}
+                    >
+                        <Text style={styles.button_text}>‹</Text>
+                    </TouchableOpacity>
+                </View>
+                <ViewPagerAndroid 
                     style={styles.container}
                     initialPage={currentWordIndex}
                     removeClippedSubviews={true}
@@ -31,15 +36,29 @@ class WordsView extends Component {
                     }}
                     ref={ref => this._pagerRef = ref}
                 >
+
                     {words.map((item, idx) => (
-                        <View key={idx} style={item.guessed ? styles.guessed : styles.notGuessed}>
-                            <Text>{item.word}</Text>
-                            <Text>{item.translation}</Text>
-                            <Text>{item.guessed}</Text>
+                        <View 
+                            key={idx}
+                            style={[styles.word_container, item.guessed && styles.word_guessed]}
+                        >
+                            <View style={styles.word}>
+                                <Text style={styles.word_text}>{item.word}</Text>
+                                <Text style={styles.word_text}>{item.translation}</Text>
+                            </View>
                         </View>
                     ))}
-                </ViewPagerAndroid>}
-            </View>  
+                </ViewPagerAndroid>
+
+                <View style={[styles.button_right, currentWordIndex >= words.length - 1 && styles.button_disabled]}>
+                    <TouchableOpacity 
+                        onPress={() => setCurrentWordIndex(currentWordIndex + 1)}
+                        disabled={currentWordIndex >= words.length - 1}
+                    >
+                        <Text style={styles.button_text}>›</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
         );   
     }
 }

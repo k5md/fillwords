@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
         fontSize: 100,
         flex: 3,
         fontFamily: 'sans-serif-condensed',
-        color: color.COLOR_BLACK,
+        color: color.COLOR_BLACK_TRANSP,
     },
     title_sub: {
 
@@ -34,13 +34,14 @@ const styles = StyleSheet.create({
         height: 100,
         justifyContent: 'center', 
         alignItems: 'center',
-        backgroundColor:'#68a0cf',
-        borderRadius: 10,
-        borderWidth: 1,
-        borderColor: '#fff',
+        padding: 10,
+    },
+    button_play: {
+        width: 150,
+        height: 150,
     },
     container_buttons: {
-        flex: 1,
+        flex: 2,
         flexDirection: 'row',
         alignItems: 'flex-start'
     },

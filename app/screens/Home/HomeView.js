@@ -4,8 +4,10 @@ import styles from './styles';
 import { handleAndroidBackButton, removeAndroidBackButtonHandler } from 'app/utils/androidBackButton';
 import HomeAnimationContainer from './HomeAnimationContainer';
 import SvgUri from 'react-native-svg-uri';
-import icon from 'app/assets/fontawesome-free-5.6.1-desktop/svgs/solid/play.svg';
 import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource';
+import AppStyles from 'app/config/styles';
+import images from 'app/config/images';
+const { color, fonts } = AppStyles;
 
 class HomeView extends Component {
     constructor(props) {
@@ -42,9 +44,10 @@ class HomeView extends Component {
                         onPress={() => this.props.navigation.navigate('Statistics')}
                     >
                         <SvgUri 
-                            width="100"
-                            height="100"
-                            source={{uri: resolveAssetSource(require('app/assets/fontawesome-free-5.6.1-desktop/svgs/solid/chart-pie.svg')).uri}}
+                            width="75"
+                            height="75"
+                            fill={color.COLOR_BLACK_TRANSP}
+                            svgXmlData={images.icons.chartPie}    
                         />
                     </TouchableOpacity>
                     <TouchableOpacity 
@@ -52,9 +55,10 @@ class HomeView extends Component {
                         onPress={() => this.props.navigation.navigate('Game')}
                     >
                         <SvgUri 
-                            width="150"
-                            height="150"
-                            source={{uri: resolveAssetSource(require('app/assets/fontawesome-free-5.6.1-desktop/svgs/solid/play.svg')).uri}}
+                            width="100"
+                            height="100"
+                            fill={color.COLOR_BLACK_TRANSP}
+                            svgXmlData={images.icons.play}
                         />
                     </TouchableOpacity>
                     <TouchableOpacity 
@@ -62,9 +66,10 @@ class HomeView extends Component {
                         onPress={() => this.props.navigation.navigate('Options')}
                     >
                         <SvgUri 
-                            width="100"
-                            height="100"
-                            source={{uri: resolveAssetSource(require('app/assets/fontawesome-free-5.6.1-desktop/svgs/solid/cog.svg')).uri}}
+                            width="75"
+                            height="75"
+                            fill={color.COLOR_BLACK_TRANSP}
+                            svgXmlData={images.icons.cog}
                         />
                     </TouchableOpacity>
                 </View>

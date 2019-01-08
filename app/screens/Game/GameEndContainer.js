@@ -21,14 +21,7 @@ class WordsPreviewContainer extends Component {
                     width: 500,
                 }}>
                     <View>
-                        <FlatList
-                            data={this.props.words}
-                            renderItem={({item}) => <Text>{`${item.word} - ${item.translation}`}</Text>}
-                        />
-                        <Button 
-                            title='Got it!'
-                            onPress={() => this.props.playGame()}
-                        />
+                        <Text>Game fucking over</Text>}
                     </View>
                 </View>
             </Modal>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BackHandler, Alert, View, Text, FlatList, StyleSheet, Dimensions, PanResponder, ScrollView, ViewPagerAndroid} from 'react-native';
+import { Button, Text, View, TouchableOpacity} from 'react-native';
 import _ from 'lodash';
 
 import Field from 'app/lib/field';
@@ -107,13 +107,11 @@ class GameView extends Component {
 
     render() {
         return (
-
             <View style={styles.container}>
-
-                <FieldContainer   />
-                <ConnectionsContainer />
+                <FieldContainer />
+                <View style = {styles.hairline} />   
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('WordsPreviewModal')}><View><Text>Kek</Text></View></TouchableOpacity>
                 <WordsContainer />
-                {this.props.gameState === 'learning' && <WordsPreviewContainer />}
             </View>
         );
     }

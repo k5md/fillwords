@@ -4,9 +4,9 @@ import styles from './styles';
 import { handleAndroidBackButton, removeAndroidBackButtonHandler } from 'app/utils/androidBackButton';
 import Svg, { Rect } from 'react-native-svg';
 import SvgUri from 'react-native-svg-uri';
-import icon from 'app/assets/fontawesome-free-5.6.1-desktop/svgs/regular/angry.svg';
 import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource';
 import AppStyles from 'app/config/styles';
+import images from 'app/config/images';
 
 class OptionsView extends Component {
     constructor(props) {
@@ -51,7 +51,7 @@ class OptionsView extends Component {
                             width="30"
                             height="30"
                             fill='#66CCFF'
-                            source={{uri: resolveAssetSource(require('app/assets/fontawesome-free-5.6.1-desktop/svgs/solid/times.svg')).uri}}
+                            svgXmlData={images.icons.times}
                         />                    
                     </TouchableOpacity>
                 </View>

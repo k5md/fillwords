@@ -6,11 +6,6 @@ import * as gameActions from 'app/actions/gameActions';
 class WordsPreviewContainer extends Component {
     render() {
         return (
-            <Modal
-                animationType="slide"
-                transparent={true}
-                visible={this.props.gameState === 'learning'}
-                onRequestClose={() => console.log('requested close')}>
                 <View style={{
                     flex: 0,
                     backgroundColor: '#ffff00',
@@ -19,6 +14,8 @@ class WordsPreviewContainer extends Component {
                     left: 50,
                     height: 500,
                     width: 500,
+                    borderRadius: 55,
+                    opacity: 0.99
                 }}>
                     <View>
                         <FlatList
@@ -26,12 +23,11 @@ class WordsPreviewContainer extends Component {
                             renderItem={({item}) => <Text>{`${item.word} - ${item.translation}`}</Text>}
                         />
                         <Button 
-                            title='Got it!'
+                            title='Got its!'
                             onPress={() => this.props.playGame()}
                         />
                     </View>
                 </View>
-            </Modal>
         );
     }
 }

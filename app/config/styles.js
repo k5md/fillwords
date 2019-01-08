@@ -16,7 +16,7 @@ const AppStyles = {
         COLOR_GREYISH: '#ebebeb',
         COLOR_DARK_SEPERATOR: '#d4d4d4',
         COLOR_BLACK_TRANSP: 'rgba(0, 0, 0, 0.7)',
-        COLOR_GREY_TRANSP: 'rgba(67, 85, 85, 0.7)'
+        COLOR_GREY_TRANSP: 'rgba(67, 85, 85, 0.7)',
     },
     fonts: {
         FONT_REGULAR: 'Roboto-Regular',
