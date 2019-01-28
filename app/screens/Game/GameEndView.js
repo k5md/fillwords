@@ -3,7 +3,7 @@ import { Text, Button, View, FlatList, ScrollView, StyleSheet } from 'react-nati
 import Modal from 'react-native-modalbox';
 import { connect } from 'react-redux';
 import * as gameActions from 'app/actions/gameActions';
-
+import styles from './styles';
 class GameEndView extends Component {
     render() {
         const self = this;
@@ -15,22 +15,14 @@ class GameEndView extends Component {
                     self.props.navigation.navigate('Home');     
                 }}
                 isOpen={this.props.isOpen} 
-                style={{
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    marginTop: '15%',
-                    height: '80%',
-                    width: '80%',
-                    border: 1,
-                    borderRadius: 5,
-                }}
+                style={styles.game_end_container}
                 position={"top"} 
                 ref={"modal6"} 
                 swipeArea={20}
             >
                 <View>
-                    <View>
-                        <Text>Game fucking over</Text>
+                    <View style={styles.words_preview_title}>
+                        <Text style={styles.words_preview_title_text}>Congratulations!</Text>
                     </View>
                 </View>
             </Modal>

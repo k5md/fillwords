@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Text, Button, View, FlatList, ScrollView, StyleSheet } from 'react-native';
+import { Text, Button, TouchableOpacity, View, FlatList, ScrollView, StyleSheet } from 'react-native';
 import Modal from 'react-native-modalbox';
 import { connect } from 'react-redux';
 import * as gameActions from 'app/actions/gameActions';
+import styles from './styles';
 
 class WordsPreviewContainer extends Component {
     render() {
@@ -10,32 +11,29 @@ class WordsPreviewContainer extends Component {
             <Modal
                 onClosed={() => this.props.playGame()}
                 isOpen={this.props.isOpen} 
-                style={{
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    marginTop: '15%',
-                    height: '80%',
-                    width: '80%',
-                    border: 1,
-                    borderRadius: 5,
-                }}
+                style={styles.words_preview_container}
                 position={"top"} 
-                ref={"modal6"} 
+
                 swipeArea={20}
             >
                 <View>
-                    <View>
-                        <Text>Please, remember the following pairs:</Text>
+                    <View style={styles.words_preview_title}>
+                        <Text style={styles.words_preview_title_text}>Remember:</Text>
                     </View>
-                    <ScrollView>
-                        
-                            {this.props.words.map((item, index) => <View key={index} ><Text>{`${item.word} - ${item.translation}`}</Text></View>)}
-                        
+                    <View style={styles.words_preview_title_hairline} />
+                    <ScrollView >
+                        {this.props.words.map((item, index) => 
+                            <View key={index} style={styles.words_preview_content_entry}>
+                                <Text style={styles.words_preview_content_entry_text}>{item.word}</Text>
+                                <Text style={styles.words_preview_content_entry_text}>{item.translation}</Text>
+                            </View>)
+                        }
                     </ScrollView>
-                    <Button 
-                        title='Got it!'
-                        onPress={() => this.props.playGame()}
-                    />
+                    <TouchableOpacity onPress={() => this.props.playGame()}>
+                        <View style={styles.words_preview_button}>
+                            <Text style={styles.words_preview_button_text}>Done!</Text>
+                        </View>
+                    </TouchableOpacity>
                 </View>
             </Modal>
         );
