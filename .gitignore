@@ -57,3 +57,7 @@ buck-out/
 
 # Private libraries
 app/lib/field.js
+
+# Sublime Text project-related files
+*.sublime-project
+*.sublime-workspace

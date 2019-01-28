@@ -1,33 +1,43 @@
 import React, { Component } from 'react';
-import { Modal, Text, Button, View, FlatList } from 'react-native';
+import { Text, Button, View, FlatList, ScrollView, StyleSheet } from 'react-native';
+import Modal from 'react-native-modalbox';
 import { connect } from 'react-redux';
 import * as gameActions from 'app/actions/gameActions';
 
 class WordsPreviewContainer extends Component {
     render() {
         return (
-                <View style={{
-                    flex: 0,
-                    backgroundColor: '#ffff00',
-                    position: 'absolute',
-                    top: 50,
-                    left: 50,
-                    height: 500,
-                    width: 500,
-                    borderRadius: 55,
-                    opacity: 0.99
-                }}>
+            <Modal
+                onClosed={() => this.props.playGame()}
+                isOpen={this.props.isOpen} 
+                style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginTop: '15%',
+                    height: '80%',
+                    width: '80%',
+                    border: 1,
+                    borderRadius: 5,
+                }}
+                position={"top"} 
+                ref={"modal6"} 
+                swipeArea={20}
+            >
+                <View>
                     <View>
-                        <FlatList
-                            data={this.props.words}
-                            renderItem={({item}) => <Text>{`${item.word} - ${item.translation}`}</Text>}
-                        />
-                        <Button 
-                            title='Got its!'
-                            onPress={() => this.props.playGame()}
-                        />
+                        <Text>Please, remember the following pairs:</Text>
                     </View>
+                    <ScrollView>
+                        
+                            {this.props.words.map((item, index) => <View key={index} ><Text>{`${item.word} - ${item.translation}`}</Text></View>)}
+                        
+                    </ScrollView>
+                    <Button 
+                        title='Got it!'
+                        onPress={() => this.props.playGame()}
+                    />
                 </View>
+            </Modal>
         );
     }
 }
@@ -35,7 +45,7 @@ class WordsPreviewContainer extends Component {
 const mapStateToProps = (state) => {
     return {
         words: state.gameReducer.words,
-        gameState: state.gameReducer.gameState
+        isOpen: state.gameReducer.gameState === 'learning',
     };
 };
 

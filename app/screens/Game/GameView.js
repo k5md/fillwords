@@ -13,9 +13,12 @@ import WordsContainer from './WordsContainer';
 import FieldContainer from './FieldContainer';
 import ConnectionsContainer from './ConnectionsContainer';
 import WordsPreviewContainer from './WordsPreviewContainer';
+import GameEndContainer from './GameEndContainer';
 import metrics from 'app/config/metrics';
 
 import { handleAndroidBackButton, removeAndroidBackButtonHandler } from 'app/utils/androidBackButton';
+
+
 
 class GameView extends Component {
     componentWillUnmount() {
@@ -108,10 +111,12 @@ class GameView extends Component {
     render() {
         return (
             <View style={styles.container}>
+
                 <FieldContainer />
                 <View style = {styles.hairline} />   
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('WordsPreviewModal')}><View><Text>Kek</Text></View></TouchableOpacity>
                 <WordsContainer />
+                <WordsPreviewContainer />
+                <GameEndContainer {...{navigation: this.props.navigation}}/>
             </View>
         );
     }
