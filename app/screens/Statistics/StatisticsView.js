@@ -8,6 +8,9 @@ import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource'
 import AppStyles from 'app/config/styles';
 import images from 'app/config/images';
 
+import dictionary from 'app/utils/Dictionaries';
+import dictionariesConfig from 'app/constants/dictionariesConfig';
+
 class StatisticsView extends Component {
     constructor(props) {
         super(props);
@@ -52,38 +55,60 @@ class StatisticsView extends Component {
                     </TouchableOpacity>
                 </View>
                 <ScrollView style={[styles.container, styles.body]}>
-                    <View style={[styles.container, styles.body_item]}>  
+                    <View style={[styles.container, styles.body_item]}>
+                      <View style={styles.container_space_between}>
                         <Text style={styles.body_item_text}>
                             Current dictionary:
-                        </Text>                  
+                        </Text>
+                        <Text style={styles.body_item_text}>
+                            {dictionariesConfig.DICTIONARIES[languagePack].displayName}:
+                        </Text>
+                      </View>
                         <View style = {styles.hairline} />
                         <Text style={styles.body_item_text}>
                             Total words:
-                        </Text>   
-                        <View style = {styles.hairline} />          
+                        </Text>
                         <Text style={styles.body_item_text}>
-                            Words to learn:
+                            {dictionariesConfig.DICTIONARIES[languagePack].entriesCount}
                         </Text>
                         <View style = {styles.hairline} />          
                         <Text style={styles.body_item_text}>
-                            Level 1:
+                            Words to learn:
                         </Text>    
+                        <Text style={styles.body_item_text}>
+                            Level 0:
+                        </Text>
+                        <Text style={styles.body_item_text}>
+                            {this.dictionary.countWords({srsStatus: 0})}
+                        </Text>
                         <View style = {styles.hairline} />    
                         <Text style={styles.body_item_text}>
-                            Level 2:
-                        </Text>                  
+                            Level 1:
+                        </Text>
+                        <Text style={styles.body_item_text}>
+                            {this.dictionary.countWords({srsStatus: 1})}
+                        </Text>               
                         <View style = {styles.hairline} />
                         <Text style={styles.body_item_text}>
+                            Level 2:
+                        </Text>
+                        <Text style={styles.body_item_text}>
+                            {this.dictionary.countWords({srsStatus: 2})}
+                        </Text> 
+                        <View style = {styles.hairline} />          
+                        <Text style={styles.body_item_text}>
                             Level 3:
-                        </Text>   
+                        </Text>
+                        <Text style={styles.body_item_text}>
+                            {this.dictionary.countWords({srsStatus: 3})}
+                        </Text>
                         <View style = {styles.hairline} />          
                         <Text style={styles.body_item_text}>
                             Level 4:
                         </Text>
-                        <View style = {styles.hairline} />          
                         <Text style={styles.body_item_text}>
-                            Level 5:
-                        </Text>   
+                            {this.dictionary.countWords({srsStatus: 4})}
+                        </Text> 
                     </View>
                 </ScrollView>
                 <View style={styles.footer} />

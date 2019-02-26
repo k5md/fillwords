@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Button, Slider, Switch, TouchableOpacity } from 'react-native';
+import { View, Text, Button, Picker, Slider, Switch, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import { handleAndroidBackButton, removeAndroidBackButtonHandler } from 'app/utils/androidBackButton';
 import Svg, { Rect } from 'react-native-svg';
@@ -7,10 +7,13 @@ import SvgUri from 'react-native-svg-uri';
 import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource';
 import AppStyles from 'app/config/styles';
 import images from 'app/config/images';
+import dictionariesConfig from 'app/constants/dictionariesConfig';
 
 class OptionsView extends Component {
     constructor(props) {
         super(props);
+
+        //this.props.setLanguagePack(Object.values(dictionariesConfig.DICTIONARIES)[0].name)
     }
 
     componentWillUnmount() {
@@ -91,6 +94,24 @@ class OptionsView extends Component {
                             value={practiceBothway}
                             onValueChange={() => togglePracticeBothway()}
                         />
+                        <View style = {styles.hairline} />          
+                        <Text style={styles.body_item_text}>
+                            Select language pair:
+                        </Text> 
+                        <Picker
+                          selectedValue={languagePack}
+                          onValueChange={(dictionaryKey) =>
+                            setLanguagePack(dictionaryKey)
+                          }>
+                          {Object.keys(dictionariesConfig.DICTIONARIES).map((dictionaryKey) => 
+                            <Picker.Item 
+                              key={dictionaryKey}
+                              label={dictionariesConfig.DICTIONARIES[dictionaryKey].displayName}
+                              value={dictionaryKey}
+                              itemStyle={styles.body_item_text}
+                            />
+                          )}
+                        </Picker>
                     </View>
                     <View style={[styles.container, styles.body]}>
                         <TouchableOpacity>

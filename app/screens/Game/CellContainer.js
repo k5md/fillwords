@@ -11,7 +11,7 @@ class CellContainer extends Component {
         return (<CellView {...this.props} />);
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
+    shouldComponentUpdate(nextProps) {
         const oldCell = this.props.cell;
         const newCell = nextProps.cell;
         return (oldCell.flipped !== newCell.flipped) || (oldCell.selected !== newCell.selected);

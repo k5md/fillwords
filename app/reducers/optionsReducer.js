@@ -1,10 +1,11 @@
 import * as types from 'app/constants/actionTypes';
+import dictionariesConfig from 'app/constants/dictionariesConfig';
 
 const initialState = {
     rows: 5,
     cols: 5,
     practiceBothway: false,
-    languagePack: 'js',
+    languagePack: Object.keys(dictionariesConfig.DICTIONARIES)[0],
 };
 
 const handlers = {

@@ -6,6 +6,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
+    container_space_between: {
+      justifyContent: 'space-between',
+    },
     header: {
         flex: 0,
         flexDirection: 'row',

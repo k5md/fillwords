@@ -4,9 +4,7 @@ import _ from 'lodash';
 
 import Field from 'app/lib/field';
 
-import SQLite from 'react-native-sqlite-storage';
-SQLite.DEBUG(false);
-SQLite.enablePromise(true);
+
 
 import styles from './styles';
 import WordsContainer from './WordsContainer';
@@ -17,7 +15,6 @@ import GameEndContainer from './GameEndContainer';
 import metrics from 'app/config/metrics';
 
 import { handleAndroidBackButton, removeAndroidBackButtonHandler } from 'app/utils/androidBackButton';
-
 
 
 class GameView extends Component {
@@ -35,20 +32,6 @@ class GameView extends Component {
             setupGame
         } = this.props;
 
-
-        const en_ru = require('app/dictionaries/en_ru.js');
-        const db = await SQLite.openDatabase({
-            name: 'dictionaries.db',
-        });
-        console.log('db opened');
-        let count = await db.executeSql('SELECT COUNT(*) FROM en_ru', []);
-        console.log('number of entries in gameView before sqlbatchinsert', count[0].rows.item(0));
-        for (let i = 0; i < en_ru.default.length; i += 500) {
-            await db.sqlBatch(en_ru.default.slice(i, i + 500))
-        }
-        console.log('db populated')
-        count = await db.executeSql('SELECT COUNT(*) FROM en_ru', []);
-        console.log('number of entries in gameView after sqlbatchinsert', count[0].rows.item(0));
         const { rows, cols } = this.props;
         const test = new Field(cols, rows);
         test.initializeFast();
@@ -83,7 +66,11 @@ class GameView extends Component {
         //TODO: add where wordIsComposite
         for (let key in test.connections) {
             const chain = test.connections[key];            
-            const results = await db.executeSql(`SELECT * FROM en_ru WHERE wordLength = ${chain.length} ORDER BY RANDOM() LIMIT 1`, []);
+            
+            const results = db.get({
+                length: chain.length,
+            });
+
             const { word, wordLength, translation, translationLength } = results[0].rows.item(0);
             for (let i = 0; i < chain.length; i += 1) {
                 const targetRow = chain[i][0];
