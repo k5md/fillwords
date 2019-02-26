@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     container_space_between: {
+      flexDirection: 'row',
       justifyContent: 'space-between',
     },
     header: {

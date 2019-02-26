@@ -3,8 +3,7 @@ import { Button, Text, View, TouchableOpacity} from 'react-native';
 import _ from 'lodash';
 
 import Field from 'app/lib/field';
-
-
+import dictionary from 'app/utils/Dictionaries';
 
 import styles from './styles';
 import WordsContainer from './WordsContainer';
@@ -67,11 +66,11 @@ class GameView extends Component {
         for (let key in test.connections) {
             const chain = test.connections[key];            
             
-            const results = db.get({
-                length: chain.length,
+            const results = await dictionary.getWord({
+                wordLength: chain.length,
             });
 
-            const { word, wordLength, translation, translationLength } = results[0].rows.item(0);
+            const { word, wordLength, translation, translationLength } = results;
             for (let i = 0; i < chain.length; i += 1) {
                 const targetRow = chain[i][0];
                 const targetCol = chain[i][1];

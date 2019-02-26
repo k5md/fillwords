@@ -12,21 +12,35 @@ import dictionary from 'app/utils/Dictionaries';
 import dictionariesConfig from 'app/constants/dictionariesConfig';
 
 class StatisticsView extends Component {
-    constructor(props) {
-        super(props);
+    state = {
+      statisticsEntries: [],
     }
 
     componentWillUnmount() {
-        console.log('unmounting options');
+        console.log('unmounting statistics');
         removeAndroidBackButtonHandler();
-    }    
+    }
 
-    componentDidMount() {
-        handleAndroidBackButton(() => {
-            console.log('back');
-            this.props.navigation.navigate('Home');
-            console.log('clearing');
-        });
+    async componentDidMount() {
+      const { languagePack } = this.props;
+
+      handleAndroidBackButton(() => {
+          console.log('back');
+          this.props.navigation.navigate('Home');
+          console.log('clearing');
+      });
+
+      const statisticsEntries = [
+        ['Current dictionary', dictionariesConfig.DICTIONARIES[languagePack].displayName],
+        ['Total words', dictionariesConfig.DICTIONARIES[languagePack].entriesCount],
+        ['Level 0', await dictionary.countWords({srsStatus: 0})],
+        ['Level 1', await dictionary.countWords({srsStatus: 1})],
+        ['Level 2', await dictionary.countWords({srsStatus: 2})],
+        ['Level 3', await dictionary.countWords({srsStatus: 3})],
+        ['Level 4', await dictionary.countWords({srsStatus: 4})],
+      ];
+
+      this.setState({ statisticsEntries });
     }
 
     render() {
@@ -36,6 +50,8 @@ class StatisticsView extends Component {
             practiceBothway,
             languagePack,
         } = this.props;
+
+        const { statisticsEntries } = this.state;
 
         return (
             <View style={styles.container}>
@@ -55,61 +71,21 @@ class StatisticsView extends Component {
                     </TouchableOpacity>
                 </View>
                 <ScrollView style={[styles.container, styles.body]}>
-                    <View style={[styles.container, styles.body_item]}>
-                      <View style={styles.container_space_between}>
-                        <Text style={styles.body_item_text}>
-                            Current dictionary:
-                        </Text>
-                        <Text style={styles.body_item_text}>
-                            {dictionariesConfig.DICTIONARIES[languagePack].displayName}:
-                        </Text>
+                  <View style={[styles.container, styles.body_item]}>
+                    {statisticsEntries.map(([displayName, value], itemIndex) =>
+                      <View key={itemIndex}>
+                        <View style={styles.container_space_between}>
+                          <Text style={styles.body_item_text}>
+                              {displayName}:
+                          </Text>
+                          <Text style={styles.body_item_text}>
+                              {value}
+                          </Text>
+                        </View>
+                        {itemIndex < statisticsEntries.length - 1 && <View style = {styles.hairline} />}
                       </View>
-                        <View style = {styles.hairline} />
-                        <Text style={styles.body_item_text}>
-                            Total words:
-                        </Text>
-                        <Text style={styles.body_item_text}>
-                            {dictionariesConfig.DICTIONARIES[languagePack].entriesCount}
-                        </Text>
-                        <View style = {styles.hairline} />          
-                        <Text style={styles.body_item_text}>
-                            Words to learn:
-                        </Text>    
-                        <Text style={styles.body_item_text}>
-                            Level 0:
-                        </Text>
-                        <Text style={styles.body_item_text}>
-                            {this.dictionary.countWords({srsStatus: 0})}
-                        </Text>
-                        <View style = {styles.hairline} />    
-                        <Text style={styles.body_item_text}>
-                            Level 1:
-                        </Text>
-                        <Text style={styles.body_item_text}>
-                            {this.dictionary.countWords({srsStatus: 1})}
-                        </Text>               
-                        <View style = {styles.hairline} />
-                        <Text style={styles.body_item_text}>
-                            Level 2:
-                        </Text>
-                        <Text style={styles.body_item_text}>
-                            {this.dictionary.countWords({srsStatus: 2})}
-                        </Text> 
-                        <View style = {styles.hairline} />          
-                        <Text style={styles.body_item_text}>
-                            Level 3:
-                        </Text>
-                        <Text style={styles.body_item_text}>
-                            {this.dictionary.countWords({srsStatus: 3})}
-                        </Text>
-                        <View style = {styles.hairline} />          
-                        <Text style={styles.body_item_text}>
-                            Level 4:
-                        </Text>
-                        <Text style={styles.body_item_text}>
-                            {this.dictionary.countWords({srsStatus: 4})}
-                        </Text> 
-                    </View>
+                    )}
+                  </View>
                 </ScrollView>
                 <View style={styles.footer} />
             </View>

@@ -6,8 +6,21 @@ import dictionaries from 'app/dictionaries';
 SQLite.DEBUG(false);
 SQLite.enablePromise(true);
 
+const fields = [
+  [ 'word', 'TEXT'],
+  [ 'translation', 'TEXT' ],
+  [ 'detailedTranslation', 'TEXT' ],
+  [ 'wordLength', 'INTEGER' ],
+  [ 'translationLength', 'INTEGER' ],
+  [ 'isWordComposite', 'BOOLEAN' ],
+  [ 'isTranslationComposite', 'BOOLEAN' ],
+  [ 'srsStatus', 'INTEGER' ], 
+  [ 'lastReviewed', 'INTEGER' ], // Unix Time Stamp
+];
+
 class Dictionaries {
   static instance;
+
 
   constructor(){
     if(this.instance){
@@ -22,49 +35,69 @@ class Dictionaries {
   async prepopulate() {
     const dictionaryName = this.dictionaryName;
     const db = await this.storage;
-    const countResults = await db.executeSql(`SELECT COUNT(*) FROM ${dictionaryName}`, []);
-    const count = Object.values(countResults[0].rows.item(0))[0];
+    console.log(`prepopulating ${dictionaryName}`);
 
-    console.log('number of entries in', dictionaryName, count);
-
-    if (count !== dictionariesConfig[dictionaryName].entriesCount) {
+    try {
+      const countResults = await db.executeSql(`SELECT COUNT(*) FROM ${dictionaryName}`, []);
+      const count = Object.values(countResults[0].rows.item(0))[0];
+      console.log('number of entries in', dictionaryName, count);
+      if (count === dictionariesConfig.DICTIONARIES[dictionaryName].entriesCount) {
+        throw new Error('entries count mismatch');
+      }
+    }
+    catch (e) {
+      const before = new Date();
       const dictionary = dictionaries[dictionaryName];
 
-      const fields = [
-        [ 'word', 'TEXT'],
-        [ 'translation', 'TEXT' ],
-        [ 'detailedTranslation', 'TEXT' ],
-        [ 'wordLength', 'INTEGER' ],
-        [ 'translationLength', 'INTEGER' ],
-        [ 'isWordComposite', 'BOOLEAN' ],
-        [ 'isTranslationComposite', 'BOOLEAN' ],
-        [ 'srsStatus', 'INTEGER' ], 
-        [ 'lastReviewed', 'INTEGER' ], // Unix Time Stamp
-      ];
+      await db.executeSql(`DROP TABLE IF EXISTS ${dictionaryName};`);
+      await db.executeSql(`CREATE TABLE IF NOT EXISTS ${dictionaryName}(${fields.map(entry => entry.join(' ')).join(',')});",`);  
 
-      await this.storage.executeSql(`DROP TABLE IF EXISTS ${dictionaryName};`);
-      await this.storage.executeSql(`CREATE TABLE ${dictionaryName}(${fields.map(entry => entry.join(' ')).join(',')});",`);
-  
-      console.log(dictionary);
-      /*
-      const insertTemplate = ()  "INSERT INTO ${dictionaryName} VALUES();",
-      for (let i = 0; i < d.length; i += 500) {
-        await db.sqlBatch(en_ru.default.slice(i, i + 500))
-      } */
+      const valuesTemplate = "(?,?,?,?,?,?,?,?,?)";
+      const insertTemplate = `INSERT INTO ${dictionaryName} VALUES ${valuesTemplate};`;
+    
+      const maxBatchSize = 500; // cordova-sqlite and it's derivatives crash the app if exceeded
+      for (let i = 0; i < dictionary.length; i += maxBatchSize) {
+        await db.transaction((tx) => {
+          for (let j = 0; j < maxBatchSize && j + i < dictionary.length; j += 1) {
+            tx.executeSql(insertTemplate, dictionary[i + j]);
+          }
+        });
+      }     
+
+      const after = new Date();
+      console.log('table prepopulated', after - before);
     }
   }
 
-  switchDictionary() {
+  async switchDictionary(dictionaryName) {
 
   }
 
-  getWords() {
-    //const results = await db.executeSql(`SELECT * FROM en_ru WHERE wordLength = ${chain.length} ORDER BY RANDOM() LIMIT 1`, []);
+  async getWord(selector) {
+    const dictionaryName = this.dictionaryName;
+    const db = await this.storage;
+
+    const specifier = Object.entries(selector).map(pair => pair.join('=')).join(',');
+    const results = await db.executeSql(`SELECT * FROM ${dictionaryName} WHERE ${specifier} ORDER BY RANDOM() LIMIT 1`, []);
+    const entry = results[0].rows.item(0);
+    console.log('get word', selector, specifier, results, entry);
+    return entry;
   }
 
-  countWords() {}
+  async countWords(selector) {
+    const dictionaryName = this.dictionaryName;
+    const db = await this.storage;
 
-  updateSRSStatus() {}
+    const specifier = Object.entries(selector).map(pair => pair.join('=')).join(',');
+    const countResults = await db.executeSql(`SELECT COUNT(*) FROM ${dictionaryName} WHERE ${specifier}`, []);
+    const count = Object.values(countResults[0].rows.item(0))[0];
+    //console.log('number of entries in', selector, specifier, dictionaryName, count);
+    return count;
+  }
+
+  async updateSRSStatus(entry, newStatus) {
+
+  }
 }
 
 const dictionary = new Dictionaries();
