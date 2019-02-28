@@ -1,9 +1,9 @@
 import { createSwitchNavigator } from 'react-navigation';
 
-import Home from 'app/screens/Home';
-import Game from 'app/screens/Game';
-import Options from 'app/screens/Options';
-import Statistics from 'app/screens/Statistics';
+import Home from '../screens/Home';
+import Game from '../screens/Game';
+import Options from '../screens/Options';
+import Statistics from '../screens/Statistics';
 
 const RootSwitch = createSwitchNavigator(
   {

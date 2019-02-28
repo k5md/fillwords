@@ -23,4 +23,5 @@ const AppStyles = {
     FONT_MEDIUM: 'Roboto-Medium',
   },
 };
+
 export default AppStyles;

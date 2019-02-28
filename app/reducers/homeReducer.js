@@ -1,5 +1,5 @@
 const initialState = {};
 
-export const homeReducer = function (state = initialState, action) {
-  return state;
-};
+const homeReducer = (state = initialState) => state;
+
+export default homeReducer;

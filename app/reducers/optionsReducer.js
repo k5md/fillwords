@@ -1,5 +1,5 @@
-import * as types from 'app/constants/actionTypes';
-import dictionariesConfig from 'app/constants/dictionariesConfig';
+import * as types from '../constants/actionTypes';
+import dictionariesConfig from '../constants/dictionariesConfig';
 
 const initialState = {
   rows: 5,
@@ -9,15 +9,24 @@ const initialState = {
 };
 
 const handlers = {
-  [types.CHANGE_NUMBER_ROWS]: (state, action) => ({ ...state, rows: action.rows }),
-  [types.CHANGE_NUMBER_COLS]: (state, action) => ({ ...state, cols: action.cols }),
-  [types.TOGGLE_PRACTICE_BOTHWAY]: (state, action) => ({ ...state, practiceBothway: !state.practiceBothway }),
-  [types.SET_LANGUAGE_PACK]: (state, action) => ({ ...state, languagePack: action.languagePack }),
+  [types.CHANGE_NUMBER_ROWS]:
+    (state, action) => ({ ...state, rows: action.rows }),
+
+  [types.CHANGE_NUMBER_COLS]:
+    (state, action) => ({ ...state, cols: action.cols }),
+
+  [types.TOGGLE_PRACTICE_BOTHWAY]:
+    state => ({ ...state, practiceBothway: !state.practiceBothway }),
+
+  [types.SET_LANGUAGE_PACK]:
+    (state, action) => ({ ...state, languagePack: action.languagePack }),
 };
 
-export const optionsReducer = function (state = initialState, action) {
-  if (handlers.hasOwnProperty(action.type)) {
+const optionsReducer = (state = initialState, action) => {
+  if (Object.prototype.hasOwnProperty.call(handlers, action.type)) {
     return handlers[action.type](state, action);
   }
   return state;
 };
+
+export default optionsReducer;

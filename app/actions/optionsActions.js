@@ -1,4 +1,4 @@
-import * as types from 'app/constants/actionTypes';
+import * as types from '../constants/actionTypes';
 
 export function changeNumberRows(rows) {
   return {

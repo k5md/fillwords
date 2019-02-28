@@ -28,10 +28,9 @@ const mapDispatchToProps = dispatch => ({
   setConnections: connections => dispatch(gameActions.setConnections(connections)),
   setSelectedCells: selectedCells => dispatch(gameActions.setSelectedCells(selectedCells)),
   setWords: words => dispatch(gameActions.setWords(words)),
-  selectCell: cell => dispatch(gameActions.selectCell(cell)),
+  selectCell: cellIndex => dispatch(gameActions.selectCell(cellIndex)),
   deselectCells: () => dispatch(gameActions.deselectCells()),
   guessWord: () => dispatch(gameActions.guessWord()),
-  selectCellByIndex: cellIndex => dispatch(gameActions.selectCellByIndex(cellIndex)),
 });
 
 export default connect(

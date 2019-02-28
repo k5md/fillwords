@@ -1,3 +1,5 @@
+/* eslint no-underscore-dangle: ["error", { "allow": ["_navigator"] }] */
+
 import { NavigationActions } from 'react-navigation';
 
 let _navigator;
@@ -22,8 +24,6 @@ function goBack(key) {
     }),
   );
 }
-
-// add other navigation functions that you need and export them
 
 export default {
   navigate,

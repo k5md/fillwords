@@ -32,7 +32,7 @@ class FieldView extends Component {
         const {
           cells,
           selectCell,
-          selectCellByIndex,
+          selectCell,
         } = this.props;
 
         const { x0, y0 } = gestureState;
@@ -43,7 +43,7 @@ class FieldView extends Component {
           return (x0 >= x && y0 >= y && x0 <= x + width && y0 <= y + height && !selected && !flipped);
         });
         if (cellIndex !== -1) {
-          selectCellByIndex(cellIndex);
+          selectCell(cellIndex);
         }
       },
       onPanResponderMove: (evt, gestureState) => {
@@ -51,7 +51,6 @@ class FieldView extends Component {
           cells,
           selectedCells,
           selectCell,
-          selectCellByIndex,
         } = this.props;
         // The most recent move distance is gestureState.move{X,Y}
 
@@ -67,7 +66,7 @@ class FieldView extends Component {
         const lastSelectedCell = selectedCells[selectedCells.length - 1];
 
         if (cellIndex !== -1 && lastSelectedCell !== -1 && lastSelectedCell !== undefined && cellIndex !== lastSelectedCell && isNeighbours(cells[cellIndex], cells[lastSelectedCell])) {
-          selectCellByIndex(cellIndex);
+          selectCell(cellIndex);
         }
       },
       onPanResponderTerminationRequest: () => true,
@@ -80,7 +79,7 @@ class FieldView extends Component {
           words,
           deselectCells,
           guessWord,
-          selectCellByIndex,
+          selectCell,
         } = this.props;
         // The user has released all touches while this view is the
         // responder. This typically means a gesture has succeeded
@@ -96,7 +95,7 @@ class FieldView extends Component {
         const lastSelectedCell = selectedCells[selectedCells.length - 1];
 
         if (cellIndex !== -1 && lastSelectedCell !== -1 && lastSelectedCell !== undefined && cellIndex !== lastSelectedCell && isNeighbours(cells[cellIndex], cells[lastSelectedCell])) {
-          selectCellByIndex(cellIndex);
+          selectCell(cellIndex);
         }
 
         const currentWord = words[currentWordIndex];

@@ -41,7 +41,7 @@ class Dictionaries {
       const countResults = await db.executeSql(`SELECT COUNT(*) FROM ${dictionaryName}`, []);
       const count = Object.values(countResults[0].rows.item(0))[0];
       console.log('number of entries in', dictionaryName, count);
-      if (count === dictionariesConfig.DICTIONARIES[dictionaryName].entriesCount) {
+      if (count !== dictionariesConfig.DICTIONARIES[dictionaryName].entriesCount) {
         throw new Error('entries count mismatch');
       }
     } catch (e) {

@@ -1,5 +1,7 @@
-import * as homeReducer from './homeReducer';
-import * as gameReducer from './gameReducer';
-import * as optionsReducer from './optionsReducer';
+import homeReducer from './homeReducer';
+import gameReducer from './gameReducer';
+import optionsReducer from './optionsReducer';
 
-export default Object.assign(homeReducer, gameReducer, optionsReducer);
+const reducers = Object.assign(homeReducer, gameReducer, optionsReducer);
+
+export default reducers;
