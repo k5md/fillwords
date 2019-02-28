@@ -46,7 +46,7 @@ class Dictionaries {
       }
     }
     catch (e) {
-      const before = new Date();
+
       const dictionary = dictionaries[dictionaryName];
 
       await db.executeSql(`DROP TABLE IF EXISTS ${dictionaryName};`);
@@ -63,9 +63,6 @@ class Dictionaries {
           }
         });
       }     
-
-      const after = new Date();
-      console.log('table prepopulated', after - before);
     }
   }
 
@@ -73,12 +70,12 @@ class Dictionaries {
 
   }
 
-  async getWord(selector) {
+  async getWord(selector, order = 'RANDOM()', limit = 1) {
     const dictionaryName = this.dictionaryName;
     const db = await this.storage;
 
     const specifier = Object.entries(selector).map(pair => pair.join('=')).join(',');
-    const results = await db.executeSql(`SELECT * FROM ${dictionaryName} WHERE ${specifier} ORDER BY RANDOM() LIMIT 1`, []);
+    const results = await db.executeSql(`SELECT * FROM ${dictionaryName} WHERE ${specifier} ORDER BY ${order} LIMIT ${limit}`, []);
     const entry = results[0].rows.item(0);
     console.log('get word', selector, specifier, results, entry);
     return entry;

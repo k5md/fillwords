@@ -10,13 +10,14 @@ class WordsView extends Component {
         }
     }
 
+    
     render() {
         const {
             currentWordIndex,
             words,
             setCurrentWordIndex,
         } = this.props;
-
+        console.log(this.props.words, this.props.currentWordIndex);
         return (
             words.length > 0 && <View nativeID="words" style={styles.words}>
                 <View style={[styles.button_left, currentWordIndex <= 0 && styles.button_disabled]}>

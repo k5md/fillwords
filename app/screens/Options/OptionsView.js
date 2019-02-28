@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Button, Picker, Slider, Switch, TouchableOpacity } from 'react-native';
+import { View, Text, Button, ScrollView, Picker, Slider, Switch, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import { handleAndroidBackButton, removeAndroidBackButtonHandler } from 'app/utils/androidBackButton';
 import Svg, { Rect } from 'react-native-svg';
@@ -58,7 +58,7 @@ class OptionsView extends Component {
                         />                    
                     </TouchableOpacity>
                 </View>
-                <View style={[styles.container, styles.body]}>
+                <ScrollView style={[styles.container, styles.body]}>
                     <View style={[styles.container, styles.body_item]}>  
                         <Text style={styles.body_item_text}>
                             Number of rows: {rows}
@@ -119,23 +119,8 @@ class OptionsView extends Component {
                                 <Text style={styles.body_item_text}>Help</Text>
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity>
-                            <View style={[styles.body_item]}>
-                                <Text style={styles.body_item_text}>Language</Text>
-                            </View>
-                        </TouchableOpacity>
-                        <TouchableOpacity>
-                            <View style={[styles.body_item]}>
-                                <Text style={styles.body_item_text}>Reset progress</Text>
-                            </View>
-                        </TouchableOpacity>
-                        <TouchableOpacity>
-                            <View style={[styles.body_item]}>
-                                <Text style={styles.body_item_text}>Rate</Text>
-                            </View>
-                        </TouchableOpacity>
                     </View>
-                </View>
+                </ScrollView>
                 <View style={styles.footer}>
                     <Text style={[styles.footer_text]}>Version: 1.0</Text>
                 </View>

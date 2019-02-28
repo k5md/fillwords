@@ -3,15 +3,16 @@ export const CHANGE_NUMBER_COLS = 'CHANGE_NUMBER_COLS';
 export const TOGGLE_PRACTICE_BOTHWAY = 'TOGGLE_PRACTICE_BOTHWAY';
 export const SET_LANGUAGE_PACK = 'SET_LANGUAGE_PACK';
 
+export const SETUP_GAME = 'SETUP_GAME';
+export const PLAY_GAME = 'PLAY_GAME';
+export const CLEAR_GAME = 'CLEAR_GAME';
+
 export const SET_CURRENT_WORD_INDEX = 'SET_CURRENT_WORD_INDEX';
 export const SET_CELLS = 'SET_CELLS';
 export const SET_CONNECTIONS = 'SET_CONNECTIONS';
 export const SET_SELECTED_CELLS = 'SET_SELECTED_CELLS';
 export const SET_WORDS = 'SET_WORDS';
-export const SETUP_GAME = 'SETUP_GAME';
 export const SELECT_CELL = 'SELECT_CELL';
 export const SELECT_CELL_BY_INDEX = 'SELECT_CELL_BY_INDEX';
 export const DESELECT_CELLS = 'DESELECT_CELLS';
 export const GUESS_WORD = 'GUESS_WORD';
-export const PLAY_GAME = 'PLAY_GAME';
-export const CLEAR_GAME = 'CLEAR_GAME';

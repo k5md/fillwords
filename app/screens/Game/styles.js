@@ -10,12 +10,12 @@ const styles = StyleSheet.create({
     },
     field: {
         backgroundColor: color.COLOR_GREYISH,
-        flex: 1,
-        minHeight: 800,
+        flex: 5,
+        //minHeight: 800,
     },
     words: {
         backgroundColor: color.COLOR_GREYISH,
-        flex: 5,
+        flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
