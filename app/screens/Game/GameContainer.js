@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as gameActions from 'app/actions/gameActions';
+import * as gameActions from '../../actions/gameActions';
 import GameView from './GameView';
 
 class GameContainer extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (<GameView {...this.props} />);
   }

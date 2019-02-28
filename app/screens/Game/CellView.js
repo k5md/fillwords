@@ -1,18 +1,25 @@
 import React, { Component } from 'react';
 import {
-  View, Text, FlatList, StyleSheet, Dimensions, PanResponder, Animated, Easing,
+  View,
+  Text,
+  Animated,
+  Easing,
 } from 'react-native';
+import PropTypes from 'prop-types';
 import styles from './styles';
 
-class CellView extends React.PureComponent {
+class CellView extends Component {
     state = {
       animatedValue: new Animated.Value(0),
-      value: 0,
     }
 
     componentWillReceiveProps(nextProps) {
-      if (this.props.cell.flipped !== nextProps.cell.flipped) {
-        Animated.timing(this.state.animatedValue, {
+      const { cell: { flipped: oldFlipped } } = this.props;
+      const { cell: { flipped: newFlipped } } = nextProps;
+      const { animatedValue } = this.state;
+
+      if (oldFlipped !== newFlipped) {
+        Animated.timing(animatedValue, {
           toValue: 180,
           duration: 300,
           easing: Easing.bounce,
@@ -23,23 +30,32 @@ class CellView extends React.PureComponent {
 
     render() {
       const {
-        selected, flipped, value, y, x, width, height,
-      } = this.props.cell;
+        cell: {
+          selected,
+          value,
+          y,
+          x,
+          width,
+          height,
+        },
+      } = this.props;
 
-      const frontInterpolate = this.state.animatedValue.interpolate({
+      const { animatedValue } = this.state;
+
+      const frontInterpolate = animatedValue.interpolate({
         inputRange: [0, 180],
         outputRange: ['0deg', '180deg'],
       });
-
-      const backInterpolate = this.state.animatedValue.interpolate({
+      const backInterpolate = animatedValue.interpolate({
         inputRange: [0, 180],
         outputRange: ['180deg', '360deg'],
       });
-      const frontOpacity = this.state.animatedValue.interpolate({
+
+      const frontOpacity = animatedValue.interpolate({
         inputRange: [89, 90],
         outputRange: [1, 0],
       });
-      const backOpacity = this.state.animatedValue.interpolate({
+      const backOpacity = animatedValue.interpolate({
         inputRange: [89, 90],
         outputRange: [0, 1],
       });
@@ -50,7 +66,6 @@ class CellView extends React.PureComponent {
         ],
         opacity: frontOpacity,
       };
-
       const backAnimatedStyle = {
         transform: [
           { rotateY: backInterpolate },
@@ -95,5 +110,17 @@ class CellView extends React.PureComponent {
       );
     }
 }
+
+CellView.propTypes = {
+  cell: PropTypes.shape({
+    selected: PropTypes.bool,
+    flipped: PropTypes.bool,
+    value: PropTypes.string,
+    y: PropTypes.number,
+    x: PropTypes.number,
+    width: PropTypes.number,
+    height: PropTypes.number,
+  }).isRequired,
+};
 
 export default CellView;

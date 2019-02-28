@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import {
-  View, Text, Button, Slider, Switch, ScrollView, TouchableOpacity,
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
 } from 'react-native';
-import { handleAndroidBackButton, removeAndroidBackButtonHandler } from 'app/utils/androidBackButton';
-import Svg, { Rect } from 'react-native-svg';
+import PropTypes from 'prop-types';
 import SvgUri from 'react-native-svg-uri';
-import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource';
-import AppStyles from 'app/config/styles';
-import images from 'app/config/images';
-
-import dictionary from 'app/utils/Dictionaries';
-import dictionariesConfig from 'app/constants/dictionariesConfig';
+import _ from 'lodash';
+import { handleAndroidBackButton, removeAndroidBackButtonHandler } from '../../utils/androidBackButton';
+import images from '../../config/images';
+import dictionary from '../../utils/Dictionaries';
+import dictionariesConfig from '../../constants/dictionariesConfig';
 import styles from './styles';
 
 class StatisticsView extends Component {
@@ -18,18 +19,17 @@ class StatisticsView extends Component {
       statisticsEntries: [],
     }
 
-    componentWillUnmount() {
-      console.log('unmounting statistics');
-      removeAndroidBackButtonHandler();
-    }
-
     async componentDidMount() {
-      const { languagePack } = this.props;
+      const {
+        languagePack,
+        navigation,
+        // practiceBothway,
+      } = this.props;
 
       handleAndroidBackButton(() => {
-        console.log('back');
-        this.props.navigation.navigate('Home');
-        console.log('clearing');
+        // console.log('back');
+        navigation.navigate('Home');
+        // console.log('clearing');
       });
 
       const statisticsEntries = [
@@ -45,14 +45,13 @@ class StatisticsView extends Component {
       this.setState({ statisticsEntries });
     }
 
-    render() {
-      const {
-        rows,
-        cols,
-        practiceBothway,
-        languagePack,
-      } = this.props;
+    componentWillUnmount() {
+      // console.log('unmounting statistics');
+      removeAndroidBackButtonHandler();
+    }
 
+    render() {
+      const { navigation } = this.props;
       const { statisticsEntries } = this.state;
 
       return (
@@ -62,7 +61,7 @@ class StatisticsView extends Component {
               <Text style={[styles.header_text]}>Statistics</Text>
             </View>
             <TouchableOpacity
-              onPress={() => this.props.navigation.navigate('Home')}
+              onPress={() => navigation.navigate('Home')}
             >
               <SvgUri
                 width="30"
@@ -75,7 +74,7 @@ class StatisticsView extends Component {
           <ScrollView style={[styles.container, styles.body]}>
             <View style={[styles.container, styles.body_item]}>
               {statisticsEntries.map(([displayName, value], itemIndex) => (
-                <View key={itemIndex}>
+                <View key={_.uniqueId()}>
                   <View style={styles.container_space_between}>
                     <Text style={styles.body_item_text}>
                       {displayName}
@@ -95,5 +94,13 @@ class StatisticsView extends Component {
       );
     }
 }
+
+StatisticsView.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+  languagePack: PropTypes.string.isRequired,
+  // practiceBothway: PropTypes.bool.isRequired,
+};
 
 export default StatisticsView;

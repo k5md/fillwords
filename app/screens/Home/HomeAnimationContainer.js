@@ -1,14 +1,14 @@
+/* eslint camelcase: ["error", {allow: ["^UNSAFE_"]}] */
+
 import React, { Component } from 'react';
 import {
-  StyleSheet,
   View,
   Animated,
-  FlatList,
   Text,
 } from 'react-native';
 import _ from 'lodash';
 
-import metrics from 'app/config/metrics';
+import metrics from '../../config/metrics';
 import styles from './styles';
 
 const { screenHeight, screenWidth } = metrics;

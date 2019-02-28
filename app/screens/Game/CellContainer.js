@@ -3,18 +3,14 @@ import { connect } from 'react-redux';
 import CellView from './CellView';
 
 class CellContainer extends Component {
-  constructor(props) {
-    super(props);
+  shouldComponentUpdate(nextProps) {
+    const { cell: oldCell } = this.props;
+    const newCell = nextProps.cell;
+    return (oldCell.flipped !== newCell.flipped) || (oldCell.selected !== newCell.selected);
   }
 
   render() {
     return (<CellView {...this.props} />);
-  }
-
-  shouldComponentUpdate(nextProps) {
-    const oldCell = this.props.cell;
-    const newCell = nextProps.cell;
-    return (oldCell.flipped !== newCell.flipped) || (oldCell.selected !== newCell.selected);
   }
 }
 

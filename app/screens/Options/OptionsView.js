@@ -1,38 +1,40 @@
+/* eslint camelcase: ["error", {allow: ["^UNSAFE_"]}] */
+
 import React, { Component } from 'react';
 import {
-  View, Text, Button, ScrollView, Picker, Slider, Switch, TouchableOpacity,
+  View,
+  Text,
+  ScrollView,
+  Picker,
+  Slider,
+  Switch,
+  TouchableOpacity,
 } from 'react-native';
-import { handleAndroidBackButton, removeAndroidBackButtonHandler } from 'app/utils/androidBackButton';
-import Svg, { Rect } from 'react-native-svg';
 import SvgUri from 'react-native-svg-uri';
-import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource';
-import AppStyles from 'app/config/styles';
-import images from 'app/config/images';
-import dictionariesConfig from 'app/constants/dictionariesConfig';
+import PropTypes from 'prop-types';
+import { handleAndroidBackButton, removeAndroidBackButtonHandler } from '../../utils/androidBackButton';
+import images from '../../config/images';
+import dictionariesConfig from '../../constants/dictionariesConfig';
 import styles from './styles';
 
 class OptionsView extends Component {
-  constructor(props) {
-    super(props);
-
-    // this.props.setLanguagePack(Object.values(dictionariesConfig.DICTIONARIES)[0].name)
+  componentDidMount() {
+    handleAndroidBackButton(() => {
+      // console.log('back');
+      const { navigation } = this.props;
+      navigation.navigate('Home');
+      // console.log('clearing');
+    });
   }
 
   componentWillUnmount() {
-    console.log('unmounting options');
+    // console.log('unmounting options');
     removeAndroidBackButtonHandler();
-  }
-
-  componentDidMount() {
-    handleAndroidBackButton(() => {
-      console.log('back');
-      this.props.navigation.navigate('Home');
-      console.log('clearing');
-    });
   }
 
   render() {
     const {
+      navigation,
       rows,
       cols,
       practiceBothway,
@@ -50,7 +52,7 @@ class OptionsView extends Component {
             <Text style={[styles.header_text]}>Options</Text>
           </View>
           <TouchableOpacity
-            onPress={() => this.props.navigation.navigate('Home')}
+            onPress={() => navigation.navigate('Home')}
           >
             <SvgUri
               width="30"
@@ -134,5 +136,19 @@ class OptionsView extends Component {
     );
   }
 }
+
+OptionsView.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+  rows: PropTypes.number.isRequired,
+  cols: PropTypes.number.isRequired,
+  practiceBothway: PropTypes.bool.isRequired,
+  languagePack: PropTypes.bool.isRequired,
+  changeNumberRows: PropTypes.func.isRequired,
+  changeNumberCols: PropTypes.func.isRequired,
+  togglePracticeBothway: PropTypes.func.isRequired,
+  setLanguagePack: PropTypes.func.isRequired,
+};
 
 export default OptionsView;

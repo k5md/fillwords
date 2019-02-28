@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import {
   Text, Button, View, FlatList, ScrollView, StyleSheet,
 } from 'react-native';
+import PropTypes from 'prop-types';
 import Modal from 'react-native-modalbox';
-import { connect } from 'react-redux';
-import * as gameActions from 'app/actions/gameActions';
 import styles from './styles';
 
 class GameEndView extends Component {
@@ -32,5 +31,9 @@ class GameEndView extends Component {
     );
   }
 }
+
+GameEndView.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+};
 
 export default GameEndView;

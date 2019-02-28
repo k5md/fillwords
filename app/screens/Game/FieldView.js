@@ -1,16 +1,23 @@
 import React, { Component } from 'react';
 import {
-  View, Text, PanResponder, FlatList,
+  View,
+  PanResponder,
 } from 'react-native';
-import _ from 'lodash';
 import CellContainer from './CellContainer';
 import styles from './styles';
+
+const isAbove = (cell, other) => cell.row - 1 === other.row && cell.col === other.col;
+const isBelow = (cell, other) => cell.row + 1 === other.row && cell.col === other.col;
+const isLeft = (cell, other) => cell.row === other.row && cell.col - 1 === other.col;
+const isRight = (cell, other) => cell.row === other.row && cell.col + 1 === other.col;
+const isNeighboursFunc = (cell, other) => isAbove(cell, other) || isBelow(cell, other) || isLeft(cell, other) || isRight(cell, other);
 
 const isNeighbours = (cell, other) => {
   const isAbove = cell.row - 1 === other.row && cell.col === other.col;
   const isBelow = cell.row + 1 === other.row && cell.col === other.col;
   const isLeft = cell.row === other.row && cell.col - 1 === other.col;
   const isRight = cell.row === other.row && cell.col + 1 === other.col;
+
   return isAbove || isBelow || isLeft || isRight;
 };
 
@@ -18,8 +25,7 @@ class FieldView extends Component {
   constructor(props) {
     super(props);
 
-
-    this._panResponder = PanResponder.create({
+    this.panResponder = PanResponder.create({
       // Ask to be the responder:
       onStartShouldSetPanResponder: () => true,
       onStartShouldSetPanResponderCapture: () => true,
@@ -110,26 +116,21 @@ class FieldView extends Component {
         }
         deselectCells();
       },
-      onPanResponderTerminate: (evt, gestureState) => {
-        const {
-          deselectCells,
-        } = this.props;
+      onPanResponderTerminate: () => {
         // Another component has become the responder, so this gesture
         // should be cancelled
+        const { deselectCells } = this.props;
         deselectCells();
       },
-      onShouldBlockNativeResponder: (evt, gestureState) => true
-      ,
+      onShouldBlockNativeResponder: () => true,
     });
   }
 
   render() {
-    const {
-      cells,
-    } = this.props;
+    const { cells } = this.props;
 
     return (
-      <View style={styles.field} {...this._panResponder.panHandlers}>
+      <View style={styles.field} {...this.panResponder.panHandlers}>
         {cells.map((item, index) => <CellContainer key={`${item.row}${item.col}`} cellIndex={index} />)}
       </View>
     );

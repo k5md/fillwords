@@ -1,3 +1,5 @@
+/* eslint camelcase: ["error", {allow: ["^UNSAFE_"]}] */
+
 import React, { Component } from 'react';
 import {
   View, Alert, Text, Button, Image, BackHandler, TouchableOpacity, FlatList,

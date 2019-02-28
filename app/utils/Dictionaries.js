@@ -1,7 +1,7 @@
 import SQLite from 'react-native-sqlite-storage';
-import dictionariesConfig from 'app/constants/dictionariesConfig';
-import configureStore from 'app/store/configureStore';
-import dictionaries from 'app/dictionaries';
+import dictionariesConfig from '../constants/dictionariesConfig';
+import configureStore from '../store/configureStore';
+import dictionaries from '../dictionaries';
 
 SQLite.DEBUG(false);
 SQLite.enablePromise(true);
@@ -21,7 +21,6 @@ const fields = [
 class Dictionaries {
   static instance;
 
-
   constructor() {
     if (this.instance) {
       return this.instance;
@@ -33,14 +32,13 @@ class Dictionaries {
   }
 
   async prepopulate() {
-    const dictionaryName = this.dictionaryName;
+    const { dictionaryName } = this;
     const db = await this.storage;
-    console.log(`prepopulating ${dictionaryName}`);
-
+    // console.log(`prepopulating ${dictionaryName}`);
     try {
       const countResults = await db.executeSql(`SELECT COUNT(*) FROM ${dictionaryName}`, []);
       const count = Object.values(countResults[0].rows.item(0))[0];
-      console.log('number of entries in', dictionaryName, count);
+      // console.log('number of entries in', dictionaryName, count);
       if (count !== dictionariesConfig.DICTIONARIES[dictionaryName].entriesCount) {
         throw new Error('entries count mismatch');
       }
@@ -64,25 +62,21 @@ class Dictionaries {
     }
   }
 
-  async switchDictionary(dictionaryName) {
-
-  }
+  // async switchDictionary(dictionaryName) {}
 
   async getWord(selector, order = 'RANDOM()', limit = 1) {
-    const dictionaryName = this.dictionaryName;
+    const { dictionaryName } = this;
     const db = await this.storage;
-
     const specifier = Object.entries(selector).map(pair => pair.join('=')).join(',');
     const results = await db.executeSql(`SELECT * FROM ${dictionaryName} WHERE ${specifier} ORDER BY ${order} LIMIT ${limit}`, []);
     const entry = results[0].rows.item(0);
-    console.log('get word', selector, specifier, results, entry);
+    // console.log('get word', selector, specifier, results, entry);
     return entry;
   }
 
   async countWords(selector) {
-    const dictionaryName = this.dictionaryName;
+    const { dictionaryName } = this;
     const db = await this.storage;
-
     const specifier = Object.entries(selector).map(pair => pair.join('=')).join(',');
     const countResults = await db.executeSql(`SELECT COUNT(*) FROM ${dictionaryName} WHERE ${specifier}`, []);
     const count = Object.values(countResults[0].rows.item(0))[0];
@@ -90,9 +84,7 @@ class Dictionaries {
     return count;
   }
 
-  async updateSRSStatus(entry, newStatus) {
-
-  }
+  // async updateSRSStatus(entry, newStatus) {}
 }
 
 const dictionary = new Dictionaries();

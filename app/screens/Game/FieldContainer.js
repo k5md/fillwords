@@ -1,17 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { PanResponder } from 'react-native';
-import * as gameActions from 'app/actions/gameActions';
+import * as gameActions from '../../actions/gameActions';
 import FieldView from './FieldView';
 
 class FieldContainer extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (<FieldView {...this.props} />);
-    // return (<FieldView {...{...this.props, ...this._panResponder.panHandlers}} />);
   }
 }
 

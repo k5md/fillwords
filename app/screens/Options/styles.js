@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import AppStyles from 'app/config/styles';
+import AppStyles from '../../config/styles';
 
 const { color, fonts } = AppStyles;
 

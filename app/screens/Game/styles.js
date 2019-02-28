@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
-import AppStyles from 'app/config/styles';
-import metrics from 'app/config/metrics';
+import AppStyles from '../../config/styles';
+import metrics from '../../config/metrics';
 
 const { color, fonts } = AppStyles;
 const { screenHeight, screenWidth } = metrics;

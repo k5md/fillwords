@@ -1,3 +1,5 @@
+/* eslint camelcase: ["error", {allow: ["^UNSAFE_"]}] */
+
 import React, { Component } from 'react';
 import {
   Button, Text, View, TouchableOpacity,
@@ -12,16 +14,11 @@ import { handleAndroidBackButton, removeAndroidBackButtonHandler } from 'app/uti
 import styles from './styles';
 import WordsContainer from './WordsContainer';
 import FieldContainer from './FieldContainer';
-import ConnectionsContainer from './ConnectionsContainer';
 import WordsPreviewContainer from './WordsPreviewContainer';
 import GameEndContainer from './GameEndContainer';
 
 
 class GameView extends Component {
-  componentWillUnmount() {
-    removeAndroidBackButtonHandler();
-  }
-
   async componentDidMount() {
     handleAndroidBackButton(() => {
       this.props.navigation.navigate('Home');
@@ -98,6 +95,9 @@ class GameView extends Component {
     });
   }
 
+  componentWillUnmount() {
+    removeAndroidBackButtonHandler();
+  }
 
   render() {
     return (

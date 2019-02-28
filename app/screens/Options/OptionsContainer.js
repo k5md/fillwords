@@ -4,10 +4,6 @@ import * as optionsActions from 'app/actions/optionsActions';
 import OptionsView from './OptionsView';
 
 class OptionsContainer extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return <OptionsView {...this.props} />;
   }

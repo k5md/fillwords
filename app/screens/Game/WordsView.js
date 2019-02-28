@@ -12,7 +12,6 @@ class WordsView extends Component {
     }
   }
 
-
   render() {
     const {
       currentWordIndex,

@@ -3,10 +3,6 @@ import { connect } from 'react-redux';
 import StatisticsView from './StatisticsView';
 
 class StatisticsContainer extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return <StatisticsView {...this.props} />;
   }

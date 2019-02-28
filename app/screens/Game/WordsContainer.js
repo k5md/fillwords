@@ -4,10 +4,6 @@ import * as gameActions from 'app/actions/gameActions';
 import WordsView from './WordsView';
 
 class WordsContainer extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (<WordsView {...this.props} />);
   }
