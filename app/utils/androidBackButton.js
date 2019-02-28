@@ -1,12 +1,12 @@
 // packages
-import {BackHandler} from 'react-native';
+import { BackHandler } from 'react-native';
 
 /**
  * Attaches an event listener that handles the android-only hardware
  * back button
  * @param  {Function} callback The function to call on click
  */
-const handleAndroidBackButton = callback => {
+const handleAndroidBackButton = (callback) => {
   BackHandler.addEventListener('hardwareBackPress', () => {
     callback();
     return true;
@@ -19,6 +19,6 @@ const handleAndroidBackButton = callback => {
  */
 const removeAndroidBackButtonHandler = () => {
   BackHandler.removeEventListener('hardwareBackPress', () => {});
-}
+};
 
-export {handleAndroidBackButton, removeAndroidBackButtonHandler};
+export { handleAndroidBackButton, removeAndroidBackButtonHandler };

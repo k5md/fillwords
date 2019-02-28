@@ -6,25 +6,25 @@ import Options from 'app/screens/Options';
 import Statistics from 'app/screens/Statistics';
 
 const RootSwitch = createSwitchNavigator(
-    {
-        Home: {
-            screen: Home,
-        },
-        Game: {
-            screen: Game,
-        },
-        Options: {
-            screen: Options,
-        },
-        Statistics: {
-            screen: Statistics,
-        }
+  {
+    Home: {
+      screen: Home,
     },
-    {
-        header: null,
-        gesturesEnabled: false,
-        initialRouteName: 'Home'
-    }
+    Game: {
+      screen: Game,
+    },
+    Options: {
+      screen: Options,
+    },
+    Statistics: {
+      screen: Statistics,
+    },
+  },
+  {
+    header: null,
+    gesturesEnabled: false,
+    initialRouteName: 'Home',
+  },
 );
 
 export default RootSwitch;

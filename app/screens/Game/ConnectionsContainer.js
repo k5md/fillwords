@@ -3,22 +3,20 @@ import { connect } from 'react-redux';
 import ConnectionsView from './ConnectionsView';
 
 class ConnectionsContainer extends Component {
-    constructor(props){
-        super(props);
-    }
+  constructor(props) {
+    super(props);
+  }
 
-    render() {
-        return (<ConnectionsView {...this.props} />);
-    }
+  render() {
+    return (<ConnectionsView {...this.props} />);
+  }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        cells: state.gameReducer.cells,
-        connections: state.gameReducer.connections,
-    };
-};
+const mapStateToProps = state => ({
+  cells: state.gameReducer.cells,
+  connections: state.gameReducer.connections,
+});
 
 export default connect(
-    mapStateToProps
+  mapStateToProps,
 )(ConnectionsContainer);

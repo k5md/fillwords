@@ -4,8 +4,8 @@ import * as optionsActions from './optionsActions';
 import * as gameActions from './gameActions';
 
 export const ActionCreators = Object.assign(
-    {},
-    navigationActions,
-    optionsActions,
-    gameActions,
+  {},
+  navigationActions,
+  optionsActions,
+  gameActions,
 );

@@ -7,23 +7,23 @@ SQLite.DEBUG(false);
 SQLite.enablePromise(true);
 
 const fields = [
-  [ 'word', 'TEXT'],
-  [ 'translation', 'TEXT' ],
-  [ 'detailedTranslation', 'TEXT' ],
-  [ 'wordLength', 'INTEGER' ],
-  [ 'translationLength', 'INTEGER' ],
-  [ 'isWordComposite', 'BOOLEAN' ],
-  [ 'isTranslationComposite', 'BOOLEAN' ],
-  [ 'srsStatus', 'INTEGER' ], 
-  [ 'lastReviewed', 'INTEGER' ], // Unix Time Stamp
+  ['word', 'TEXT'],
+  ['translation', 'TEXT'],
+  ['detailedTranslation', 'TEXT'],
+  ['wordLength', 'INTEGER'],
+  ['translationLength', 'INTEGER'],
+  ['isWordComposite', 'BOOLEAN'],
+  ['isTranslationComposite', 'BOOLEAN'],
+  ['srsStatus', 'INTEGER'],
+  ['lastReviewed', 'INTEGER'], // Unix Time Stamp
 ];
 
 class Dictionaries {
   static instance;
 
 
-  constructor(){
-    if(this.instance){
+  constructor() {
+    if (this.instance) {
       return this.instance;
     }
 
@@ -44,17 +44,15 @@ class Dictionaries {
       if (count === dictionariesConfig.DICTIONARIES[dictionaryName].entriesCount) {
         throw new Error('entries count mismatch');
       }
-    }
-    catch (e) {
-
+    } catch (e) {
       const dictionary = dictionaries[dictionaryName];
 
       await db.executeSql(`DROP TABLE IF EXISTS ${dictionaryName};`);
-      await db.executeSql(`CREATE TABLE IF NOT EXISTS ${dictionaryName}(${fields.map(entry => entry.join(' ')).join(',')});",`);  
+      await db.executeSql(`CREATE TABLE IF NOT EXISTS ${dictionaryName}(${fields.map(entry => entry.join(' ')).join(',')});",`);
 
-      const valuesTemplate = "(?,?,?,?,?,?,?,?,?)";
+      const valuesTemplate = '(?,?,?,?,?,?,?,?,?)';
       const insertTemplate = `INSERT INTO ${dictionaryName} VALUES ${valuesTemplate};`;
-    
+
       const maxBatchSize = 500; // cordova-sqlite and it's derivatives crash the app if exceeded
       for (let i = 0; i < dictionary.length; i += maxBatchSize) {
         await db.transaction((tx) => {
@@ -62,7 +60,7 @@ class Dictionaries {
             tx.executeSql(insertTemplate, dictionary[i + j]);
           }
         });
-      }     
+      }
     }
   }
 
@@ -88,7 +86,7 @@ class Dictionaries {
     const specifier = Object.entries(selector).map(pair => pair.join('=')).join(',');
     const countResults = await db.executeSql(`SELECT COUNT(*) FROM ${dictionaryName} WHERE ${specifier}`, []);
     const count = Object.values(countResults[0].rows.item(0))[0];
-    //console.log('number of entries in', selector, specifier, dictionaryName, count);
+    // console.log('number of entries in', selector, specifier, dictionaryName, count);
     return count;
   }
 
@@ -99,5 +97,5 @@ class Dictionaries {
 
 const dictionary = new Dictionaries();
 dictionary.prepopulate();
- 
+
 export default dictionary;

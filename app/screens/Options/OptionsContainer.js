@@ -1,36 +1,35 @@
 import React, { Component } from 'react';
-import OptionsView from './OptionsView';
 import { connect } from 'react-redux';
 import * as optionsActions from 'app/actions/optionsActions';
+import OptionsView from './OptionsView';
 
 class OptionsContainer extends Component {
-    constructor(props) {
-        super(props);
-    }    
-    render() {
-        return <OptionsView {...this.props} />;
-    }
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return <OptionsView {...this.props} />;
+  }
 }
 
 function mapStateToProps(state) {
-    return {
-        rows: state.optionsReducer.rows,
-        cols: state.optionsReducer.cols,
-        practiceBothway: state.optionsReducer.practiceBothway,
-        languagePack: state.optionsReducer.languagePack,        
-    };
+  return {
+    rows: state.optionsReducer.rows,
+    cols: state.optionsReducer.cols,
+    practiceBothway: state.optionsReducer.practiceBothway,
+    languagePack: state.optionsReducer.languagePack,
+  };
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        changeNumberRows: (rows) => dispatch(optionsActions.changeNumberRows(rows)),
-        changeNumberCols: (cols) => dispatch(optionsActions.changeNumberCols(cols)),
-        togglePracticeBothway: () => dispatch(optionsActions.togglePracticeBothway()),
-        setLanguagePack: (languagePack) => dispatch(optionsActions.setLanguagePack(languagePack)),
-    };
-}
+const mapDispatchToProps = dispatch => ({
+  changeNumberRows: rows => dispatch(optionsActions.changeNumberRows(rows)),
+  changeNumberCols: cols => dispatch(optionsActions.changeNumberCols(cols)),
+  togglePracticeBothway: () => dispatch(optionsActions.togglePracticeBothway()),
+  setLanguagePack: languagePack => dispatch(optionsActions.setLanguagePack(languagePack)),
+});
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps,
 )(OptionsContainer);

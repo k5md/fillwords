@@ -4,28 +4,24 @@ import * as gameActions from 'app/actions/gameActions';
 import GameEndView from './GameEndView';
 
 class GameEndContainer extends Component {
-    constructor(props) {
-        super(props);
-    }
+  constructor(props) {
+    super(props);
+  }
 
-    render() {
-        return (<GameEndView {...this.props} />);
-    }
+  render() {
+    return (<GameEndView {...this.props} />);
+  }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        isOpen: state.gameReducer.gameState === 'end',
-    };
-};
+const mapStateToProps = state => ({
+  isOpen: state.gameReducer.gameState === 'end',
+});
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        clearGame: () => dispatch(gameActions.clearGame()),
-    }
-}
+const mapDispatchToProps = dispatch => ({
+  clearGame: () => dispatch(gameActions.clearGame()),
+});
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
+  mapStateToProps,
+  mapDispatchToProps,
 )(GameEndContainer);

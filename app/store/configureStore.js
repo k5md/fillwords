@@ -6,17 +6,17 @@ import { createLogger } from 'redux-logger';
 import rootReducers from 'app/reducers'; // where reducers is a object of reducers
 
 const config = {
-    key: 'root',
-    storage,
-    blacklist: ['nav', 'gameReducer'],
-    debug: true //to get useful logging
+  key: 'root',
+  storage,
+  blacklist: ['nav', 'gameReducer'],
+  debug: true, // to get useful logging
 };
 
 const middleware = [];
 
 
 if (__DEV__) {
-    middleware.push(createLogger());
+  middleware.push(createLogger());
 }
 
 const reducers = persistCombineReducers(config, rootReducers);
@@ -24,11 +24,9 @@ const enhancers = [applyMiddleware(...middleware)];
 const persistConfig = { enhancers };
 const store = createStore(reducers, undefined, compose(...enhancers));
 const persistor = persistStore(store, persistConfig, () => {
-	
+
 });
-const configureStore = () => {
-    return { persistor, store };
-};
+const configureStore = () => ({ persistor, store });
 
 
 export default configureStore;
