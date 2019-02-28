@@ -32,7 +32,6 @@ class FieldView extends Component {
         const {
           cells,
           selectCell,
-          selectCell,
         } = this.props;
 
         const { x0, y0 } = gestureState;
