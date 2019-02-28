@@ -61,3 +61,6 @@ app/lib/field.js
 # Sublime Text project-related files
 *.sublime-project
 *.sublime-workspace
+
+# Gradle properties file
+android/gradle.properties
