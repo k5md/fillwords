@@ -1,44 +1,41 @@
-/* eslint camelcase: ["error", {allow: ["^UNSAFE_"]}] */
-
 import React, { Component } from 'react';
 import {
-  View, Alert, Text, Button, Image, BackHandler, TouchableOpacity, FlatList,
+  View,
+  Alert,
+  Text,
+  BackHandler,
+  TouchableOpacity,
 } from 'react-native';
-import { handleAndroidBackButton, removeAndroidBackButtonHandler } from 'app/utils/androidBackButton';
+import PropTypes from 'prop-types';
 import SvgUri from 'react-native-svg-uri';
-import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource';
-import AppStyles from 'app/config/styles';
-import images from 'app/config/images';
+import { handleAndroidBackButton, removeAndroidBackButtonHandler } from '../../utils/androidBackButton';
+import AppStyles from '../../config/styles';
+import images from '../../config/images';
 import HomeAnimationContainer from './HomeAnimationContainer';
 import styles from './styles';
 
-const { color, fonts } = AppStyles;
+const { color } = AppStyles;
 
 class HomeView extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
-    handleAndroidBackButton(() => {
-      console.log('back button from homeview');
-      return Alert.alert(
-        'Confirm exit',
-        'Do you want to quit the app?',
-        [
-          { text: 'CANCEL', style: 'cancel' },
-          { text: 'OK', onPress: () => BackHandler.exitApp() },
-        ],
-      );
-    });
+    handleAndroidBackButton(() => Alert.alert(
+      'Confirm exit',
+      'Do you want to quit the app?',
+      [
+        { text: 'CANCEL', style: 'cancel' },
+        { text: 'OK', onPress: () => BackHandler.exitApp() },
+      ],
+    ));
   }
 
   componentWillUnmount() {
     removeAndroidBackButtonHandler();
-    console.log('unmounting homeview');
+    // console.log('unmounting homeview');
   }
 
   render() {
+    const { navigation } = this.props;
+
     return (
       <View style={[styles.container, styles.body]}>
         <HomeAnimationContainer />
@@ -46,7 +43,7 @@ class HomeView extends Component {
         <View style={styles.container_buttons}>
           <TouchableOpacity
             style={styles.button}
-            onPress={() => this.props.navigation.navigate('Statistics')}
+            onPress={() => navigation.navigate('Statistics')}
           >
             <SvgUri
               width="75"
@@ -57,7 +54,7 @@ class HomeView extends Component {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.button}
-            onPress={() => this.props.navigation.navigate('Game')}
+            onPress={() => navigation.navigate('Game')}
           >
             <SvgUri
               width="100"
@@ -68,7 +65,7 @@ class HomeView extends Component {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.button}
-            onPress={() => this.props.navigation.navigate('Options')}
+            onPress={() => navigation.navigate('Options')}
           >
             <SvgUri
               width="75"
@@ -83,5 +80,11 @@ class HomeView extends Component {
     );
   }
 }
+
+HomeView.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+};
 
 export default HomeView;

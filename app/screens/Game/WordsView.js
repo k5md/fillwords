@@ -1,14 +1,27 @@
+/* eslint no-underscore-dangle: ["error", { "allow": ["_pagerRef"] }] */
+/* eslint "react-native/split-platform-components": 1 */
+
 import React, { Component } from 'react';
 import {
-  View, Text, ViewPagerAndroid, TouchableOpacity,
+  View,
+  ViewPagerAndroid,
+  Text,
+  TouchableOpacity,
 } from 'react-native';
-
+import PropTypes from 'prop-types';
+import _ from 'lodash';
 import styles from './styles';
 
 class WordsView extends Component {
-  componentDidUpdate({ currentWordIndex }) {
-    if (this.props.currentWordIndex !== currentWordIndex && this._pagerRef) {
-      this._pagerRef.setPage(this.props.currentWordIndex);
+  componentDidUpdate(prevProps) {
+    const {
+      currentWordIndex: newCurrentWordIndex,
+    } = this.props;
+    const {
+      currentWordIndex: oldCurrentWordIndex,
+    } = prevProps;
+    if (oldCurrentWordIndex !== newCurrentWordIndex && this._pagerRef) {
+      this._pagerRef.setPage(newCurrentWordIndex);
     }
   }
 
@@ -18,7 +31,7 @@ class WordsView extends Component {
       words,
       setCurrentWordIndex,
     } = this.props;
-    console.log(this.props.words, this.props.currentWordIndex);
+
     return (
       words.length > 0 && (
       <View nativeID="words" style={styles.words}>
@@ -40,9 +53,9 @@ class WordsView extends Component {
           ref={ref => this._pagerRef = ref}
         >
 
-          {words.map((item, idx) => (
+          {words.map(item => (
             <View
-              key={idx}
+              key={_.uniqueId()}
               style={[styles.word_container, item.guessed && styles.word_guessed]}
             >
               <View style={styles.word}>
@@ -53,7 +66,11 @@ class WordsView extends Component {
           ))}
         </ViewPagerAndroid>
 
-        <View style={[styles.button_right, currentWordIndex >= words.length - 1 && styles.button_disabled]}>
+        <View style={[
+          styles.button_right,
+          currentWordIndex >= words.length - 1 && styles.button_disabled,
+        ]}
+        >
           <TouchableOpacity
             onPress={() => setCurrentWordIndex(currentWordIndex + 1)}
             disabled={currentWordIndex >= words.length - 1}
@@ -66,5 +83,14 @@ class WordsView extends Component {
     );
   }
 }
+
+WordsView.propTypes = {
+  currentWordIndex: PropTypes.number.isRequired,
+  words: PropTypes.shape({
+    word: PropTypes.node,
+    translation: PropTypes.node,
+  }).isRequired,
+  setCurrentWordIndex: PropTypes.func.isRequired,
+};
 
 export default WordsView;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as gameActions from 'app/actions/gameActions';
+import * as gameActions from '../../actions/gameActions';
 import WordsView from './WordsView';
 
 class WordsContainer extends Component {

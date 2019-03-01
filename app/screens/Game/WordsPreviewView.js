@@ -5,18 +5,24 @@ import {
   View,
   ScrollView,
 } from 'react-native';
+import PropTypes from 'prop-types';
 import Modal from 'react-native-modalbox';
+import _ from 'lodash';
 import styles from './styles';
 
 class WordsPreviewView extends Component {
   render() {
+    const {
+      playGame,
+      isOpen,
+      words,
+    } = this.props;
     return (
       <Modal
-        onClosed={() => this.props.playGame()}
-        isOpen={this.props.isOpen}
+        onClosed={() => playGame()}
+        isOpen={isOpen}
         style={styles.words_preview_container}
         position="top"
-
         swipeArea={20}
       >
         <View>
@@ -25,15 +31,14 @@ class WordsPreviewView extends Component {
           </View>
           <View style={styles.words_preview_title_hairline} />
           <ScrollView>
-            {this.props.words.map((item, index) => (
-              <View key={index} style={styles.words_preview_content_entry}>
+            {words.map(item => (
+              <View key={_.uniqueId()} style={styles.words_preview_content_entry}>
                 <Text style={styles.words_preview_content_entry_text}>{item.word}</Text>
                 <Text style={styles.words_preview_content_entry_text}>{item.translation}</Text>
               </View>
-            ))
-                        }
+            ))}
           </ScrollView>
-          <TouchableOpacity onPress={() => this.props.playGame()}>
+          <TouchableOpacity onPress={() => playGame()}>
             <View style={styles.words_preview_button}>
               <Text style={styles.words_preview_button_text}>Done!</Text>
             </View>
@@ -43,5 +48,11 @@ class WordsPreviewView extends Component {
     );
   }
 }
+
+WordsPreviewView.propTypes = {
+  playGame: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  words: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 
 export default WordsPreviewView;

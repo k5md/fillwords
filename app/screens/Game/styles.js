@@ -2,8 +2,8 @@ import { StyleSheet } from 'react-native';
 import AppStyles from '../../config/styles';
 import metrics from '../../config/metrics';
 
-const { color, fonts } = AppStyles;
-const { screenHeight, screenWidth } = metrics;
+const { color } = AppStyles;
+const { screenHeight } = metrics;
 const fontSize = Math.floor(screenHeight / 40) + 20;
 const styles = StyleSheet.create({
   container: {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
-  Text, Button, View, FlatList, ScrollView, StyleSheet,
+  Text,
+  View,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import Modal from 'react-native-modalbox';
@@ -8,15 +9,18 @@ import styles from './styles';
 
 class GameEndView extends Component {
   render() {
+    const {
+      isOpen,
+    } = this.props;
     const self = this;
     return (
       <Modal
         onClosed={() => {
-          console.log(self, self.props);
+          // console.log(self, self.props);
           self.props.clearGame();
           self.props.navigation.navigate('Home');
         }}
-        isOpen={this.props.isOpen}
+        isOpen={isOpen}
         style={styles.game_end_container}
         position="top"
         ref="modal6"

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as optionsActions from 'app/actions/optionsActions';
+import * as optionsActions from '../../actions/optionsActions';
 import OptionsView from './OptionsView';
 
 class OptionsContainer extends Component {

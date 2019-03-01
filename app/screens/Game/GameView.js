@@ -1,38 +1,35 @@
-/* eslint camelcase: ["error", {allow: ["^UNSAFE_"]}] */
-
 import React, { Component } from 'react';
 import {
-  Button, Text, View, TouchableOpacity,
+  View,
 } from 'react-native';
-import _ from 'lodash';
-
-import Field from 'app/lib/field';
-import dictionary from 'app/utils/Dictionaries';
-
-import metrics from 'app/config/metrics';
-import { handleAndroidBackButton, removeAndroidBackButtonHandler } from 'app/utils/androidBackButton';
+import Field from '../../lib/field';
+import dictionary from '../../utils/Dictionaries';
+import metrics from '../../config/metrics';
+import { handleAndroidBackButton, removeAndroidBackButtonHandler } from '../../utils/androidBackButton';
 import styles from './styles';
 import WordsContainer from './WordsContainer';
 import FieldContainer from './FieldContainer';
 import WordsPreviewContainer from './WordsPreviewContainer';
 import GameEndContainer from './GameEndContainer';
 
-
 class GameView extends Component {
   async componentDidMount() {
-    handleAndroidBackButton(() => {
-      this.props.navigation.navigate('Home');
-      this.props.clearGame();
-    });
-
     const {
+      navigation,
+      clearGame,
       setupGame,
+      rows,
+      cols,
     } = this.props;
 
-    const { rows, cols } = this.props;
+    handleAndroidBackButton(() => {
+      navigation.navigate('Home');
+      clearGame();
+    });
+
     const test = new Field(cols, rows);
     test.initializeFast();
-    // NOTE THIS IS A TEMPORARY WORKAROUND! REMOVE LATER AND FIX
+    // NOTE: THIS IS A TEMPORARY WORKAROUND! REMOVE LATER AND FIX
     while (Object.values(test.connections).some(item => item.length >= 14)) {
       test.initializeFast();
     }
@@ -48,19 +45,23 @@ class GameView extends Component {
     let cells = [];
     for (let row = 0; row < rows; row += 1) {
       for (let col = 0; col < cols; col += 1) {
-        // const height = metrics.screenHeight / rows - 2 * rows;
         const x = col * size + marginX;
         const y = row * size + marginY;
-        const width = size;
-        const height = size;
         const value = test.cells[row][col];
         cells.push({
-          x, y, width, height, value, row, col, selected: false, flipped: false,
+          x,
+          y,
+          width: size,
+          height: size,
+          value,
+          row,
+          col,
+          selected: false,
+          flipped: false,
         });
       }
     }
 
-    console.log('started retrieving words');
     const words = [];
     // TODO: add where wordIsComposite
     for (const key in test.connections) {
@@ -83,8 +84,7 @@ class GameView extends Component {
         key, wordLength, word, translation, translationLength, guessed: false,
       });
     }
-    console.log('done retrieving words');
-
+    // console.log('done retrieving words');
 
     setupGame({
       cells,
@@ -100,14 +100,17 @@ class GameView extends Component {
   }
 
   render() {
+    const {
+      navigation,
+    } = this.props;
+
     return (
       <View style={styles.container}>
-
         <FieldContainer />
         <View style={styles.hairline} />
         <WordsContainer />
         <WordsPreviewContainer />
-        <GameEndContainer {...{ navigation: this.props.navigation }} />
+        <GameEndContainer {...{ navigation }} />
       </View>
     );
   }
