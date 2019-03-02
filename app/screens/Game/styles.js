@@ -12,7 +12,6 @@ const styles = StyleSheet.create({
   field: {
     backgroundColor: color.COLOR_GREYISH,
     flex: 5,
-    // minHeight: 800,
   },
   words: {
     backgroundColor: color.COLOR_GREYISH,

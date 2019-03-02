@@ -14,7 +14,7 @@ import SvgUri from 'react-native-svg-uri';
 import PropTypes from 'prop-types';
 import { handleAndroidBackButton, removeAndroidBackButtonHandler } from '../../utils/androidBackButton';
 import images from '../../config/images';
-import dictionariesConfig from '../../constants/dictionariesConfig';
+import dictionariesConfig from '../../config/dictionaries';
 import styles from './styles';
 
 class OptionsView extends Component {

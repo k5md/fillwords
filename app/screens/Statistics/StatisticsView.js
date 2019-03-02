@@ -11,7 +11,7 @@ import _ from 'lodash';
 import { handleAndroidBackButton, removeAndroidBackButtonHandler } from '../../utils/androidBackButton';
 import images from '../../config/images';
 import dictionary from '../../utils/Dictionaries';
-import dictionariesConfig from '../../constants/dictionariesConfig';
+import dictionariesConfig from '../../config/dictionaries';
 import styles from './styles';
 
 class StatisticsView extends Component {

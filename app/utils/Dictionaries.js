@@ -1,5 +1,5 @@
 import SQLite from 'react-native-sqlite-storage';
-import dictionariesConfig from '../constants/dictionariesConfig';
+import dictionariesConfig from '../config/dictionaries';
 import configureStore from '../store/configureStore';
 import dictionaries from '../dictionaries';
 

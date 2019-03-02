@@ -1,5 +1,5 @@
 import * as types from '../constants/actionTypes';
-import dictionariesConfig from '../constants/dictionariesConfig';
+import dictionariesConfig from '../config/dictionaries';
 
 const initialState = {
   rows: 5,
