@@ -1,11 +1,14 @@
 import { StyleSheet } from 'react-native';
 import AppStyles from '../../config/styles';
 
-const { color } = AppStyles;
+const { color, fontSizes } = AppStyles;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  flow_right: {
+    alignItems: 'flex-end',
   },
   container_space_between: {
     flexDirection: 'row',
@@ -24,7 +27,7 @@ const styles = StyleSheet.create({
   header_text: {
     color: color.COLOR_WHITE,
     fontFamily: 'Verdana',
-    fontSize: 20,
+    fontSize: fontSizes.FONT_SIZE_SMALL, // 20px was default
     fontWeight: 'bold',
     textAlign: 'center',
   },
@@ -43,7 +46,7 @@ const styles = StyleSheet.create({
   },
   body_item_text: {
     fontFamily: 'Verdana',
-    fontSize: 20,
+    fontSize: fontSizes.FONT_SIZE_SMALL, // 20px was default
   },
   footer: {
     flex: 0,
@@ -55,7 +58,7 @@ const styles = StyleSheet.create({
   footer_text: {
     color: color.COLOR_WHITE,
     fontFamily: 'Verdana',
-    fontSize: 20,
+    fontSize: fontSizes.FONT_SIZE_SMALL, // 20px was default
   },
   hairline: {
     borderWidth: 0.5,

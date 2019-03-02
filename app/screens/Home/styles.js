@@ -1,21 +1,18 @@
 import { StyleSheet } from 'react-native';
 import AppStyles from '../../config/styles';
-import metrics from '../../config/metrics';
 
-const { color } = AppStyles;
-const { screenHeight } = metrics;
-const fontSize = Math.floor(screenHeight / 40) + 20;
+const { color, fontSizes } = AppStyles;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   title: {
-    paddingTop: 250,
-    fontSize: fontSize + 40,
-    flex: 3,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  title_text: {
+    fontSize: fontSizes.FONT_SIZE_LARGE,
     fontFamily: 'sans-serif-condensed',
     color: color.COLOR_BLACK_TRANSP,
   },
@@ -45,12 +42,13 @@ const styles = StyleSheet.create({
     height: 150,
   },
   container_buttons: {
-    flex: 4,
     flexDirection: 'row',
-    alignItems: 'flex-start',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   body: {
-    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
     backgroundColor: color.COLOR_GREYISH,
   },
 });

@@ -2,6 +2,15 @@
  * Provides universal color configs used in the app.
  * Provides universal fonts used in the app.
  */
+import metrics from './metrics';
+
+const { screenHeight } = metrics;
+
+const fontSizeBase = Math.floor(screenHeight / 40);
+const fontSizeSmall = fontSizeBase + 4;
+const fontSizeNormal = fontSizeBase + 20;
+const fontSizeLarge = fontSizeBase + 54;
+
 const AppStyles = {
   color: {
     COLOR_PRIMARY: '#2ec7ab',
@@ -21,6 +30,12 @@ const AppStyles = {
   fonts: {
     FONT_REGULAR: 'Roboto-Regular',
     FONT_MEDIUM: 'Roboto-Medium',
+  },
+  fontSizes: {
+    FONT_SIZE_BASE: fontSizeBase,
+    FONT_SIZE_SMALL: fontSizeSmall,
+    FONT_SIZE_NORMAL: fontSizeNormal,
+    FONT_SIZE_LARGE: fontSizeLarge,
   },
 };
 

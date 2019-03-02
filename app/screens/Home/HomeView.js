@@ -39,8 +39,10 @@ class HomeView extends Component {
     return (
       <View style={[styles.container, styles.body]}>
         <HomeAnimationContainer />
-        <Text style={styles.title}>FILLWORDS</Text>
-        <View style={styles.container_buttons}>
+        <View style={[styles.container, styles.title]}>
+          <Text style={styles.title_text}>FILLWORDS</Text>
+        </View>
+        <View style={[styles.container, styles.container_buttons]}>
           <TouchableOpacity
             style={styles.button}
             onPress={() => navigation.navigate('Statistics')}
@@ -75,7 +77,6 @@ class HomeView extends Component {
             />
           </TouchableOpacity>
         </View>
-
       </View>
     );
   }

@@ -2,9 +2,8 @@ import { StyleSheet } from 'react-native';
 import AppStyles from '../../config/styles';
 import metrics from '../../config/metrics';
 
-const { color } = AppStyles;
-const { screenHeight } = metrics;
-const fontSize = Math.floor(screenHeight / 40) + 20;
+const { color, fontSizes } = AppStyles;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -31,7 +30,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   word_text: {
-    fontSize: fontSize / 2,
+    fontSize: fontSizes.FONT_SIZE_SMALL, // fontSize / 2,
   },
   button_left: {
     minWidth: 50,
@@ -46,8 +45,8 @@ const styles = StyleSheet.create({
     opacity: 0.7,
   },
   button_text: {
-    lineHeight: 70,
-    fontSize: 70,
+    lineHeight: fontSizes.FONT_SIZE_LARGE,
+    fontSize: fontSizes.FONT_SIZE_LARGE, // 70,
     color: color.COLOR_BLACK_TRANSP,
   },
   button_disabled: {
@@ -81,7 +80,7 @@ const styles = StyleSheet.create({
     backgroundColor: color.COLOR_BLUE_LIGHT,
   },
   cell_text: {
-    fontSize,
+    fontSize: fontSizes.FONT_SIZE_NORMAL,
     color: color.COLOR_GREYISH,
   },
   connections: {
@@ -123,7 +122,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   words_preview_title_text: {
-    fontSize,
+    fontSize: fontSizes.FONT_SIZE_NORMAL, // default 36,
     fontWeight: 'bold',
   },
   words_preview_content_entry: {
@@ -131,8 +130,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   words_preview_content_entry_text: {
-    fontSize: fontSize / 2.5,
-    lineHeight: fontSize,
+    fontSize: fontSizes.FONT_SIZE_BASE, // 16 / 2.5,
+    lineHeight: fontSizes.FONT_SIZE_SMALL,
   },
   words_preview_button: {
     margin: 0,
@@ -144,14 +143,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   words_preview_button_text: {
-    fontSize: fontSize / 2,
+    fontSize: fontSizes.FONT_SIZE_BASE, // 8
   },
   game_end_container: {
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: '30%',
     height: '30%',
-    width: '75%',
+    width: '80%',
     borderWidth: 2,
     borderRadius: 1,
     display: 'flex',

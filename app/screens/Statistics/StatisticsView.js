@@ -33,7 +33,7 @@ class StatisticsView extends Component {
       });
 
       const statisticsEntries = [
-        ['Current dictionary', dictionariesConfig.DICTIONARIES[languagePack].displayName],
+        ['Dictionary', dictionariesConfig.DICTIONARIES[languagePack].displayName],
         ['Total words', dictionariesConfig.DICTIONARIES[languagePack].entriesCount],
         ['Level 0', await dictionary.countWords({ srsStatus: 0 })],
         ['Level 1', await dictionary.countWords({ srsStatus: 1 })],
@@ -76,13 +76,17 @@ class StatisticsView extends Component {
               {statisticsEntries.map(([displayName, value], itemIndex) => (
                 <View key={_.uniqueId()}>
                   <View style={styles.container_space_between}>
-                    <Text style={styles.body_item_text}>
-                      {displayName}
+                    <View style={styles.container}>
+                      <Text style={styles.body_item_text}>
+                        {displayName}
 :
-                    </Text>
-                    <Text style={styles.body_item_text}>
-                      {value}
-                    </Text>
+                      </Text>
+                    </View>
+                    <View style={[styles.container, styles.flow_right]}>
+                      <Text style={styles.body_item_text} numberOfLines={1}>
+                        {value}
+                      </Text>
+                    </View>
                   </View>
                   {itemIndex < statisticsEntries.length - 1 && <View style={styles.hairline} />}
                 </View>

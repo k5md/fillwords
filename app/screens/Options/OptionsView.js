@@ -144,7 +144,7 @@ OptionsView.propTypes = {
   rows: PropTypes.number.isRequired,
   cols: PropTypes.number.isRequired,
   practiceBothway: PropTypes.bool.isRequired,
-  languagePack: PropTypes.bool.isRequired,
+  languagePack: PropTypes.string.isRequired,
   changeNumberRows: PropTypes.func.isRequired,
   changeNumberCols: PropTypes.func.isRequired,
   togglePracticeBothway: PropTypes.func.isRequired,
