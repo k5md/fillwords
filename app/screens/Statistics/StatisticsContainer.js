@@ -1,12 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import StatisticsView from './StatisticsView';
 
-class StatisticsContainer extends Component {
-  render() {
-    return <StatisticsView {...this.props} />;
-  }
-}
+const StatisticsContainer = props => (<StatisticsView {...props} />);
 
 function mapStateToProps(state) {
   return {

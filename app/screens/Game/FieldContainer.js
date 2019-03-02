@@ -1,13 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import * as gameActions from '../../actions/gameActions';
 import FieldView from './FieldView';
 
-class FieldContainer extends Component {
-  render() {
-    return (<FieldView {...this.props} />);
-  }
-}
+const FieldContainer = props => (<FieldView {...props} />);
 
 const mapStateToProps = state => ({
   cells: state.gameReducer.cells,

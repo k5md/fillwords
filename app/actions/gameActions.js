@@ -42,10 +42,10 @@ export function setupGame(config) {
   };
 }
 
-export function selectCell(cell) {
+export function selectCell(cellIndex) {
   return {
     type: types.SELECT_CELL,
-    cell,
+    cellIndex,
   };
 }
 
@@ -58,13 +58,6 @@ export function deselectCells() {
 export function guessWord() {
   return {
     type: types.GUESS_WORD,
-  };
-}
-
-export function selectCellByIndex(cellIndex) {
-  return {
-    type: types.SELECT_CELL_BY_INDEX,
-    cellIndex,
   };
 }
 

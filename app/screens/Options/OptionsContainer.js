@@ -1,13 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import * as optionsActions from '../../actions/optionsActions';
 import OptionsView from './OptionsView';
 
-class OptionsContainer extends Component {
-  render() {
-    return <OptionsView {...this.props} />;
-  }
-}
+const OptionsContainer = props => (<OptionsView {...props} />);
 
 function mapStateToProps(state) {
   return {

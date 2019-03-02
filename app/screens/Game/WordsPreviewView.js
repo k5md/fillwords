@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   Text,
   TouchableOpacity,
@@ -10,44 +10,39 @@ import Modal from 'react-native-modalbox';
 import _ from 'lodash';
 import styles from './styles';
 
-class WordsPreviewView extends Component {
-  render() {
-    const {
-      playGame,
-      isOpen,
-      words,
-    } = this.props;
-    return (
-      <Modal
-        onClosed={() => playGame()}
-        isOpen={isOpen}
-        style={styles.words_preview_container}
-        position="top"
-        swipeArea={20}
-      >
-        <View>
-          <View style={styles.words_preview_title}>
-            <Text style={styles.words_preview_title_text}>Remember:</Text>
+const WordsPreviewView = ({
+  playGame,
+  isOpen,
+  words,
+}) => (
+  <Modal
+    onClosed={() => playGame()}
+    isOpen={isOpen}
+    style={styles.words_preview_container}
+    position="top"
+    swipeArea={20}
+  >
+    <View>
+      <View style={styles.words_preview_title}>
+        <Text style={styles.words_preview_title_text}>Remember:</Text>
+      </View>
+      <View style={styles.words_preview_title_hairline} />
+      <ScrollView>
+        {words.map(item => (
+          <View key={_.uniqueId()} style={styles.words_preview_content_entry}>
+            <Text style={styles.words_preview_content_entry_text}>{item.word}</Text>
+            <Text style={styles.words_preview_content_entry_text}>{item.translation}</Text>
           </View>
-          <View style={styles.words_preview_title_hairline} />
-          <ScrollView>
-            {words.map(item => (
-              <View key={_.uniqueId()} style={styles.words_preview_content_entry}>
-                <Text style={styles.words_preview_content_entry_text}>{item.word}</Text>
-                <Text style={styles.words_preview_content_entry_text}>{item.translation}</Text>
-              </View>
-            ))}
-          </ScrollView>
-          <TouchableOpacity onPress={() => playGame()}>
-            <View style={styles.words_preview_button}>
-              <Text style={styles.words_preview_button_text}>Done!</Text>
-            </View>
-          </TouchableOpacity>
+        ))}
+      </ScrollView>
+      <TouchableOpacity onPress={() => playGame()}>
+        <View style={styles.words_preview_button}>
+          <Text style={styles.words_preview_button_text}>Done!</Text>
         </View>
-      </Modal>
-    );
-  }
-}
+      </TouchableOpacity>
+    </View>
+  </Modal>
+);
 
 WordsPreviewView.propTypes = {
   playGame: PropTypes.func.isRequired,

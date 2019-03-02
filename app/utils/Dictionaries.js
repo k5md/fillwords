@@ -52,13 +52,16 @@ class Dictionaries {
       const insertTemplate = `INSERT INTO ${dictionaryName} VALUES ${valuesTemplate};`;
 
       const maxBatchSize = 500; // cordova-sqlite and it's derivatives crash the app if exceeded
+      const transactions = [];
       for (let i = 0; i < dictionary.length; i += maxBatchSize) {
-        await db.transaction((tx) => {
+        const transaction = db.transaction((tx) => {
           for (let j = 0; j < maxBatchSize && j + i < dictionary.length; j += 1) {
             tx.executeSql(insertTemplate, dictionary[i + j]);
           }
         });
+        transactions.push(transaction);
       }
+      await Promise.all(transactions);
     }
   }
 

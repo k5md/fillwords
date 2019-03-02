@@ -27,12 +27,46 @@ class GameView extends Component {
       clearGame();
     });
 
-    const test = new Field(cols, rows);
-    test.initializeFast();
-    // NOTE: THIS IS A TEMPORARY WORKAROUND! REMOVE LATER AND FIX
-    while (Object.values(test.connections).some(item => item.length >= 14)) {
-      test.initializeFast();
+    const field = new Field(cols, rows);
+    field.initializeFast();
+    // TODO: remove later, fix to depend on the dictionary chosen,
+    // this is a temporary workaround to prevent creating fields with chains
+    // longer than 14, since no such words may be present in the dictionary
+    while (Object.values(field.connections).some(item => item.length >= 14)) {
+      field.initializeFast();
     }
+
+    // TODO: add where wordIsComposite
+    const letters = new Map(); // used to map {row, col} to it's corresponding letter
+    const words = await Promise.all(
+      Object.keys(field.connections).map((key) => {
+        const chain = field.connections[key];
+        const wordPromise = dictionary.getWord({
+          wordLength: chain.length,
+        }).then(({
+          wordLength,
+          word,
+          translation,
+          translationLength,
+        }) => {
+          for (let i = 0; i < chain.length; i += 1) {
+            const [row, col] = chain[i];
+            const letter = word[i];
+            letters.set(row * field.cols + col, letter);
+          }
+
+          return {
+            key,
+            wordLength,
+            word,
+            translation,
+            translationLength,
+            guessed: false,
+          };
+        });
+        return wordPromise;
+      }),
+    );
 
     const height = metrics.screenHeight;
     const width = metrics.screenWidth;
@@ -42,12 +76,13 @@ class GameView extends Component {
     const marginX = Math.floor((width - (size * cols)) / (2 * cols));
     const marginY = Math.floor((height - (size * rows)) / (2 * rows));
 
-    let cells = [];
+    const cells = [];
     for (let row = 0; row < rows; row += 1) {
       for (let col = 0; col < cols; col += 1) {
         const x = col * size + marginX;
         const y = row * size + marginY;
-        const value = test.cells[row][col];
+        const value = letters.get(row * field.cols + col);
+
         cells.push({
           x,
           y,
@@ -62,33 +97,9 @@ class GameView extends Component {
       }
     }
 
-    const words = [];
-    // TODO: add where wordIsComposite
-    for (const key in test.connections) {
-      const chain = test.connections[key];
-
-      const results = await dictionary.getWord({
-        wordLength: chain.length,
-      });
-
-      const {
-        word, wordLength, translation, translationLength,
-      } = results;
-      for (let i = 0; i < chain.length; i += 1) {
-        const targetRow = chain[i][0];
-        const targetCol = chain[i][1];
-        const letter = word[i];
-        cells = cells.map(cell => (cell.row === targetRow && cell.col === targetCol ? ({ ...cell, value: letter }) : cell));
-      }
-      words.push({
-        key, wordLength, word, translation, translationLength, guessed: false,
-      });
-    }
-    // console.log('done retrieving words');
-
     setupGame({
       cells,
-      connections: test.connections,
+      connections: field.connections,
       currentWordIndex: 0,
       selectedCells: [],
       words,

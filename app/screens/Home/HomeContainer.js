@@ -1,12 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import HomeView from './HomeView';
 
-class HomeContainer extends Component {
-  render() {
-    return <HomeView {...this.props} />;
-  }
-}
+const HomeContainer = props => (<HomeView {...props} />);
 
 function mapStateToProps() {
   return {};

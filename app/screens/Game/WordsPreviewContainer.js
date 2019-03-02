@@ -1,13 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import * as gameActions from '../../actions/gameActions';
 import WordsPreviewView from './WordsPreviewView';
 
-class WordsPreviewContainer extends Component {
-  render() {
-    return (<WordsPreviewView {...this.props} />);
-  }
-}
+const WordsPreviewContainer = props => (<WordsPreviewView {...props} />);
 
 const mapStateToProps = state => ({
   words: state.gameReducer.words,

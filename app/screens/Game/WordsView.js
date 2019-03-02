@@ -1,5 +1,6 @@
 /* eslint no-underscore-dangle: ["error", { "allow": ["_pagerRef"] }] */
 /* eslint "react-native/split-platform-components": 1 */
+/* eslint "react/no-array-index-key": 0 */
 
 import React, { Component } from 'react';
 import {
@@ -9,7 +10,6 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
 import styles from './styles';
 
 class WordsView extends Component {
@@ -50,12 +50,11 @@ class WordsView extends Component {
           onPageSelected={(event) => {
             setCurrentWordIndex(event.nativeEvent.position);
           }}
-          ref={ref => this._pagerRef = ref}
+          ref={(ref) => { this._pagerRef = ref; }}
         >
-
-          {words.map(item => (
+          {words.map((item, index) => (
             <View
-              key={_.uniqueId()}
+              key={index}
               style={[styles.word_container, item.guessed && styles.word_guessed]}
             >
               <View style={styles.word}>
@@ -86,10 +85,10 @@ class WordsView extends Component {
 
 WordsView.propTypes = {
   currentWordIndex: PropTypes.number.isRequired,
-  words: PropTypes.shape({
+  words: PropTypes.arrayOf(PropTypes.shape({
     word: PropTypes.node,
     translation: PropTypes.node,
-  }).isRequired,
+  })).isRequired,
   setCurrentWordIndex: PropTypes.func.isRequired,
 };
 
