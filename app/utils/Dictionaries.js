@@ -15,7 +15,9 @@ const fields = [
   ['isWordComposite', 'BOOLEAN'],
   ['isTranslationComposite', 'BOOLEAN'],
   ['srsStatus', 'INTEGER'],
+  ['srsStatusReversed', 'INTEGER'],
   ['lastReviewed', 'INTEGER'], // Unix Time Stamp
+  ['lastReviewedReversed', 'INTEGER'], // Unix Time Stamp
 ];
 
 class Dictionaries {
@@ -48,7 +50,7 @@ class Dictionaries {
       await db.executeSql(`DROP TABLE IF EXISTS ${dictionaryName};`);
       await db.executeSql(`CREATE TABLE IF NOT EXISTS ${dictionaryName}(${fields.map(entry => entry.join(' ')).join(',')});",`);
 
-      const valuesTemplate = '(?,?,?,?,?,?,?,?,?)';
+      const valuesTemplate = '(?,?,?,?,?,?,?,?,?,?,?)';
       const insertTemplate = `INSERT INTO ${dictionaryName} VALUES ${valuesTemplate};`;
 
       const maxBatchSize = 500; // cordova-sqlite and it's derivatives crash the app if exceeded
@@ -62,6 +64,9 @@ class Dictionaries {
         transactions.push(transaction);
       }
       await Promise.all(transactions);
+      // NOTE: consider search for not-composite words
+      await db.executeSql(`CREATE INDEX IF NOT EXISTS idx_${dictionaryName}_wordLength ON ${dictionaryName} (wordLength)`);
+      await db.executeSql(`CREATE INDEX IF NOT EXISTS idx_${dictionaryName}_translationLength ON ${dictionaryName} (translationLength)`);
     }
   }
 
@@ -73,7 +78,7 @@ class Dictionaries {
     const specifier = Object.entries(selector).map(pair => pair.join('=')).join(',');
     const results = await db.executeSql(`SELECT * FROM ${dictionaryName} WHERE ${specifier} ORDER BY ${order} LIMIT ${limit}`, []);
     const entry = results[0].rows.item(0);
-    // console.log('get word', selector, specifier, results, entry);
+
     return entry;
   }
 
@@ -83,11 +88,19 @@ class Dictionaries {
     const specifier = Object.entries(selector).map(pair => pair.join('=')).join(',');
     const countResults = await db.executeSql(`SELECT COUNT(*) FROM ${dictionaryName} WHERE ${specifier}`, []);
     const count = Object.values(countResults[0].rows.item(0))[0];
-    // console.log('number of entries in', selector, specifier, dictionaryName, count);
+
     return count;
   }
 
-  // async updateSRSStatus(entry, newStatus) {}
+  async updateWord(selector, update) {
+    const { dictionaryName } = this;
+    const db = await this.storage;
+    const modifier = Object.entries(update).map(pair => pair.join('=')).join(',');
+    const specifier = Object.entries(selector).map(pair => pair.join('=')).join(',');
+    const results = await db.executeSql(`UPDATE ${dictionaryName} SET ${modifier} WHERE ${specifier}`, []);
+
+    return results;
+  }
 }
 
 const dictionary = new Dictionaries();
