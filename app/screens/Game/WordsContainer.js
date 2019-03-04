@@ -13,6 +13,7 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
   return {
+    discardWord: index => dispatch(gameActions.discardWord(index)),
     setCurrentWordIndex: index => dispatch(gameActions.setCurrentWordIndex(index)),
   };
 }

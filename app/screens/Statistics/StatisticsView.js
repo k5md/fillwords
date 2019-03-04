@@ -23,7 +23,6 @@ class StatisticsView extends Component {
       const {
         languagePack,
         navigation,
-        // practiceBothway,
       } = this.props;
 
       handleAndroidBackButton(() => {
@@ -79,7 +78,7 @@ class StatisticsView extends Component {
                     <View style={styles.container}>
                       <Text style={styles.body_item_text}>
                         {displayName}
-:
+                        :
                       </Text>
                     </View>
                     <View style={[styles.container, styles.flow_right]}>
@@ -104,7 +103,6 @@ StatisticsView.propTypes = {
     navigate: PropTypes.func.isRequired,
   }).isRequired,
   languagePack: PropTypes.string.isRequired,
-  // practiceBothway: PropTypes.bool.isRequired,
 };
 
 export default StatisticsView;

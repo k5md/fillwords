@@ -14,12 +14,6 @@ export function changeNumberCols(cols) {
   };
 }
 
-export function togglePracticeBothway() {
-  return {
-    type: types.TOGGLE_PRACTICE_BOTHWAY,
-  };
-}
-
 export function setLanguagePack(languagePack) {
   return {
     type: types.SET_LANGUAGE_PACK,

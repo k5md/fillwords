@@ -61,6 +61,13 @@ export function guessWord() {
   };
 }
 
+export function discardWord(discardedWordIndex) {
+  return {
+    type: types.DISCARD_WORD,
+    discardedWordIndex,
+  };
+}
+
 export function playGame() {
   return {
     type: types.PLAY_GAME,

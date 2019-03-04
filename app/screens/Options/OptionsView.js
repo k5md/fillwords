@@ -37,11 +37,9 @@ class OptionsView extends Component {
       navigation,
       rows,
       cols,
-      practiceBothway,
       languagePack,
       changeNumberRows,
       changeNumberCols,
-      togglePracticeBothway,
       setLanguagePack,
     } = this.props;
 
@@ -95,21 +93,11 @@ class OptionsView extends Component {
             />
             <View style={styles.hairline} />
             <Text style={styles.body_item_text}>
-                            Practice reverse translation:
-            </Text>
-            <Switch
-              thumbColor="#66CCFF"
-              value={practiceBothway}
-              onValueChange={() => togglePracticeBothway()}
-            />
-            <View style={styles.hairline} />
-            <Text style={styles.body_item_text}>
-                            Select language pair:
+              Select language pair:
             </Text>
             <Picker
               selectedValue={languagePack}
-              onValueChange={dictionaryKey => setLanguagePack(dictionaryKey)
-                          }
+              onValueChange={dictionaryKey => setLanguagePack(dictionaryKey)}
             >
               {Object.keys(dictionariesConfig.DICTIONARIES).map(dictionaryKey => (
                 <Picker.Item
@@ -143,11 +131,9 @@ OptionsView.propTypes = {
   }).isRequired,
   rows: PropTypes.number.isRequired,
   cols: PropTypes.number.isRequired,
-  practiceBothway: PropTypes.bool.isRequired,
   languagePack: PropTypes.string.isRequired,
   changeNumberRows: PropTypes.func.isRequired,
   changeNumberCols: PropTypes.func.isRequired,
-  togglePracticeBothway: PropTypes.func.isRequired,
   setLanguagePack: PropTypes.func.isRequired,
 };
 

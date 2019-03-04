@@ -8,7 +8,6 @@ function mapStateToProps(state) {
   return {
     rows: state.optionsReducer.rows,
     cols: state.optionsReducer.cols,
-    practiceBothway: state.optionsReducer.practiceBothway,
     languagePack: state.optionsReducer.languagePack,
   };
 }

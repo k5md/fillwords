@@ -9,7 +9,6 @@ function mapStateToProps(state) {
   return {
     rows: state.optionsReducer.rows,
     cols: state.optionsReducer.cols,
-    practiceBothway: state.optionsReducer.practiceBothway,
     languagePack: state.optionsReducer.languagePack,
   };
 }
@@ -17,7 +16,6 @@ function mapStateToProps(state) {
 const mapDispatchToProps = dispatch => ({
   changeNumberRows: rows => dispatch(optionsActions.changeNumberRows(rows)),
   changeNumberCols: cols => dispatch(optionsActions.changeNumberCols(cols)),
-  togglePracticeBothway: () => dispatch(optionsActions.togglePracticeBothway()),
   setLanguagePack: languagePack => dispatch(optionsActions.setLanguagePack(languagePack)),
 });
 

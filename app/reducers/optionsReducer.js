@@ -4,7 +4,6 @@ import dictionariesConfig from '../config/dictionaries';
 const initialState = {
   rows: 5,
   cols: 5,
-  practiceBothway: false,
   languagePack: Object.keys(dictionariesConfig.DICTIONARIES)[0],
 };
 

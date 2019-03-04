@@ -1,23 +1,20 @@
+/* eslint no-underscore-dangle: ["error", { "allow": ["_dictionaryName"] }] */
+
 import SQLite from 'react-native-sqlite-storage';
 import dictionariesConfig from '../config/dictionaries';
 import configureStore from '../store/configureStore';
 import dictionaries from '../dictionaries';
+import observeStore from './Observer';
 
-SQLite.DEBUG(false);
+SQLite.DEBUG(true);
 SQLite.enablePromise(true);
 
 const fields = [
   ['word', 'TEXT'],
   ['translation', 'TEXT'],
-  ['detailedTranslation', 'TEXT'],
   ['wordLength', 'INTEGER'],
-  ['translationLength', 'INTEGER'],
-  ['isWordComposite', 'BOOLEAN'],
-  ['isTranslationComposite', 'BOOLEAN'],
   ['srsStatus', 'INTEGER'],
-  ['srsStatusReversed', 'INTEGER'],
   ['lastReviewed', 'INTEGER'], // Unix Time Stamp
-  ['lastReviewedReversed', 'INTEGER'], // Unix Time Stamp
 ];
 
 class Dictionaries {
@@ -30,17 +27,28 @@ class Dictionaries {
 
     this.instance = this;
     this.storage = SQLite.openDatabase({ name: dictionariesConfig.DB_NAME });
-    this.dictionaryName = configureStore().store.getState().optionsReducer.languagePack;
+    this._dictionaryName = null;
   }
 
-  async prepopulate() {
+  get dictionaryName() {
+    return this._dictionaryName;
+  }
+
+  set dictionaryName(newDictionaryName) {
+    this._dictionaryName = newDictionaryName;
+    this.initialize();
+  }
+
+  async initialize() {
     const { dictionaryName } = this;
     const db = await this.storage;
     // console.log(`prepopulating ${dictionaryName}`);
+
     try {
       const countResults = await db.executeSql(`SELECT COUNT(*) FROM ${dictionaryName}`, []);
       const count = Object.values(countResults[0].rows.item(0))[0];
       // console.log('number of entries in', dictionaryName, count);
+
       if (count !== dictionariesConfig.DICTIONARIES[dictionaryName].entriesCount) {
         throw new Error('entries count mismatch');
       }
@@ -50,7 +58,9 @@ class Dictionaries {
       await db.executeSql(`DROP TABLE IF EXISTS ${dictionaryName};`);
       await db.executeSql(`CREATE TABLE IF NOT EXISTS ${dictionaryName}(${fields.map(entry => entry.join(' ')).join(',')});",`);
 
-      const valuesTemplate = '(?,?,?,?,?,?,?,?,?,?,?)';
+      const defaultSrsStatus = 0;
+      const defaultLastReviewed = Date.now();
+      const valuesTemplate = `(?,?,?,${defaultSrsStatus},${defaultLastReviewed})`;
       const insertTemplate = `INSERT INTO ${dictionaryName} VALUES ${valuesTemplate};`;
 
       const maxBatchSize = 500; // cordova-sqlite and it's derivatives crash the app if exceeded
@@ -66,7 +76,6 @@ class Dictionaries {
       await Promise.all(transactions);
       // NOTE: consider search for not-composite words
       await db.executeSql(`CREATE INDEX IF NOT EXISTS idx_${dictionaryName}_wordLength ON ${dictionaryName} (wordLength)`);
-      await db.executeSql(`CREATE INDEX IF NOT EXISTS idx_${dictionaryName}_translationLength ON ${dictionaryName} (translationLength)`);
     }
   }
 
@@ -78,7 +87,7 @@ class Dictionaries {
     const specifier = Object.entries(selector).map(pair => pair.join('=')).join(',');
     const results = await db.executeSql(`SELECT * FROM ${dictionaryName} WHERE ${specifier} ORDER BY ${order} LIMIT ${limit}`, []);
     const entry = results[0].rows.item(0);
-
+    console.log(selector, specifier, entry);
     return entry;
   }
 
@@ -96,14 +105,25 @@ class Dictionaries {
     const { dictionaryName } = this;
     const db = await this.storage;
     const modifier = Object.entries(update).map(pair => pair.join('=')).join(',');
-    const specifier = Object.entries(selector).map(pair => pair.join('=')).join(',');
+    const specifier = Object.entries(selector).map(
+      ([left, right]) => `${left}='${right}'`,
+    ).join(',');
     const results = await db.executeSql(`UPDATE ${dictionaryName} SET ${modifier} WHERE ${specifier}`, []);
-
+    console.log(selector, update, results);
     return results;
   }
 }
 
 const dictionary = new Dictionaries();
-dictionary.prepopulate();
+
+// subscribing to optionsReducer changes to update and reinitialize the dictionary storage
+const { store } = configureStore();
+observeStore(
+  store,
+  state => state.optionsReducer.languagePack,
+  (newDictionaryName) => {
+    dictionary.dictionaryName = newDictionaryName;
+  },
+);
 
 export default dictionary;

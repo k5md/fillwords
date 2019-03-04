@@ -30,8 +30,8 @@ const WordsPreviewView = ({
       <ScrollView>
         {words.map(item => (
           <View key={_.uniqueId()} style={styles.words_preview_content_entry}>
-            <Text style={styles.words_preview_content_entry_text}>{item.word}</Text>
             <Text style={styles.words_preview_content_entry_text}>{item.translation}</Text>
+            <Text style={styles.words_preview_content_entry_text}>{item.word}</Text>
           </View>
         ))}
       </ScrollView>

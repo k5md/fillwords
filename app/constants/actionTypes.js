@@ -15,3 +15,4 @@ export const SET_WORDS = 'SET_WORDS';
 export const SELECT_CELL = 'SELECT_CELL';
 export const DESELECT_CELLS = 'DESELECT_CELLS';
 export const GUESS_WORD = 'GUESS_WORD';
+export const DISCARD_WORD = 'DISCARD_WORD';

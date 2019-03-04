@@ -29,6 +29,7 @@ class WordsView extends Component {
     const {
       currentWordIndex,
       words,
+      discardWord,
       setCurrentWordIndex,
     } = this.props;
 
@@ -55,12 +56,17 @@ class WordsView extends Component {
           {words.map((item, index) => (
             <View
               key={index}
-              style={[styles.word_container, item.guessed && styles.word_guessed]}
+              style={styles.word_container}
             >
-              <View style={styles.word}>
-                <Text style={styles.word_text}>{item.word}</Text>
-                <Text style={styles.word_text}>{item.translation}</Text>
-              </View>
+              <TouchableOpacity
+                onLongPress={() => !item.guessed && discardWord(index)}
+              >
+                <View style={styles.word}>
+                  {item.guessed && <Text style={styles.word_text}>✓</Text>}
+                  {item.discarded && <Text style={styles.word_text}>✗</Text>}
+                  <Text style={styles.word_text}>{item.translation}</Text>
+                </View>
+              </TouchableOpacity>
             </View>
           ))}
         </ViewPagerAndroid>
@@ -90,6 +96,7 @@ WordsView.propTypes = {
     translation: PropTypes.node,
   })).isRequired,
   setCurrentWordIndex: PropTypes.func.isRequired,
+  discardWord: PropTypes.func.isRequired,
 };
 
 export default WordsView;

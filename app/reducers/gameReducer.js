@@ -52,13 +52,13 @@ const handlers = {
 
   [types.GUESS_WORD]: (state) => {
     const words = state.words.map(
-      (item, idx) => (idx === state.currentWordIndex ? ({ ...item, guessed: true }) : item),
+      (word, idx) => (idx === state.currentWordIndex ? ({ ...word, guessed: true }) : word),
     );
     const cells = state.cells.map(
       (cell, idx) => (state.selectedCells.includes(idx) ? ({ ...cell, flipped: true }) : cell),
     );
-    const gameState = words.every(word => word.guessed) ? 'end' : state.gameState;
-    const nextWordIndex = words.findIndex(word => !word.guessed);
+    const gameState = words.every(word => word.guessed || word.discarded) ? 'end' : state.gameState;
+    const nextWordIndex = words.findIndex(word => !word.guessed && !word.discarded);
     const currentWordIndex = nextWordIndex !== -1 ? nextWordIndex : state.currentWordIndex;
     return {
       ...state,
@@ -66,6 +66,33 @@ const handlers = {
       cells,
       gameState,
       currentWordIndex,
+    };
+  },
+
+  [types.DISCARD_WORD]: (state, action) => {
+    const { discardedWordIndex } = action;
+    const words = state.words.map(
+      (word, index) => (index === discardedWordIndex ? ({ ...word, discarded: true }) : word),
+    );
+
+    const connection = state.connections[words[discardedWordIndex].key];
+    // find cells that belong to the discarded word and flip them
+    const cells = state.cells.map(
+      (cell) => {
+        if (connection.findIndex(([row, col]) => cell.row === row && cell.col === col) !== -1) {
+          return { ...cell, flipped: true };
+        }
+        return cell;
+      },
+    );
+
+    const gameState = words.every(word => word.guessed || word.discarded) ? 'end' : state.gameState;
+
+    return {
+      ...state,
+      words,
+      cells,
+      gameState,
     };
   },
 

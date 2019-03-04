@@ -47,7 +47,7 @@ class GameView extends Component {
           wordLength,
           word,
           translation,
-          translationLength,
+          srsStatus,
         }) => {
           for (let i = 0; i < chain.length; i += 1) {
             const [row, col] = chain[i];
@@ -60,8 +60,7 @@ class GameView extends Component {
             wordLength,
             word,
             translation,
-            translationLength,
-            guessed: false,
+            srsStatus,
           };
         });
         return wordPromise;
@@ -93,6 +92,8 @@ class GameView extends Component {
           col,
           selected: false,
           flipped: false,
+          discarded: false,
+          guessed: false,
         });
       }
     }

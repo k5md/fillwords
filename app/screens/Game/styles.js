@@ -1,6 +1,5 @@
 import { StyleSheet } from 'react-native';
 import AppStyles from '../../config/styles';
-import metrics from '../../config/metrics';
 
 const { color, fontSizes } = AppStyles;
 
@@ -21,9 +20,6 @@ const styles = StyleSheet.create({
   word_container: {
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  word_guessed: {
-
   },
   word: {
     justifyContent: 'center',

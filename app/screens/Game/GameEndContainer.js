@@ -6,6 +6,7 @@ import GameEndView from './GameEndView';
 const GameEndContainer = props => (<GameEndView {...props} />);
 
 const mapStateToProps = state => ({
+  words: state.gameReducer.words,
   isOpen: state.gameReducer.gameState === 'end',
 });
 
