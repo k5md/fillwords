@@ -2,12 +2,12 @@
 
 import React, { Component } from 'react';
 import {
+  Alert,
   View,
   Text,
   ScrollView,
   Picker,
   Slider,
-  Switch,
   TouchableOpacity,
 } from 'react-native';
 import SvgUri from 'react-native-svg-uri';
@@ -16,8 +16,17 @@ import { handleAndroidBackButton, removeAndroidBackButtonHandler } from '../../u
 import images from '../../config/images';
 import dictionariesConfig from '../../config/dictionaries';
 import styles from './styles';
+import { translate } from '../../localizations';
+import dictionary from '../../utils/Dictionaries';
 
 class OptionsView extends Component {
+  constructor(props) {
+    super(props);
+
+    const { rows, cols } = this.props;
+    this.state = { rows, cols };
+  }
+
   componentDidMount() {
     handleAndroidBackButton(() => {
       // console.log('back');
@@ -32,22 +41,30 @@ class OptionsView extends Component {
     removeAndroidBackButtonHandler();
   }
 
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    const { cols, rows } = nextProps;
+    return { cols, rows };
+  }
+
   render() {
     const {
       navigation,
-      rows,
-      cols,
-      languagePack,
-      changeNumberRows,
       changeNumberCols,
+      changeNumberRows,
+      languagePack,
       setLanguagePack,
     } = this.props;
+
+    const {
+      cols,
+      rows,
+    } = this.state;
 
     return (
       <View style={styles.container}>
         <View style={[styles.header]}>
           <View style={[styles.header_item]}>
-            <Text style={[styles.header_text]}>Options</Text>
+            <Text style={[styles.header_text]}>{translate('options')}</Text>
           </View>
           <TouchableOpacity
             onPress={() => navigation.navigate('Home')}
@@ -63,9 +80,7 @@ class OptionsView extends Component {
         <ScrollView style={[styles.container, styles.body]}>
           <View style={[styles.container, styles.body_item]}>
             <Text style={styles.body_item_text}>
-                            Number of rows:
-              {' '}
-              {rows}
+              {`${translate('numberOfRows')}: ${rows}`}
             </Text>
             <Slider
               step={1}
@@ -74,13 +89,12 @@ class OptionsView extends Component {
               minimumTrackTintColor="#66CCFF"
               thumbTintColor="#66CCFF"
               value={rows}
-              onValueChange={value => changeNumberRows(value)}
+              onValueChange={value => this.setState({ rows: value })}
+              onSlidingComplete={changeNumberRows}
             />
             <View style={styles.hairline} />
             <Text style={styles.body_item_text}>
-                            Number of columns:
-              {' '}
-              {cols}
+              {`${translate('numberOfCols')}: ${cols}`}
             </Text>
             <Slider
               step={1}
@@ -89,11 +103,13 @@ class OptionsView extends Component {
               minimumTrackTintColor="#66CCFF"
               thumbTintColor="#66CCFF"
               value={cols}
-              onValueChange={value => changeNumberCols(value)}
+              onValueChange={value => this.setState({ cols: value })}
+              onSlidingComplete={changeNumberCols}
             />
-            <View style={styles.hairline} />
+          </View>
+          <View style={[styles.container, styles.body_item]}>
             <Text style={styles.body_item_text}>
-              Select language pair:
+              {`${translate('selectLanguagePair')}:`}
             </Text>
             <Picker
               selectedValue={languagePack}
@@ -112,13 +128,35 @@ class OptionsView extends Component {
           <View style={[styles.container, styles.body]}>
             <TouchableOpacity>
               <View style={[styles.body_item]}>
-                <Text style={styles.body_item_text}>Help</Text>
+                <Text style={styles.body_item_text}>
+                  {translate('help')}
+                </Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+          <View style={[styles.container, styles.body]}>
+            <TouchableOpacity
+              onPress={() => Alert.alert(
+                translate('confirmResetStatistics'),
+                translate('confirmResetStatisticsQuestion'),
+                [
+                  { text: translate('cancel'), style: 'cancel' },
+                  { text: translate('ok'), onPress: () => dictionary.resetStatistics() },
+                ],
+              )}
+            >
+              <View style={[styles.body_item]}>
+                <Text style={styles.body_item_text}>
+                  {translate('confirmResetStatistics')}
+                </Text>
               </View>
             </TouchableOpacity>
           </View>
         </ScrollView>
         <View style={styles.footer}>
-          <Text style={[styles.footer_text]}>Version: 1.0</Text>
+          <Text style={[styles.footer_text]}>
+            {`${translate('version')} 1.0`}
+          </Text>
         </View>
       </View>
     );

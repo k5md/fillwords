@@ -14,6 +14,7 @@ import java.util.List;
 import org.pgsqlite.SQLitePluginPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.horcrux.svg.SvgPackage;
+import com.reactcommunity.rnlocalize.RNLocalizePackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -29,6 +30,7 @@ public class MainApplication extends Application implements ReactApplication {
           new SQLitePluginPackage(),
           new VectorIconsPackage(),
           new SvgPackage(),
+          new RNLocalizePackage(),
           new MainReactPackage()
       );
     }

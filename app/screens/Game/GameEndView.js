@@ -9,6 +9,7 @@ import _ from 'lodash';
 import Modal from 'react-native-modalbox';
 import styles from './styles';
 import dictionary from '../../utils/Dictionaries';
+import { translate } from '../../localizations';
 
 class GameEndView extends Component {
   async componentDidMount() {
@@ -49,7 +50,7 @@ class GameEndView extends Component {
       >
         <View>
           <View style={styles.words_preview_title}>
-            <Text style={styles.words_preview_title_text}>Congratulations!</Text>
+            <Text style={styles.words_preview_title_text}>{translate('congratulations')}</Text>
           </View>
           <View style={styles.words_preview_title_hairline} />
           <ScrollView>
@@ -57,11 +58,7 @@ class GameEndView extends Component {
               <View key={_.uniqueId()} style={styles.words_preview_content_entry}>
                 <Text style={styles.words_preview_content_entry_text}>{item.word}</Text>
                 <Text style={styles.words_preview_content_entry_text}>
-                  {item.srsStatus}
-                  -&gt;
-                </Text>
-                <Text style={styles.words_preview_content_entry_text}>
-                  {item.discarded ? item.srsStatus : item.srsStatus + 1}
+                  {`${item.srsStatus}->${item.discarded ? item.srsStatus : item.srsStatus + 1}`}
                 </Text>
               </View>
             ))}

@@ -12,6 +12,7 @@ import { handleAndroidBackButton, removeAndroidBackButtonHandler } from '../../u
 import AppStyles from '../../config/styles';
 import images from '../../config/images';
 import HomeAnimationContainer from './HomeAnimationContainer';
+import { translate } from '../../localizations';
 import styles from './styles';
 
 const { color } = AppStyles;
@@ -19,11 +20,11 @@ const { color } = AppStyles;
 class HomeView extends Component {
   componentDidMount() {
     handleAndroidBackButton(() => Alert.alert(
-      'Confirm exit',
-      'Do you want to quit the app?',
+      translate('confirmExit'),
+      translate('confirmExitQuestion'),
       [
-        { text: 'CANCEL', style: 'cancel' },
-        { text: 'OK', onPress: () => BackHandler.exitApp() },
+        { text: translate('cancel'), style: 'cancel' },
+        { text: translate('ok'), onPress: () => BackHandler.exitApp() },
       ],
     ));
   }

@@ -7,7 +7,7 @@ export default {
     },
     ru_en: {
       displayName: 'Russian - English',
-      entriesCount: 3318,
+      entriesCount: 3319,
     },
   },
 };

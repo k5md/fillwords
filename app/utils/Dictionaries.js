@@ -87,7 +87,7 @@ class Dictionaries {
     const specifier = Object.entries(selector).map(pair => pair.join('=')).join(',');
     const results = await db.executeSql(`SELECT * FROM ${dictionaryName} WHERE ${specifier} ORDER BY ${order} LIMIT ${limit}`, []);
     const entry = results[0].rows.item(0);
-    console.log(selector, specifier, entry);
+    // console.log(selector, specifier, entry);
     return entry;
   }
 
@@ -109,7 +109,20 @@ class Dictionaries {
       ([left, right]) => `${left}='${right}'`,
     ).join(',');
     const results = await db.executeSql(`UPDATE ${dictionaryName} SET ${modifier} WHERE ${specifier}`, []);
-    console.log(selector, update, results);
+    // console.log(selector, update, results);
+    return results;
+  }
+
+  async resetStatistics() {
+    const { dictionaryName } = this;
+    const db = await this.storage;
+    const update = {
+      lastReviewed: Date.now(),
+      srsStatus: 0,
+    };
+    const modifier = Object.entries(update).map(pair => pair.join('=')).join(',');
+    const results = await db.executeSql(`UPDATE ${dictionaryName} SET ${modifier}`, []);
+    // console.log(selector, update, results);
     return results;
   }
 }

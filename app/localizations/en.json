@@ -1,0 +1,21 @@
+{
+	"remember": "Remember",
+	"options": "Options",
+	"statistics": "Statistics",
+	"numberOfRows": "Number of rows",
+	"numberOfCols": "Number of columns",
+	"selectLanguagePair": "Select language pair",
+	"help": "Help",
+	"confirmResetStatistics": "Statistics reset",
+	"confirmResetStatisticsQuestion": "Do you want to reset the statistics?",
+	"version": "Version",
+	"dictionary": "Dictionary",
+	"totalWords": "Total words",
+	"level": "Level",
+	"confirmExit": "Confirm exit",
+	"confirmExitQuestion": "Do you want to quit the app?",
+	"cancel": "CANCEL",
+	"ok": "OK",
+	"congratulations": "Congratulations!",
+	"done": "Done!"
+}

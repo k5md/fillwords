@@ -1,0 +1,21 @@
+{
+	"remember": "Запомните",
+	"options": "Опции",
+	"statistics": "Статистика",
+	"numberOfRows": "Число строк",
+	"numberOfCols": "Число столбцов",
+	"selectLanguagePair": "Языковая пара",
+	"help": "Помощь",
+	"confirmResetStatistics": "Сброс статистики",
+	"confirmResetStatisticsQuestion": "Вы точно хотите очистить статистику слов?",
+	"version": "Версия",
+	"dictionary": "Словарь",
+	"totalWords": "Всего слов",
+	"level": "Уровень",
+	"confirmExit": "Выход",
+	"confirmExitQuestion": "Вы точно хотите закрыть приложение?",
+	"cancel": "Нет",
+	"ok": "Да",
+	"congratulations": "Поздравляем!",
+	"done": "Продолжить"
+}

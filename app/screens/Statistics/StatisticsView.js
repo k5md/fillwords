@@ -12,6 +12,7 @@ import { handleAndroidBackButton, removeAndroidBackButtonHandler } from '../../u
 import images from '../../config/images';
 import dictionary from '../../utils/Dictionaries';
 import dictionariesConfig from '../../config/dictionaries';
+import { translate } from '../../localizations';
 import styles from './styles';
 
 class StatisticsView extends Component {
@@ -32,13 +33,13 @@ class StatisticsView extends Component {
       });
 
       const statisticsEntries = [
-        ['Dictionary', dictionariesConfig.DICTIONARIES[languagePack].displayName],
-        ['Total words', dictionariesConfig.DICTIONARIES[languagePack].entriesCount],
-        ['Level 0', await dictionary.countWords({ srsStatus: 0 })],
-        ['Level 1', await dictionary.countWords({ srsStatus: 1 })],
-        ['Level 2', await dictionary.countWords({ srsStatus: 2 })],
-        ['Level 3', await dictionary.countWords({ srsStatus: 3 })],
-        ['Level 4', await dictionary.countWords({ srsStatus: 4 })],
+        [translate('dictionary'), dictionariesConfig.DICTIONARIES[languagePack].displayName],
+        [translate('totalWords'), await dictionary.countWords({ 1: 1 })],
+        [`${translate('level')} 0`, await dictionary.countWords({ srsStatus: 0 })],
+        [`${translate('level')} 1`, await dictionary.countWords({ srsStatus: 1 })],
+        [`${translate('level')} 2`, await dictionary.countWords({ srsStatus: 2 })],
+        [`${translate('level')} 3`, await dictionary.countWords({ srsStatus: 3 })],
+        [`${translate('level')} 4`, await dictionary.countWords({ srsStatus: 4 })],
       ];
 
       this.setState({ statisticsEntries });
@@ -57,7 +58,7 @@ class StatisticsView extends Component {
         <View style={styles.container}>
           <View style={[styles.header]}>
             <View style={[styles.header_item]}>
-              <Text style={[styles.header_text]}>Statistics</Text>
+              <Text style={[styles.header_text]}>{translate('statistics')}</Text>
             </View>
             <TouchableOpacity
               onPress={() => navigation.navigate('Home')}

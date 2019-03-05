@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import Modal from 'react-native-modalbox';
 import _ from 'lodash';
 import styles from './styles';
+import { translate } from '../../localizations';
 
 const WordsPreviewView = ({
   playGame,
@@ -24,7 +25,7 @@ const WordsPreviewView = ({
   >
     <View>
       <View style={styles.words_preview_title}>
-        <Text style={styles.words_preview_title_text}>Remember:</Text>
+        <Text style={styles.words_preview_title_text}>{translate('remember')}</Text>
       </View>
       <View style={styles.words_preview_title_hairline} />
       <ScrollView>
@@ -37,7 +38,7 @@ const WordsPreviewView = ({
       </ScrollView>
       <TouchableOpacity onPress={() => playGame()}>
         <View style={styles.words_preview_button}>
-          <Text style={styles.words_preview_button_text}>Done!</Text>
+          <Text style={styles.words_preview_button_text}>{translate('done')}</Text>
         </View>
       </TouchableOpacity>
     </View>
