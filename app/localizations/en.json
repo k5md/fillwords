@@ -6,6 +6,7 @@
 	"numberOfCols": "Number of columns",
 	"selectLanguagePair": "Select language pair",
 	"help": "Help",
+	"helpText": "•\tThis application is created to help you learn foreign languages.\n•\tYour goal is to memorize words and their translations within a certain time limit and find them on the game field.\n•\tSelect the cells corresponding to the current word from the word list under the playing field. If you do not remember the translation of the current word, click on it in the word list and hold it to mark it as forgotten.\n•\tYou can change the size of the playing field using the sliders on the options screen.",
 	"confirmResetStatistics": "Statistics reset",
 	"confirmResetStatisticsQuestion": "Do you want to reset the statistics?",
 	"version": "Version",
@@ -17,5 +18,6 @@
 	"cancel": "CANCEL",
 	"ok": "OK",
 	"congratulations": "Congratulations!",
-	"done": "Done!"
+	"done": "Done!",
+	"playMore": "Play more!"
 }

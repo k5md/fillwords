@@ -17,6 +17,7 @@
     "react-native-fontawesome": "^6.0.1",
     "react-native-localize": "^1.0.4",
     "react-native-modalbox": "^1.6.0",
+    "react-native-on-layout": "^2.0.2",
     "react-native-sqlite-storage": "^3.3.9",
     "react-native-svg": "^8.0.10",
     "react-native-svg-uri": "^1.2.3",

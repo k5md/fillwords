@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
   Text,
+  TouchableOpacity,
   View,
   ScrollView,
 } from 'react-native';
@@ -14,34 +15,31 @@ import { translate } from '../../localizations';
 class GameEndView extends Component {
   async componentDidMount() {
     const { words } = this.props;
-    const promises = words.map(({
-      guessed,
-      word,
-      srsStatus,
-    }) => {
-      console.log(word, srsStatus);
-      return dictionary.updateWord(
-        { word },
-        { srsStatus: guessed ? srsStatus + 1 : srsStatus, lastReviewed: Date.now() },
-      );
-    });
+    const promises = words.map(({ guessed, word, srsStatus }) => dictionary.updateWord(
+      { word },
+      { srsStatus: guessed ? srsStatus + 1 : srsStatus, lastReviewed: Date.now() },
+    ));
     await Promise.all(promises);
+  }
+
+  closeModal() {
+    const {
+      clearGame,
+      navigation,
+    } = this.props;
+
+    clearGame();
+    navigation.navigate('Home');
   }
 
   render() {
     const {
-      clearGame,
-      navigation,
       isOpen,
       words,
     } = this.props;
     return (
       <Modal
-        onClosed={() => {
-          // console.log(self, self.props);
-          clearGame();
-          navigation.navigate('Home');
-        }}
+        onClosed={this.closeModal}
         isOpen={isOpen}
         onOpened={() => this.componentDidMount()}
         style={styles.words_preview_container}
@@ -63,6 +61,11 @@ class GameEndView extends Component {
               </View>
             ))}
           </ScrollView>
+          <TouchableOpacity onPress={this.closeModal}>
+            <View style={styles.words_preview_button}>
+              <Text style={styles.words_preview_button_text}>{translate('done')}</Text>
+            </View>
+          </TouchableOpacity>
         </View>
       </Modal>
     );

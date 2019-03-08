@@ -7,6 +7,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  header: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    flex: 0,
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    padding: 10,
+    backgroundColor: color.COLOR_BLACK_TRANSP,
+  },
+  button_close: {
+    justifyContent: 'flex-end',
+  },
   field: {
     backgroundColor: color.COLOR_GREYISH,
     flex: 5,

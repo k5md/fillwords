@@ -3,7 +3,7 @@
 import * as RNLocalize from 'react-native-localize';
 
 const translations = [
-  // { languageTag: 'de', displayName: 'Deutsch', translation: require('./de.json') },
+  { languageTag: 'de', displayName: 'Deutsch', translation: require('./de.json') },
   { languageTag: 'en', displayName: 'English', translation: require('./en.json') },
   // { languageTag: 'fr', displayName: 'Français', translation: require('./fr.json') },
   // { languageTag: 'ja', displayName: '日本語', translation: require('./ja.json') },

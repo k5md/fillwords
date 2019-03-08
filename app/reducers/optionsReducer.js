@@ -5,6 +5,7 @@ const initialState = {
   rows: 5,
   cols: 5,
   languagePack: Object.keys(dictionariesConfig.DICTIONARIES)[0],
+  showHelp: false,
 };
 
 const handlers = {
@@ -14,11 +15,11 @@ const handlers = {
   [types.CHANGE_NUMBER_COLS]:
     (state, action) => ({ ...state, cols: action.cols }),
 
-  [types.TOGGLE_PRACTICE_BOTHWAY]:
-    state => ({ ...state, practiceBothway: !state.practiceBothway }),
-
   [types.SET_LANGUAGE_PACK]:
     (state, action) => ({ ...state, languagePack: action.languagePack }),
+
+  [types.TOGGLE_SHOW_HELP]:
+    state => ({ ...state, showHelp: !state.showHelp }),
 };
 
 const optionsReducer = (state = initialState, action) => {

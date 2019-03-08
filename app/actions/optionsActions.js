@@ -20,3 +20,9 @@ export function setLanguagePack(languagePack) {
     languagePack,
   };
 }
+
+export function toggleShowHelp() {
+  return {
+    type: types.TOGGLE_SHOW_HELP,
+  };
+}

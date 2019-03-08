@@ -18,26 +18,35 @@ import dictionariesConfig from '../../config/dictionaries';
 import styles from './styles';
 import { translate } from '../../localizations';
 import dictionary from '../../utils/Dictionaries';
+import HelpContainer from './HelpContainer';
 
 class OptionsView extends Component {
   constructor(props) {
     super(props);
 
     const { rows, cols } = this.props;
-    this.state = { rows, cols };
+    this.state = {
+      rows,
+      cols,
+    };
   }
 
   componentDidMount() {
     handleAndroidBackButton(() => {
-      // console.log('back');
-      const { navigation } = this.props;
+      const {
+        showHelp,
+        toggleShowHelp,
+        navigation,
+      } = this.props;
+
+      if (showHelp) {
+        toggleShowHelp();
+      }
       navigation.navigate('Home');
-      // console.log('clearing');
     });
   }
 
   componentWillUnmount() {
-    // console.log('unmounting options');
     removeAndroidBackButtonHandler();
   }
 
@@ -53,6 +62,7 @@ class OptionsView extends Component {
       changeNumberRows,
       languagePack,
       setLanguagePack,
+      toggleShowHelp,
     } = this.props;
 
     const {
@@ -126,7 +136,9 @@ class OptionsView extends Component {
             </Picker>
           </View>
           <View style={[styles.container, styles.body]}>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => toggleShowHelp()}
+            >
               <View style={[styles.body_item]}>
                 <Text style={styles.body_item_text}>
                   {translate('help')}
@@ -158,6 +170,7 @@ class OptionsView extends Component {
             {`${translate('version')} 1.0`}
           </Text>
         </View>
+        <HelpContainer />
       </View>
     );
   }
@@ -173,6 +186,8 @@ OptionsView.propTypes = {
   changeNumberRows: PropTypes.func.isRequired,
   changeNumberCols: PropTypes.func.isRequired,
   setLanguagePack: PropTypes.func.isRequired,
+  toggleShowHelp: PropTypes.func.isRequired,
+  showHelp: PropTypes.bool.isRequired,
 };
 
 export default OptionsView;

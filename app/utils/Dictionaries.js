@@ -6,7 +6,7 @@ import configureStore from '../store/configureStore';
 import dictionaries from '../dictionaries';
 import observeStore from './Observer';
 
-SQLite.DEBUG(true);
+SQLite.DEBUG(false);
 SQLite.enablePromise(true);
 
 const fields = [

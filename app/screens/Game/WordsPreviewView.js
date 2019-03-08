@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   Text,
   TouchableOpacity,
@@ -11,39 +11,99 @@ import _ from 'lodash';
 import styles from './styles';
 import { translate } from '../../localizations';
 
-const WordsPreviewView = ({
-  playGame,
-  isOpen,
-  words,
-}) => (
-  <Modal
-    onClosed={() => playGame()}
-    isOpen={isOpen}
-    style={styles.words_preview_container}
-    position="top"
-    swipeArea={20}
-  >
-    <View>
-      <View style={styles.words_preview_title}>
-        <Text style={styles.words_preview_title_text}>{translate('remember')}</Text>
-      </View>
-      <View style={styles.words_preview_title_hairline} />
-      <ScrollView>
-        {words.map(item => (
-          <View key={_.uniqueId()} style={styles.words_preview_content_entry}>
-            <Text style={styles.words_preview_content_entry_text}>{item.translation}</Text>
-            <Text style={styles.words_preview_content_entry_text}>{item.word}</Text>
+const initialCountdownTime = 30000;
+const tick = 1000;
+
+class WordsPreviewView extends Component {
+  state = {
+    buttonCountdownTime: initialCountdownTime,
+    buttonCountdownIntervalHandle: null,
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { words } = nextProps;
+    const { buttonCountdownIntervalHandle: intervalHandle } = this.state;
+
+    // do nothing if interval is already set or if words array is empty
+    if (words.length === 0 || intervalHandle) {
+      return;
+    }
+
+    // calculate time to learn the words based on the amount of them
+    const countdownTime = words.length * tick;
+    this.setState({ buttonCountdownTime: countdownTime });
+
+    // set the interval that decrements buttonCountdownTime on each tick
+    const newIntervalHandle = setInterval(() => {
+      const {
+        buttonCountdownTime,
+        buttonCountdownIntervalHandle,
+      } = this.state;
+
+      if (buttonCountdownTime < 0) {
+        clearInterval(buttonCountdownIntervalHandle);
+        return;
+      }
+
+      this.setState({ buttonCountdownTime: buttonCountdownTime - tick });
+    }, tick);
+
+    this.setState({ buttonCountdownIntervalHandle: newIntervalHandle });
+  }
+
+  componentWillUnmount() {
+    const { buttonCountdownIntervalHandle } = this.state;
+    if (buttonCountdownIntervalHandle) {
+      clearInterval(buttonCountdownIntervalHandle);
+    }
+  }
+
+  render() {
+    const {
+      playGame,
+      isOpen,
+      words,
+    } = this.props;
+
+    const { buttonCountdownTime } = this.state;
+
+    return (
+      <Modal
+        onClosed={() => playGame()}
+        isOpen={isOpen}
+        style={styles.words_preview_container}
+        position="top"
+        backdropPressToClose={false}
+        swipeArea={20}
+      >
+        <View>
+          <View style={styles.words_preview_title}>
+            <Text style={styles.words_preview_title_text}>{translate('remember')}</Text>
           </View>
-        ))}
-      </ScrollView>
-      <TouchableOpacity onPress={() => playGame()}>
-        <View style={styles.words_preview_button}>
-          <Text style={styles.words_preview_button_text}>{translate('done')}</Text>
+          <View style={styles.words_preview_title_hairline} />
+          <ScrollView>
+            {words.map(item => (
+              <View key={_.uniqueId()} style={styles.words_preview_content_entry}>
+                <Text style={styles.words_preview_content_entry_text}>{item.translation}</Text>
+                <Text style={styles.words_preview_content_entry_text}>{item.word}</Text>
+              </View>
+            ))}
+          </ScrollView>
+          <TouchableOpacity
+            onPress={() => playGame()}
+            disabled={buttonCountdownTime > 0}
+          >
+            <View style={styles.words_preview_button}>
+              <Text style={styles.words_preview_button_text}>
+                {buttonCountdownTime > 0 ? buttonCountdownTime / 1000 : translate('done')}
+              </Text>
+            </View>
+          </TouchableOpacity>
         </View>
-      </TouchableOpacity>
-    </View>
-  </Modal>
-);
+      </Modal>
+    );
+  }
+}
 
 WordsPreviewView.propTypes = {
   playGame: PropTypes.func.isRequired,

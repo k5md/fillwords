@@ -8,7 +8,7 @@ const { screenHeight } = metrics;
 
 const fontSizeBase = Math.floor(screenHeight / 40);
 const fontSizeSmall = fontSizeBase + 4;
-const fontSizeNormal = fontSizeBase + 20;
+const fontSizeNormal = fontSizeBase + 19;
 const fontSizeLarge = fontSizeBase + 54;
 
 const AppStyles = {
