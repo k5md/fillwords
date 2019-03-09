@@ -26,3 +26,15 @@ export function toggleShowHelp() {
     type: types.TOGGLE_SHOW_HELP,
   };
 }
+
+export function dbReady() {
+  return {
+    type: types.DB_READY,
+  };
+}
+
+export function dbNotReady() {
+  return {
+    type: types.DB_NOT_READY,
+  };
+}

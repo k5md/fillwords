@@ -6,6 +6,7 @@ import {
 import SvgUri from 'react-native-svg-uri';
 import Field from '../../lib/field';
 import dictionary from '../../utils/Dictionaries';
+import dictionariesConfig from '../../config/dictionaries';
 import metrics from '../../config/metrics';
 import { handleAndroidBackButton, removeAndroidBackButtonHandler } from '../../utils/androidBackButton';
 import defer from '../../utils/deferredPromise';
@@ -28,6 +29,7 @@ class GameView extends Component {
       setupGame,
       rows,
       cols,
+      languagePack,
     } = this.props;
 
     const { header } = this.state;
@@ -37,12 +39,16 @@ class GameView extends Component {
       clearGame();
     });
 
+    const { minimumWordLength, maximumWordLength } = dictionariesConfig.DICTIONARIES[languagePack];
+
     const field = new Field(cols, rows);
     field.initializeFast();
     // TODO: remove later, fix to depend on the dictionary chosen,
     // this is a temporary workaround to prevent creating fields with chains
     // longer than 14, since no such words may be present in the dictionary
-    while (Object.values(field.connections).some(item => item.length >= 14)) {
+    while (Object.values(field.connections).some(
+      item => item.length > maximumWordLength || item.length < minimumWordLength,
+    )) {
       field.initializeFast();
     }
 

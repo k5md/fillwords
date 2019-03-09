@@ -13,6 +13,8 @@
 	"dictionary": "Словарь",
 	"totalWords": "Всего слов",
 	"level": "Уровень",
+	"loading": "Подождите",
+	"loadingText": "Загружаются данные выбранного словаря...",
 	"confirmExit": "Выход",
 	"confirmExitQuestion": "Вы точно хотите закрыть приложение?",
 	"cancel": "Нет",

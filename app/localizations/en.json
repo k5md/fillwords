@@ -13,6 +13,8 @@
 	"dictionary": "Dictionary",
 	"totalWords": "Total words",
 	"level": "Level",
+	"loading": "Loading",
+	"loadingText": "The dictionary data is being loaded...",
 	"confirmExit": "Confirm exit",
 	"confirmExitQuestion": "Do you want to quit the app?",
 	"cancel": "CANCEL",

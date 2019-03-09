@@ -14,6 +14,7 @@ function mapStateToProps(state) {
     selectedCells: state.gameReducer.selectedCells,
     words: state.gameReducer.words,
     gameState: state.gameReducer.gameState,
+    languagePack: state.optionsReducer.languagePack,
   };
 }
 function mapDispatchToProps(dispatch) {

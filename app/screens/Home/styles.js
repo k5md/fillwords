@@ -51,6 +51,37 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     backgroundColor: color.COLOR_GREYISH,
   },
+  words_preview_container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 2,
+    borderRadius: 1,
+    display: 'flex',
+    shadowColor: color.COLOR_GREY_TRANSP,
+    shadowOpacity: 0.4,
+    shadowRadius: 10,
+    borderColor: color.COLOR_BLACK_TRANSP,
+  },
+  words_preview_title_hairline: {
+    paddingLeft: '35%',
+    paddingRight: '35%',
+    flex: 0,
+    alignSelf: 'center',
+    borderWidth: 1,
+    borderColor: color.COLOR_GREY,
+    opacity: 0.7,
+  },
+  words_preview_title: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  words_preview_title_text: {
+    fontSize: fontSizes.FONT_SIZE_NORMAL, // default 36,
+    fontWeight: 'bold',
+  },
+  help_text: {
+    fontSize: fontSizes.FONT_SIZE_BASE,
+  },
 });
 
 export default styles;

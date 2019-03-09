@@ -6,6 +6,7 @@ const initialState = {
   cols: 5,
   languagePack: Object.keys(dictionariesConfig.DICTIONARIES)[0],
   showHelp: false,
+  isDBReady: false,
 };
 
 const handlers = {
@@ -20,6 +21,11 @@ const handlers = {
 
   [types.TOGGLE_SHOW_HELP]:
     state => ({ ...state, showHelp: !state.showHelp }),
+
+  [types.DB_NOT_READY]:
+    state => ({ ...state, isDBReady: false }),
+  [types.DB_READY]:
+    state => ({ ...state, isDBReady: true }),
 };
 
 const optionsReducer = (state = initialState, action) => {

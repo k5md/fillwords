@@ -1,13 +1,17 @@
 /* eslint no-underscore-dangle: ["error", { "allow": ["_dictionaryName"] }] */
 
+import { dispatch } from 'redux';
 import SQLite from 'react-native-sqlite-storage';
 import dictionariesConfig from '../config/dictionaries';
 import configureStore from '../store/configureStore';
 import dictionaries from '../dictionaries';
 import observeStore from './Observer';
+import { dbReady, dbNotReady } from '../actions/optionsActions';
 
-SQLite.DEBUG(false);
+SQLite.DEBUG(true);
 SQLite.enablePromise(true);
+
+const { store } = configureStore();
 
 const fields = [
   ['word', 'TEXT'],
@@ -40,6 +44,8 @@ class Dictionaries {
   }
 
   async initialize() {
+    store.dispatch(dbReady());
+
     const { dictionaryName } = this;
     const db = await this.storage;
     // console.log(`prepopulating ${dictionaryName}`);
@@ -50,10 +56,12 @@ class Dictionaries {
       // console.log('number of entries in', dictionaryName, count);
 
       if (count !== dictionariesConfig.DICTIONARIES[dictionaryName].entriesCount) {
-        throw new Error('entries count mismatch');
+        throw new Error('entries count mismatch', count, dictionariesConfig.DICTIONARIES[dictionaryName].entriesCount);
       }
     } catch (e) {
-      const dictionary = dictionaries[dictionaryName];
+      // console.log(e);
+      store.dispatch(dbNotReady());
+      const dictionary = dictionaries(dictionaryName);
 
       await db.executeSql(`DROP TABLE IF EXISTS ${dictionaryName};`);
       await db.executeSql(`CREATE TABLE IF NOT EXISTS ${dictionaryName}(${fields.map(entry => entry.join(' ')).join(',')});",`);
@@ -76,6 +84,7 @@ class Dictionaries {
       await Promise.all(transactions);
       // NOTE: consider search for not-composite words
       await db.executeSql(`CREATE INDEX IF NOT EXISTS idx_${dictionaryName}_wordLength ON ${dictionaryName} (wordLength)`);
+      store.dispatch(dbReady());
     }
   }
 
@@ -130,7 +139,7 @@ class Dictionaries {
 const dictionary = new Dictionaries();
 
 // subscribing to optionsReducer changes to update and reinitialize the dictionary storage
-const { store } = configureStore();
+
 observeStore(
   store,
   state => state.optionsReducer.languagePack,

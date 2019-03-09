@@ -13,6 +13,8 @@
 	"dictionary": "Wörterbuch",
 	"totalWords": "Wörter insgesamt",
 	"level": "Level",
+	"loading": "",
+	"loadingText": "",
 	"confirmExit": "Exit bestätigen",
 	"confirmExitQuestion": "Möchten Sie die App beenden?",
 	"cancel": "ABBRECHEN",

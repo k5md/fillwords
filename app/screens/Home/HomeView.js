@@ -12,6 +12,7 @@ import { handleAndroidBackButton, removeAndroidBackButtonHandler } from '../../u
 import AppStyles from '../../config/styles';
 import images from '../../config/images';
 import HomeAnimationContainer from './HomeAnimationContainer';
+import LoadingView from './LoadingView';
 import { translate } from '../../localizations';
 import styles from './styles';
 
@@ -35,10 +36,16 @@ class HomeView extends Component {
   }
 
   render() {
-    const { navigation } = this.props;
+    const {
+      navigation,
+      isDBReady,
+    } = this.props;
 
     return (
       <View style={[styles.container, styles.body]}>
+        <LoadingView
+          isOpen={!isDBReady}
+        />
         <HomeAnimationContainer />
         <View style={[styles.container, styles.title]}>
           <Text style={styles.title_text}>FILLWORDS</Text>
@@ -58,6 +65,7 @@ class HomeView extends Component {
           <TouchableOpacity
             style={styles.button}
             onPress={() => navigation.navigate('Game')}
+            disabled={!isDBReady}
           >
             <SvgUri
               width="100"
@@ -87,6 +95,7 @@ HomeView.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
   }).isRequired,
+  isDBReady: PropTypes.bool.isRequired,
 };
 
 export default HomeView;
