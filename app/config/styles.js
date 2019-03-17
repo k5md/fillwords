@@ -7,6 +7,7 @@ import metrics from './metrics';
 const { screenHeight } = metrics;
 
 const fontSizeBase = Math.floor(screenHeight / 40);
+const fontSizeMini = fontSizeBase - 4;
 const fontSizeSmall = fontSizeBase + 4;
 const fontSizeNormal = fontSizeBase + 19;
 const fontSizeLarge = fontSizeBase + 54;
@@ -32,6 +33,7 @@ const AppStyles = {
     FONT_MEDIUM: 'Roboto-Medium',
   },
   fontSizes: {
+    FONT_SIZE_MINI: fontSizeMini,
     FONT_SIZE_BASE: fontSizeBase,
     FONT_SIZE_SMALL: fontSizeSmall,
     FONT_SIZE_NORMAL: fontSizeNormal,

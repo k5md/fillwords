@@ -39,7 +39,7 @@ class GameEndView extends Component {
     } = this.props;
     return (
       <Modal
-        onClosed={this.closeModal}
+        onClosed={() => this.closeModal()}
         isOpen={isOpen}
         onOpened={() => this.componentDidMount()}
         style={styles.words_preview_container}
@@ -61,7 +61,7 @@ class GameEndView extends Component {
               </View>
             ))}
           </ScrollView>
-          <TouchableOpacity onPress={this.closeModal}>
+          <TouchableOpacity onPress={() => this.closeModal()}>
             <View style={styles.words_preview_button}>
               <Text style={styles.words_preview_button_text}>{translate('done')}</Text>
             </View>

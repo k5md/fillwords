@@ -84,8 +84,12 @@ class WordsPreviewView extends Component {
           <ScrollView>
             {words.map(item => (
               <View key={_.uniqueId()} style={styles.words_preview_content_entry}>
-                <Text style={styles.words_preview_content_entry_text}>{item.translation}</Text>
-                <Text style={styles.words_preview_content_entry_text}>{item.word}</Text>
+                <View style={styles.words_preview_content}>
+                  <Text style={styles.words_preview_content_entry_text}>{item.translation}</Text>
+                </View>
+                <View style={styles.words_preview_content}>
+                  <Text style={styles.words_preview_content_entry_text}>{item.word}</Text>
+                </View>
               </View>
             ))}
           </ScrollView>

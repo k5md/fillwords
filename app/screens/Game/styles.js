@@ -135,6 +135,11 @@ const styles = StyleSheet.create({
     fontSize: fontSizes.FONT_SIZE_NORMAL, // default 36,
     fontWeight: 'bold',
   },
+  words_preview_content: {
+    width: '50%',
+    marginTop: '2%',
+    marginLeft: '2%',
+  },
   words_preview_content_entry: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -145,6 +150,8 @@ const styles = StyleSheet.create({
   },
   words_preview_button: {
     margin: 0,
+    marginLeft: '10%',
+    marginRight: '10%',
     borderWidth: 2,
     borderRadius: 1,
     borderColor: color.COLOR_BLACK_TRANSP,

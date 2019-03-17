@@ -33,7 +33,7 @@ export default {
     },
     eng_spa: {
       displayName: 'English - Español',
-      entriesCount: 5010,
+      entriesCount: 5009,
       minimumWordLength: 1,
       maximumWordLength: 18,
     },
