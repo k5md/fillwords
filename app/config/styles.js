@@ -6,7 +6,7 @@ import metrics from './metrics';
 
 const { screenHeight } = metrics;
 
-const fontSizeBase = Math.floor(screenHeight / 40);
+const fontSizeBase = Math.floor(screenHeight / 60);
 const fontSizeMini = fontSizeBase - 4;
 const fontSizeSmall = fontSizeBase + 4;
 const fontSizeNormal = fontSizeBase + 19;

@@ -1,8 +1,8 @@
-# [Fillwords](https://play.google.com/store/apps/details?id=com.fillwordsFree)
+# [Fillwords](https://play.google.com/store/apps/details?id=com.k5md.fillwords)
 
 ## Description
 
-Fillwords - Learn Foreign Languages is a logical game created to help you learn foreign languages, improve your memory and concentration span!
+Fillwords - Learn Foreign Languages is an application created to help you learn foreign languages, improve your memory and concentration span!
 
 In this version of a hungarian crossword puzzle your goal is to memorize words and their translations within a certain time limit and find them on the game field.
 
@@ -34,6 +34,6 @@ In order to develop the application or build android .apk from the sources one s
 	- `adb reverse tcp:8081 tcp:8081`
 5. build and watch with `react-native run-android`
 
-*Note that app/lib/field.js required for generating and partitioning fields is not included.*
+*Note that app/lib/field.js required for generating and partitioning fields is not included. Rename fieldMock.js -> field.js to use pregenerated fields.*
 
 In case of cache issues run `gradlew clean` from the project's android directory

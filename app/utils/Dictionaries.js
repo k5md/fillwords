@@ -8,7 +8,7 @@ import dictionaries from '../dictionaries';
 import observeStore from './Observer';
 import { dbReady, dbNotReady } from '../actions/optionsActions';
 
-SQLite.DEBUG(true);
+SQLite.DEBUG(__DEV__);
 SQLite.enablePromise(true);
 
 const { store } = configureStore();

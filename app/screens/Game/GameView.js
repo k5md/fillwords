@@ -3,6 +3,7 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
+import firebase from 'react-native-firebase';
 import SvgUri from 'react-native-svg-uri';
 import Field from '../../lib/field';
 import dictionary from '../../utils/Dictionaries';
@@ -158,6 +159,9 @@ class GameView extends Component {
       clearGame,
     } = this.props;
 
+    const { Banner, AdRequest } = firebase.admob;
+    const request = new AdRequest();
+
     return (
       <View style={styles.container}>
         <FieldContainer />
@@ -178,6 +182,14 @@ class GameView extends Component {
             </TouchableOpacity>
           </View>
         </View>
+        <Banner
+          unitId="ca-app-pub-1059497387348503/9478393171"
+          size="SMART_BANNER"
+          request={request.build()}
+          onAdLoaded={() => {
+            console.log('Advert loaded');
+          }}
+        />
         <View style={styles.hairline} />
         <WordsContainer />
         <WordsPreviewContainer />

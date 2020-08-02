@@ -5,10 +5,11 @@
 import React, { Component } from 'react';
 import {
   View,
-  ViewPagerAndroid,
   Text,
   TouchableOpacity,
+  //ViewPagerAndroid
 } from 'react-native';
+import ViewPager from '@react-native-community/viewpager';
 import PropTypes from 'prop-types';
 import styles from './styles';
 
@@ -44,7 +45,7 @@ class WordsView extends Component {
             <Text style={styles.button_text}>‹</Text>
           </TouchableOpacity>
         </View>
-        <ViewPagerAndroid
+        <ViewPager
           style={styles.container}
           initialPage={currentWordIndex}
           removeClippedSubviews
@@ -69,7 +70,7 @@ class WordsView extends Component {
               </TouchableOpacity>
             </View>
           ))}
-        </ViewPagerAndroid>
+        </ViewPager>
 
         <View style={[
           styles.button_right,
