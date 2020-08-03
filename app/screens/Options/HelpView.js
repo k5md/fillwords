@@ -33,7 +33,7 @@ const HelpView = (props) => {
           </Text>
         </View>
         <View style={styles.words_preview_title_hairline} />
-        <ScrollView style={[styles.container]}>
+        <ScrollView style={styles.container}>
           <View style={[styles.container, styles.body_item]}>
             <Text style={styles.help_text}>
               {translate('helpText')}

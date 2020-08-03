@@ -7,7 +7,7 @@ import {
   View,
   Text,
   TouchableOpacity,
-  //ViewPagerAndroid
+  // ViewPagerAndroid
 } from 'react-native';
 import ViewPager from '@react-native-community/viewpager';
 import PropTypes from 'prop-types';
@@ -26,17 +26,22 @@ class WordsView extends Component {
     }
   }
 
+  test(e) {
+    console.log(e);
+  }
+
   render() {
     const {
       currentWordIndex,
       words,
       discardWord,
       setCurrentWordIndex,
+      onLayout,
     } = this.props;
 
     return (
       words.length > 0 && (
-      <View nativeID="words" style={styles.words}>
+      <View nativeID="words" style={styles.words} onLayout={(e) => { this.test(e); }}>
         <View style={[styles.button_left, currentWordIndex <= 0 && styles.button_disabled]}>
           <TouchableOpacity
             onPress={() => setCurrentWordIndex(currentWordIndex - 1)}
@@ -98,6 +103,11 @@ WordsView.propTypes = {
   })).isRequired,
   setCurrentWordIndex: PropTypes.func.isRequired,
   discardWord: PropTypes.func.isRequired,
+  onLayout: PropTypes.func,
+};
+
+WordsView.defaultProps = {
+  onLayout: () => {},
 };
 
 export default WordsView;

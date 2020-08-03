@@ -104,8 +104,7 @@ class CellView extends Component {
               height,
             },
           ]}
-          >
-          </Animated.View>
+          />
         </View>
       );
     }

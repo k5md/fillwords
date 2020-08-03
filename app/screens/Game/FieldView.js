@@ -131,10 +131,10 @@ class FieldView extends Component {
   }
 
   render() {
-    const { cells } = this.props;
+    const { cells, fieldStyle } = this.props;
 
     return (
-      <View style={styles.field} {...this.panResponder.panHandlers}>
+      <View style={[styles.field, fieldStyle]} {...this.panResponder.panHandlers}>
         {cells.map((item, index) => <CellContainer key={`${item.row}${item.col}`} cellIndex={index} />)}
       </View>
     );

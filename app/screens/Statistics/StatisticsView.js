@@ -56,9 +56,9 @@ class StatisticsView extends Component {
 
       return (
         <View style={styles.container}>
-          <View style={[styles.header]}>
-            <View style={[styles.header_item]}>
-              <Text style={[styles.header_text]}>{translate('statistics')}</Text>
+          <View style={styles.header}>
+            <View style={styles.header_item}>
+              <Text style={styles.header_text}>{translate('statistics')}</Text>
             </View>
             <TouchableOpacity
               onPress={() => navigation.navigate('Home')}

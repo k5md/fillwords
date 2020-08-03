@@ -72,9 +72,9 @@ class OptionsView extends Component {
 
     return (
       <View style={styles.container}>
-        <View style={[styles.header]}>
-          <View style={[styles.header_item]}>
-            <Text style={[styles.header_text]}>{translate('options')}</Text>
+        <View style={styles.header}>
+          <View style={styles.header_item}>
+            <Text style={styles.header_text}>{translate('options')}</Text>
           </View>
           <TouchableOpacity
             onPress={() => navigation.navigate('Home')}
@@ -139,7 +139,7 @@ class OptionsView extends Component {
             <TouchableOpacity
               onPress={() => toggleShowHelp()}
             >
-              <View style={[styles.body_item]}>
+              <View style={styles.body_item}>
                 <Text style={styles.body_item_text}>
                   {translate('help')}
                 </Text>
@@ -157,7 +157,7 @@ class OptionsView extends Component {
                 ],
               )}
             >
-              <View style={[styles.body_item]}>
+              <View style={styles.body_item}>
                 <Text style={styles.body_item_text}>
                   {translate('confirmResetStatistics')}
                 </Text>
@@ -166,7 +166,7 @@ class OptionsView extends Component {
           </View>
         </ScrollView>
         <View style={styles.footer}>
-          <Text style={[styles.footer_text]}>
+          <Text style={styles.footer_text}>
             {`${translate('version')} 1.0`}
           </Text>
         </View>

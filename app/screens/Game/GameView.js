@@ -20,7 +20,10 @@ import GameEndContainer from './GameEndContainer';
 
 class GameView extends Component {
   state = {
-    header: defer(), // contains layout object after the view is mounted
+    headerView: defer(), // contains layout object after the view is mounted
+    wordsView: defer(),
+    fieldWidth: 0,
+    fieldHeight: 0,
   }
 
   async componentDidMount() {
@@ -33,7 +36,7 @@ class GameView extends Component {
       languagePack,
     } = this.props;
 
-    const { header } = this.state;
+    const { headerView, wordsView } = this.state;
 
     handleAndroidBackButton(() => {
       navigation.navigate('Home');
@@ -84,7 +87,14 @@ class GameView extends Component {
       }),
     );
 
-    const height = metrics.screenHeight;
+    const {
+      layout: {
+        width: wordsWidth,
+        height: wordsHeight,
+      },
+    } = await wordsView;
+
+    const height = metrics.screenHeight - wordsHeight;
     const width = metrics.screenWidth;
 
     const size = Math.floor(Math.min(width / cols, height / rows));
@@ -99,7 +109,10 @@ class GameView extends Component {
         width: headerWidth,
         height: headerHeight,
       },
-    } = await header;
+    } = await headerView;
+
+    this.setState({ fieldHeight: height - headerHeight, fieldWidth: width })
+
 
     // header takes fullWidth, absolute positioned,
     // so dx will be header's left property + width, it's >= screenWidth, set it to 0
@@ -143,12 +156,22 @@ class GameView extends Component {
     removeAndroidBackButtonHandler();
   }
 
-  measureHeader = (e) => {
+  measureHeaderView = (e) => {
     const { nativeEvent: { layout } } = e;
-    const { header } = this.state;
-    if (header) {
+    const { headerView } = this.state;
+    if (headerView) {
       this.setState({
-        header: header.resolve({ layout }),
+        headerView: headerView.resolve({ layout }),
+      });
+    }
+  }
+
+  measureWordsView = (e) => {
+    const { nativeEvent: { layout } } = e;
+    const { wordsView } = this.state;
+    if (wordsView) {
+      this.setState({
+        wordsView: wordsView.resolve({ layout }),
       });
     }
   }
@@ -164,8 +187,7 @@ class GameView extends Component {
 
     return (
       <View style={styles.container}>
-        <FieldContainer />
-        <View style={[styles.header]} onLayout={(e) => { this.measureHeader(e); }}>
+        <View style={styles.header} onLayout={(e) => { this.measureHeaderView(e); }}>
           <View styles={styles.button_close}>
             <TouchableOpacity
               onPress={() => {
@@ -182,16 +204,22 @@ class GameView extends Component {
             </TouchableOpacity>
           </View>
         </View>
-        {__DEV__ ? null : <Banner
-          unitId="ca-app-pub-1059497387348503/9478393171"
-          size="SMART_BANNER"
-          request={request.build()}
-          onAdLoaded={() => {
-            console.log('Advert loaded');
-          }}
-        />}
+        <FieldContainer fieldStyle={{width: this.state.fieldWidth, height: this.state.fieldHeight}}/>
+        {__DEV__ ? null : (
+          <Banner
+            unitId="ca-app-pub-1059497387348503/9478393171"
+            size="SMART_BANNER"
+            request={request.build()}
+            onAdLoaded={() => {
+              console.log('Advert loaded');
+            }}
+          />
+        )}
         <View style={styles.hairline} />
-        <WordsContainer />
+        <View onLayout={(e) => { console.log(e); this.measureWordsView(e); }} style={styles.container}>
+          <WordsContainer />
+        </View>
+
         <WordsPreviewContainer />
         <GameEndContainer {...{ navigation }} />
       </View>

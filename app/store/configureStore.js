@@ -11,7 +11,7 @@ import rootReducers from '../reducers'; // where reducers is a object of reducer
 
 const config = {
   key: 'root',
-  storage, //: AsyncStorage,
+  storage, // : AsyncStorage,
   blacklist: ['nav', 'gameReducer'],
   debug: true, // to get useful logging
 };

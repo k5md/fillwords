@@ -4,54 +4,22 @@ import AppStyles from '../../config/styles';
 const { color, fontSizes } = AppStyles;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  header: {
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    flex: 0,
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    padding: 10,
-    backgroundColor: color.COLOR_BLACK_TRANSP,
-  },
   button_close: {
     justifyContent: 'flex-end',
   },
-  field: {
-    backgroundColor: color.COLOR_GREYISH,
-    flex: 5,
-  },
-  words: {
-    backgroundColor: color.COLOR_GREYISH,
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  word_container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  word: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  word_text: {
-    fontSize: fontSizes.FONT_SIZE_SMALL, // fontSize / 2,
+  button_disabled: {
+    opacity: 0,
   },
   button_left: {
-    minWidth: 50,
-    justifyContent: 'center',
     alignItems: 'center',
+    justifyContent: 'center',
+    minWidth: 50,
     opacity: 0.7,
   },
   button_right: {
-    minWidth: 50,
-    justifyContent: 'center',
     alignItems: 'center',
+    justifyContent: 'center',
+    minWidth: 50,
     opacity: 0.7,
   },
   button_text: {
@@ -59,94 +27,96 @@ const styles = StyleSheet.create({
     fontSize: fontSizes.FONT_SIZE_LARGE, // 70,
     color: color.COLOR_BLACK_TRANSP,
   },
-  button_disabled: {
-    opacity: 0,
-  },
-  cell_outer_container: {
-    flex: 0,
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'absolute',
-    backfaceVisibility: 'hidden',
-  },
-  cell_container: {
-    width: '100%',
-    height: '100%',
-    padding: 5,
-  },
   cell: {
+    alignItems: 'center',
     backgroundColor: color.COLOR_BLACK_TRANSP,
-    borderWidth: 1,
     borderColor: color.COLOR_BLACK_TRANSP,
     borderRadius: 3,
-    width: '100%',
+    borderWidth: 1,
     height: '100%',
     justifyContent: 'center',
-    alignItems: 'center',
+    width: '100%',
   },
   cell_backface: {
+  },
+  cell_container: {
+    height: '100%',
+    padding: 5,
+    width: '100%',
+  },
+  cell_outer_container: {
+    alignItems: 'center',
+    backfaceVisibility: 'hidden',
+    flex: 0,
+    justifyContent: 'center',
+    position: 'absolute',
   },
   cell_selected: {
     backgroundColor: color.COLOR_BLUE_LIGHT,
   },
   cell_text: {
-    fontSize: fontSizes.FONT_SIZE_NORMAL,
     color: color.COLOR_GREYISH,
+    fontSize: fontSizes.FONT_SIZE_NORMAL,
   },
   connections: {
-    flex: 1,
     alignItems: 'stretch',
+    flex: 1,
     flexWrap: 'wrap',
   },
-  hairline: {
-    borderWidth: 1,
-    borderColor: color.COLOR_GREY,
-    opacity: 0.7,
-    flex: 0,
+  container: {
+    flex: 1,
   },
-  words_preview_container: {
-    justifyContent: 'center',
+  field: {
+    backgroundColor: color.COLOR_GREYISH,
+    flex: 5,
+  },
+  game_end_container: {
     alignItems: 'center',
-    marginTop: '15%',
-    height: '80%',
-    width: '80%',
-    borderWidth: 2,
+    borderColor: color.COLOR_BLACK_TRANSP,
     borderRadius: 1,
+    borderWidth: 2,
     display: 'flex',
+    height: '30%',
+    justifyContent: 'center',
+    marginTop: '30%',
     shadowColor: color.COLOR_GREY_TRANSP,
     shadowOpacity: 0.4,
     shadowRadius: 10,
-    borderColor: color.COLOR_BLACK_TRANSP,
+    width: '80%',
   },
-  words_preview_title_hairline: {
-    paddingLeft: '35%',
-    paddingRight: '35%',
-    flex: 0,
-    alignSelf: 'center',
-    borderWidth: 1,
+  hairline: {
     borderColor: color.COLOR_GREY,
+    borderWidth: 1,
+    flex: 0,
     opacity: 0.7,
   },
-  words_preview_title: {
-    justifyContent: 'center',
+  header: {
+    backgroundColor: color.COLOR_BLACK_TRANSP,
+    flex: 0,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    padding: 10,
+    position: 'absolute',
+    right: 0,
+    top: 0,
+    width: '100%',
+  },
+  word: {
     alignItems: 'center',
+    justifyContent: 'center',
   },
-  words_preview_title_text: {
-    fontSize: fontSizes.FONT_SIZE_NORMAL, // default 36,
-    fontWeight: 'bold',
+  word_container: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  words_preview_content: {
-    width: '50%',
-    marginTop: '2%',
-    marginLeft: '2%',
+  word_text: {
+    fontSize: fontSizes.FONT_SIZE_SMALL, // fontSize / 2,
   },
-  words_preview_content_entry: {
+  words: {
+    backgroundColor: color.COLOR_GREYISH,
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-  },
-  words_preview_content_entry_text: {
-    fontSize: fontSizes.FONT_SIZE_BASE, // 16 / 2.5,
-    lineHeight: fontSizes.FONT_SIZE_SMALL,
   },
   words_preview_button: {
     margin: 0,
@@ -162,19 +132,49 @@ const styles = StyleSheet.create({
   words_preview_button_text: {
     fontSize: fontSizes.FONT_SIZE_BASE, // 8
   },
-  game_end_container: {
-    justifyContent: 'center',
+  words_preview_container: {
     alignItems: 'center',
-    marginTop: '30%',
-    height: '30%',
-    width: '80%',
-    borderWidth: 2,
+    borderColor: color.COLOR_BLACK_TRANSP,
     borderRadius: 1,
+    borderWidth: 2,
     display: 'flex',
+    height: '80%',
+    justifyContent: 'center',
+    marginTop: '15%',
     shadowColor: color.COLOR_GREY_TRANSP,
     shadowOpacity: 0.4,
     shadowRadius: 10,
-    borderColor: color.COLOR_BLACK_TRANSP,
+    width: '80%',
+  },
+  words_preview_content: {
+    marginLeft: '2%',
+    marginTop: '2%',
+    width: '50%',
+  },
+  words_preview_content_entry: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  words_preview_content_entry_text: {
+    fontSize: fontSizes.FONT_SIZE_BASE, // 16 / 2.5,
+    lineHeight: fontSizes.FONT_SIZE_SMALL,
+  },
+  words_preview_title: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  words_preview_title_hairline: {
+    alignSelf: 'center',
+    borderColor: color.COLOR_GREY,
+    borderWidth: 1,
+    flex: 0,
+    opacity: 0.7,
+    paddingLeft: '35%',
+    paddingRight: '35%',
+  },
+  words_preview_title_text: {
+    fontSize: fontSizes.FONT_SIZE_NORMAL, // default 36,
+    fontWeight: 'bold',
   },
 });
 
