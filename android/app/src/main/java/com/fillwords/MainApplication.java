@@ -23,6 +23,8 @@ import io.invertase.firebase.admob.RNFirebaseAdMobPackage;
 import io.invertase.firebase.analytics.RNFirebaseAnalyticsPackage;
 import com.google.android.gms.ads.MobileAds;
 
+import org.devio.rn.splashscreen.SplashScreenReactPackage;
+
 public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
@@ -42,7 +44,8 @@ public class MainApplication extends Application implements ReactApplication {
           new RNFirebaseAdMobPackage(),
           new RNFirebaseAnalyticsPackage(),
           new MainReactPackage(),
-          new RNCViewPagerPackage()
+          new RNCViewPagerPackage(),
+          new SplashScreenReactPackage()
       );
     }
 

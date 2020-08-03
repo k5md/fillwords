@@ -182,14 +182,14 @@ class GameView extends Component {
             </TouchableOpacity>
           </View>
         </View>
-        <Banner
+        {__DEV__ ? null : <Banner
           unitId="ca-app-pub-1059497387348503/9478393171"
           size="SMART_BANNER"
           request={request.build()}
           onAdLoaded={() => {
             console.log('Advert loaded');
           }}
-        />
+        />}
         <View style={styles.hairline} />
         <WordsContainer />
         <WordsPreviewContainer />

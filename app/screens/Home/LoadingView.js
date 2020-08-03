@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Text,
   ActivityIndicator,
@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import Modal from 'react-native-modalbox';
+import SplashScreen from 'react-native-splash-screen';
 import styles from './styles';
 import AppStyles from '../../config/styles';
 import { translate } from '../../localizations';
@@ -13,6 +14,10 @@ import { translate } from '../../localizations';
 const { color } = AppStyles;
 
 const LoadingView = (props) => {
+  useEffect(() => {
+    SplashScreen.hide();
+  });
+
   const {
     isOpen,
   } = props;
