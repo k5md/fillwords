@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import SvgUri from 'react-native-svg-uri';
+import { SvgUri } from 'react-native-svg';
 import { handleAndroidBackButton, removeAndroidBackButtonHandler } from '../../utils/androidBackButton';
 import AppStyles from '../../config/styles';
 import images from '../../config/images';

@@ -16,8 +16,8 @@
 #   public *;
 #}
 
--keep class io.invertase.firebase.** { *; }
--dontwarn io.invertase.firebase.**
+#-keep class io.invertase.firebase.** { *; }
+#-dontwarn io.invertase.firebase.**
 
--keep class com.google.android.gms.** { *; }
--dontwarn com.google.android.gms.**
+#-keep class com.google.android.gms.** { *; }
+#-dontwarn com.google.android.gms.**

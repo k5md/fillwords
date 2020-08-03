@@ -3,8 +3,8 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
-import firebase from 'react-native-firebase';
-import SvgUri from 'react-native-svg-uri';
+// import firebase from 'react-native-firebase';
+import { SvgUri } from 'react-native-svg';
 import Field from '../../lib/field';
 import dictionary from '../../utils/Dictionaries';
 import dictionariesConfig from '../../config/dictionaries';
@@ -111,7 +111,7 @@ class GameView extends Component {
       },
     } = await headerView;
 
-    this.setState({ fieldHeight: height - headerHeight, fieldWidth: width })
+    this.setState({ fieldHeight: height - headerHeight, fieldWidth: width });
 
 
     // header takes fullWidth, absolute positioned,
@@ -182,8 +182,8 @@ class GameView extends Component {
       clearGame,
     } = this.props;
 
-    const { Banner, AdRequest } = firebase.admob;
-    const request = new AdRequest();
+    // const { Banner, AdRequest } = firebase.admob;
+    // const request = new AdRequest();
 
     return (
       <View style={styles.container}>
@@ -204,17 +204,8 @@ class GameView extends Component {
             </TouchableOpacity>
           </View>
         </View>
-        <FieldContainer fieldStyle={{width: this.state.fieldWidth, height: this.state.fieldHeight}}/>
-        {__DEV__ ? null : (
-          <Banner
-            unitId="ca-app-pub-1059497387348503/9478393171"
-            size="SMART_BANNER"
-            request={request.build()}
-            onAdLoaded={() => {
-              console.log('Advert loaded');
-            }}
-          />
-        )}
+        <FieldContainer fieldStyle={{ width: this.state.fieldWidth, height: this.state.fieldHeight }} />
+
         <View style={styles.hairline} />
         <View onLayout={(e) => { console.log(e); this.measureWordsView(e); }} style={styles.container}>
           <WordsContainer />
