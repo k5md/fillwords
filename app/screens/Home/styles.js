@@ -46,9 +46,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  title_sub: {
-
-  },
+  title_sub: {},
   title_text: {
     color: color.COLOR_BLACK_TRANSP,
     fontFamily: 'sans-serif-condensed',

@@ -10,28 +10,35 @@ const initialState = {
 };
 
 const handlers = {
-  [types.SET_CURRENT_WORD_INDEX]:
-    (state, action) => ({ ...state, currentWordIndex: action.index }),
+  [types.SET_CURRENT_WORD_INDEX]: (state, action) => ({
+    ...state,
+    currentWordIndex: action.index,
+  }),
 
-  [types.SET_CELLS]:
-    (state, action) => ({ ...state, cells: action.cells }),
+  [types.SET_CELLS]: (state, action) => ({ ...state, cells: action.cells }),
 
-  [types.SET_CONNECTIONS]:
-    (state, action) => ({ ...state, connections: action.connections }),
+  [types.SET_CONNECTIONS]: (state, action) => ({
+    ...state,
+    connections: action.connections,
+  }),
 
-  [types.SET_WORDS]:
-    (state, action) => ({ ...state, words: action.words }),
+  [types.SET_WORDS]: (state, action) => ({ ...state, words: action.words }),
 
-  [types.SET_SELECTED_CELLS]:
-    (state, action) => ({ ...state, selectedCells: action.selectedCells }),
+  [types.SET_SELECTED_CELLS]: (state, action) => ({
+    ...state,
+    selectedCells: action.selectedCells,
+  }),
 
-  [types.SETUP_GAME]:
-    (state, action) => ({ ...state, ...action.config, gameState: 'learning' }),
+  [types.SETUP_GAME]: (state, action) => ({
+    ...state,
+    ...action.config,
+    gameState: 'learning',
+  }),
 
   [types.SELECT_CELL]: (state, action) => {
     // TODO: add check here for already existing selected cells
-    const cells = state.cells.map(
-      (cell, index) => (action.cellIndex === index ? ({ ...cell, selected: true }) : cell),
+    const cells = state.cells.map((cell, index) =>
+      action.cellIndex === index ? { ...cell, selected: true } : cell,
     );
     const selectedCells = [...state.selectedCells, action.cellIndex];
     return {
@@ -41,8 +48,10 @@ const handlers = {
     };
   },
 
-  [types.DESELECT_CELLS]: (state) => {
-    const cells = state.cells.map(cell => (cell.selected ? ({ ...cell, selected: false }) : cell));
+  [types.DESELECT_CELLS]: state => {
+    const cells = state.cells.map(cell =>
+      cell.selected ? { ...cell, selected: false } : cell,
+    );
     return {
       ...state,
       cells,
@@ -50,16 +59,21 @@ const handlers = {
     };
   },
 
-  [types.GUESS_WORD]: (state) => {
-    const words = state.words.map(
-      (word, idx) => (idx === state.currentWordIndex ? ({ ...word, guessed: true }) : word),
+  [types.GUESS_WORD]: state => {
+    const words = state.words.map((word, idx) =>
+      idx === state.currentWordIndex ? { ...word, guessed: true } : word,
     );
-    const cells = state.cells.map(
-      (cell, idx) => (state.selectedCells.includes(idx) ? ({ ...cell, flipped: true }) : cell),
+    const cells = state.cells.map((cell, idx) =>
+      state.selectedCells.includes(idx) ? { ...cell, flipped: true } : cell,
     );
-    const gameState = words.every(word => word.guessed || word.discarded) ? 'end' : state.gameState;
-    const nextWordIndex = words.findIndex(word => !word.guessed && !word.discarded);
-    const currentWordIndex = nextWordIndex !== -1 ? nextWordIndex : state.currentWordIndex;
+    const gameState = words.every(word => word.guessed || word.discarded)
+      ? 'end'
+      : state.gameState;
+    const nextWordIndex = words.findIndex(
+      word => !word.guessed && !word.discarded,
+    );
+    const currentWordIndex =
+      nextWordIndex !== -1 ? nextWordIndex : state.currentWordIndex;
     return {
       ...state,
       words,
@@ -71,22 +85,26 @@ const handlers = {
 
   [types.DISCARD_WORD]: (state, action) => {
     const { discardedWordIndex } = action;
-    const words = state.words.map(
-      (word, index) => (index === discardedWordIndex ? ({ ...word, discarded: true }) : word),
+    const words = state.words.map((word, index) =>
+      index === discardedWordIndex ? { ...word, discarded: true } : word,
     );
 
     const connection = state.connections[words[discardedWordIndex].key];
     // find cells that belong to the discarded word and flip them
-    const cells = state.cells.map(
-      (cell) => {
-        if (connection.findIndex(([row, col]) => cell.row === row && cell.col === col) !== -1) {
-          return { ...cell, flipped: true };
-        }
-        return cell;
-      },
-    );
+    const cells = state.cells.map(cell => {
+      if (
+        connection.findIndex(
+          ([row, col]) => cell.row === row && cell.col === col,
+        ) !== -1
+      ) {
+        return { ...cell, flipped: true };
+      }
+      return cell;
+    });
 
-    const gameState = words.every(word => word.guessed || word.discarded) ? 'end' : state.gameState;
+    const gameState = words.every(word => word.guessed || word.discarded)
+      ? 'end'
+      : state.gameState;
 
     return {
       ...state,

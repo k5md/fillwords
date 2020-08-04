@@ -12,7 +12,10 @@ import {
 } from 'react-native';
 import { SvgXml } from 'react-native-svg';
 import PropTypes from 'prop-types';
-import { handleAndroidBackButton, removeAndroidBackButtonHandler } from '../../utils/androidBackButton';
+import {
+  handleAndroidBackButton,
+  removeAndroidBackButtonHandler,
+} from '../../utils/androidBackButton';
 import images from '../../config/images';
 import dictionariesConfig from '../../config/dictionaries';
 import styles from './styles';
@@ -33,11 +36,7 @@ class OptionsView extends Component {
 
   componentDidMount() {
     handleAndroidBackButton(() => {
-      const {
-        showHelp,
-        toggleShowHelp,
-        navigation,
-      } = this.props;
+      const { showHelp, toggleShowHelp, navigation } = this.props;
 
       if (showHelp) {
         toggleShowHelp();
@@ -65,10 +64,7 @@ class OptionsView extends Component {
       toggleShowHelp,
     } = this.props;
 
-    const {
-      cols,
-      rows,
-    } = this.state;
+    const { cols, rows } = this.state;
 
     return (
       <View style={styles.container}>
@@ -76,9 +72,7 @@ class OptionsView extends Component {
           <View style={styles.header_item}>
             <Text style={styles.header_text}>{translate('options')}</Text>
           </View>
-          <TouchableOpacity
-            onPress={() => navigation.navigate('Home')}
-          >
+          <TouchableOpacity onPress={() => navigation.navigate('Home')}>
             <SvgXml
               width="30"
               height="30"
@@ -125,37 +119,42 @@ class OptionsView extends Component {
               selectedValue={languagePack}
               onValueChange={dictionaryKey => setLanguagePack(dictionaryKey)}
             >
-              {Object.keys(dictionariesConfig.DICTIONARIES).map(dictionaryKey => (
-                <Picker.Item
-                  key={dictionaryKey}
-                  label={dictionariesConfig.DICTIONARIES[dictionaryKey].displayName}
-                  value={dictionaryKey}
-                  itemStyle={styles.body_item_text}
-                />
-              ))}
+              {Object.keys(dictionariesConfig.DICTIONARIES).map(
+                dictionaryKey => (
+                  <Picker.Item
+                    key={dictionaryKey}
+                    label={
+                      dictionariesConfig.DICTIONARIES[dictionaryKey].displayName
+                    }
+                    value={dictionaryKey}
+                    itemStyle={styles.body_item_text}
+                  />
+                ),
+              )}
             </Picker>
           </View>
           <View style={[styles.container, styles.body]}>
-            <TouchableOpacity
-              onPress={() => toggleShowHelp()}
-            >
+            <TouchableOpacity onPress={() => toggleShowHelp()}>
               <View style={styles.body_item}>
-                <Text style={styles.body_item_text}>
-                  {translate('help')}
-                </Text>
+                <Text style={styles.body_item_text}>{translate('help')}</Text>
               </View>
             </TouchableOpacity>
           </View>
           <View style={[styles.container, styles.body]}>
             <TouchableOpacity
-              onPress={() => Alert.alert(
-                translate('confirmResetStatistics'),
-                translate('confirmResetStatisticsQuestion'),
-                [
-                  { text: translate('cancel'), style: 'cancel' },
-                  { text: translate('ok'), onPress: () => dictionary.resetStatistics() },
-                ],
-              )}
+              onPress={() =>
+                Alert.alert(
+                  translate('confirmResetStatistics'),
+                  translate('confirmResetStatisticsQuestion'),
+                  [
+                    { text: translate('cancel'), style: 'cancel' },
+                    {
+                      text: translate('ok'),
+                      onPress: () => dictionary.resetStatistics(),
+                    },
+                  ],
+                )
+              }
             >
               <View style={styles.body_item}>
                 <Text style={styles.body_item_text}>

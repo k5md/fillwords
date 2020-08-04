@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-import {
-  View,
-  Alert,
-  Text,
-  BackHandler,
-  TouchableOpacity,
-} from 'react-native';
+import { View, Alert, Text, BackHandler, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import { SvgXml } from 'react-native-svg';
-import { handleAndroidBackButton, removeAndroidBackButtonHandler } from '../../utils/androidBackButton';
+import {
+  handleAndroidBackButton,
+  removeAndroidBackButtonHandler,
+} from '../../utils/androidBackButton';
 import AppStyles from '../../config/styles';
 import images from '../../config/images';
 import HomeAnimationContainer from './HomeAnimationContainer';
@@ -20,14 +17,12 @@ const { color } = AppStyles;
 
 class HomeView extends Component {
   componentDidMount() {
-    handleAndroidBackButton(() => Alert.alert(
-      translate('confirmExit'),
-      translate('confirmExitQuestion'),
-      [
+    handleAndroidBackButton(() =>
+      Alert.alert(translate('confirmExit'), translate('confirmExitQuestion'), [
         { text: translate('cancel'), style: 'cancel' },
         { text: translate('ok'), onPress: () => BackHandler.exitApp() },
-      ],
-    ));
+      ]),
+    );
   }
 
   componentWillUnmount() {
@@ -36,16 +31,11 @@ class HomeView extends Component {
   }
 
   render() {
-    const {
-      navigation,
-      isDBReady,
-    } = this.props;
+    const { navigation, isDBReady } = this.props;
 
     return (
       <View style={[styles.container, styles.body]}>
-        <LoadingView
-          isOpen={!isDBReady}
-        />
+        <LoadingView isOpen={!isDBReady} />
         <HomeAnimationContainer />
         <View style={[styles.container, styles.title]}>
           <Text style={styles.title_text}>FILLWORDS</Text>

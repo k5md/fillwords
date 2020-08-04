@@ -6,11 +6,14 @@ class CellContainer extends Component {
   shouldComponentUpdate(nextProps) {
     const { cell: oldCell } = this.props;
     const newCell = nextProps.cell;
-    return (oldCell.flipped !== newCell.flipped) || (oldCell.selected !== newCell.selected);
+    return (
+      oldCell.flipped !== newCell.flipped ||
+      oldCell.selected !== newCell.selected
+    );
   }
 
   render() {
-    return (<CellView {...this.props} />);
+    return <CellView {...this.props} />;
   }
 }
 
@@ -18,6 +21,4 @@ const mapStateToProps = (state, ownProps) => ({
   cell: state.gameReducer.cells[ownProps.cellIndex],
 });
 
-export default connect(
-  mapStateToProps,
-)(CellContainer);
+export default connect(mapStateToProps)(CellContainer);

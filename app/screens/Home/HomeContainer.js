@@ -2,10 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import HomeView from './HomeView';
 
-
 class HomeContainer extends React.Component {
   render() {
-    return (<HomeView {...this.props} />);
+    return <HomeView {...this.props} />;
   }
 }
 

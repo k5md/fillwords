@@ -37,8 +37,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
   },
-  cell_backface: {
-  },
+  cell_backface: {},
   cell_container: {
     height: '100%',
     padding: 5,

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import * as gameActions from '../../actions/gameActions';
 import GameEndView from './GameEndView';
 
-const GameEndContainer = props => (<GameEndView {...props} />);
+const GameEndContainer = props => <GameEndView {...props} />;
 
 const mapStateToProps = state => ({
   words: state.gameReducer.words,

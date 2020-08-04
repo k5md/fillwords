@@ -9,13 +9,12 @@ import rootReducers from '../reducers'; // where reducers is a object of reducer
 
 const config = {
   key: 'not-root', // refer to redux-persist issue on rp converting arrays in root storage to plain objects
-  storage : AsyncStorage,
+  storage: AsyncStorage,
   blacklist: ['nav', 'gameReducer'],
   debug: __DEV__, // to get useful logging
 };
 
 const middleware = [];
-
 
 if (__DEV__) {
   middleware.push(createLogger());
@@ -27,6 +26,5 @@ const persistConfig = { enhancers };
 const store = createStore(reducers, undefined, compose(...enhancers));
 const persistor = persistStore(store, persistConfig, () => {});
 const configureStore = () => ({ persistor, store });
-
 
 export default configureStore;

@@ -5,7 +5,7 @@ import GameView from './GameView';
 
 class GameContainer extends React.Component {
   render() {
-    return (<GameView {...this.props} />);
+    return <GameView {...this.props} />;
   }
 }
 
@@ -24,10 +24,13 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     setCells: cells => dispatch(gameActions.setCells(cells)),
-    setConnections: connections => dispatch(gameActions.setConnections(connections)),
-    setSelectedCells: selectedCells => dispatch(gameActions.setSelectedCells(selectedCells)),
+    setConnections: connections =>
+      dispatch(gameActions.setConnections(connections)),
+    setSelectedCells: selectedCells =>
+      dispatch(gameActions.setSelectedCells(selectedCells)),
     setWords: words => dispatch(gameActions.setWords(words)),
-    setCurrentWordIndex: index => dispatch(gameActions.setCurrentWordIndex(index)),
+    setCurrentWordIndex: index =>
+      dispatch(gameActions.setCurrentWordIndex(index)),
     setupGame: config => dispatch(gameActions.setupGame(config)),
     clearGame: () => dispatch(gameActions.clearGame()),
   };

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import * as optionsActions from '../../actions/optionsActions';
 import HelpView from './HelpView';
 
-const HelpContainer = props => (<HelpView {...props} />);
+const HelpContainer = props => <HelpView {...props} />;
 
 function mapStateToProps(state) {
   return {

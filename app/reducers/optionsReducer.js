@@ -10,22 +10,25 @@ const initialState = {
 };
 
 const handlers = {
-  [types.CHANGE_NUMBER_ROWS]:
-    (state, action) => ({ ...state, rows: action.rows }),
+  [types.CHANGE_NUMBER_ROWS]: (state, action) => ({
+    ...state,
+    rows: action.rows,
+  }),
 
-  [types.CHANGE_NUMBER_COLS]:
-    (state, action) => ({ ...state, cols: action.cols }),
+  [types.CHANGE_NUMBER_COLS]: (state, action) => ({
+    ...state,
+    cols: action.cols,
+  }),
 
-  [types.SET_LANGUAGE_PACK]:
-    (state, action) => ({ ...state, languagePack: action.languagePack }),
+  [types.SET_LANGUAGE_PACK]: (state, action) => ({
+    ...state,
+    languagePack: action.languagePack,
+  }),
 
-  [types.TOGGLE_SHOW_HELP]:
-    state => ({ ...state, showHelp: !state.showHelp }),
+  [types.TOGGLE_SHOW_HELP]: state => ({ ...state, showHelp: !state.showHelp }),
 
-  [types.DB_NOT_READY]:
-    state => ({ ...state, isDBReady: false }),
-  [types.DB_READY]:
-    state => ({ ...state, isDBReady: true }),
+  [types.DB_NOT_READY]: state => ({ ...state, isDBReady: false }),
+  [types.DB_READY]: state => ({ ...state, isDBReady: true }),
 };
 
 const optionsReducer = (state = initialState, action) => {

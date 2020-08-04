@@ -107,7 +107,6 @@ class GameView extends Component {
     const marginY = Math.floor((height - size * rows) / 2);
 
     this.setState({ fieldHeight: height, fieldWidth: width });
-    console.log({ wordsHeight, headerHeight, height, marginX, marginY });
 
     const cells = [];
     for (let row = 0; row < rows; row += 1) {
@@ -181,13 +180,15 @@ class GameView extends Component {
           style={styles.header}
           onLayout={e => {
             this.measureHeaderView(e);
-          }}>
+          }}
+        >
           <View styles={styles.button_close}>
             <TouchableOpacity
               onPress={() => {
                 clearGame();
                 navigation.navigate('Home');
-              }}>
+              }}
+            >
               <SvgXml
                 width="30"
                 height="30"
@@ -207,16 +208,15 @@ class GameView extends Component {
         <View style={styles.hairline} />
         <View
           onLayout={e => {
-            console.log(e);
             this.measureWordsView(e);
           }}
-          style={styles.container}>
+          style={styles.container}
+        >
           <WordsContainer />
         </View>
 
-        {/*<WordsPreviewContainer />
+        <WordsPreviewContainer />
         <GameEndContainer {...{ navigation }} />
-        */}
       </View>
     );
   }

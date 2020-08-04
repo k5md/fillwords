@@ -5,7 +5,7 @@ import OptionsView from './OptionsView';
 
 class OptionsContainer extends React.Component {
   render() {
-    return (<OptionsView {...this.props} />);
+    return <OptionsView {...this.props} />;
   }
 }
 
@@ -21,7 +21,8 @@ function mapStateToProps(state) {
 const mapDispatchToProps = dispatch => ({
   changeNumberRows: rows => dispatch(optionsActions.changeNumberRows(rows)),
   changeNumberCols: cols => dispatch(optionsActions.changeNumberCols(cols)),
-  setLanguagePack: languagePack => dispatch(optionsActions.setLanguagePack(languagePack)),
+  setLanguagePack: languagePack =>
+    dispatch(optionsActions.setLanguagePack(languagePack)),
   toggleShowHelp: () => dispatch(optionsActions.toggleShowHelp()),
 });
 

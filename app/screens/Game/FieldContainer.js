@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import * as gameActions from '../../actions/gameActions';
 import FieldView from './FieldView';
 
-const FieldContainer = props => (<FieldView {...props} />);
+const FieldContainer = props => <FieldView {...props} />;
 
 const mapStateToProps = state => ({
   cells: state.gameReducer.cells,
@@ -15,8 +15,10 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   setCells: cells => dispatch(gameActions.setCells(cells)),
-  setConnections: connections => dispatch(gameActions.setConnections(connections)),
-  setSelectedCells: selectedCells => dispatch(gameActions.setSelectedCells(selectedCells)),
+  setConnections: connections =>
+    dispatch(gameActions.setConnections(connections)),
+  setSelectedCells: selectedCells =>
+    dispatch(gameActions.setSelectedCells(selectedCells)),
   setWords: words => dispatch(gameActions.setWords(words)),
   selectCell: cellIndex => dispatch(gameActions.selectCell(cellIndex)),
   deselectCells: () => dispatch(gameActions.deselectCells()),

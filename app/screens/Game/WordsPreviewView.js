@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Text,
-  TouchableOpacity,
-  View,
-  ScrollView,
-} from 'react-native';
+import { Text, TouchableOpacity, View, ScrollView } from 'react-native';
 import PropTypes from 'prop-types';
 import Modal from 'react-native-modalbox';
 import _ from 'lodash';
@@ -18,7 +13,7 @@ class WordsPreviewView extends Component {
   state = {
     buttonCountdownTime: initialCountdownTime,
     buttonCountdownIntervalHandle: null,
-  }
+  };
 
   componentWillReceiveProps(nextProps) {
     const { words } = nextProps;
@@ -35,10 +30,7 @@ class WordsPreviewView extends Component {
 
     // set the interval that decrements buttonCountdownTime on each tick
     const newIntervalHandle = setInterval(() => {
-      const {
-        buttonCountdownTime,
-        buttonCountdownIntervalHandle,
-      } = this.state;
+      const { buttonCountdownTime, buttonCountdownIntervalHandle } = this.state;
 
       if (buttonCountdownTime < 0) {
         clearInterval(buttonCountdownIntervalHandle);
@@ -59,11 +51,7 @@ class WordsPreviewView extends Component {
   }
 
   render() {
-    const {
-      playGame,
-      isOpen,
-      words,
-    } = this.props;
+    const { playGame, isOpen, words } = this.props;
 
     const { buttonCountdownTime } = this.state;
 
@@ -78,17 +66,26 @@ class WordsPreviewView extends Component {
       >
         <View>
           <View style={styles.words_preview_title}>
-            <Text style={styles.words_preview_title_text}>{translate('remember')}</Text>
+            <Text style={styles.words_preview_title_text}>
+              {translate('remember')}
+            </Text>
           </View>
           <View style={styles.words_preview_title_hairline} />
           <ScrollView>
             {words.map(item => (
-              <View key={_.uniqueId()} style={styles.words_preview_content_entry}>
+              <View
+                key={_.uniqueId()}
+                style={styles.words_preview_content_entry}
+              >
                 <View style={styles.words_preview_content}>
-                  <Text style={styles.words_preview_content_entry_text}>{item.translation}</Text>
+                  <Text style={styles.words_preview_content_entry_text}>
+                    {item.translation}
+                  </Text>
                 </View>
                 <View style={styles.words_preview_content}>
-                  <Text style={styles.words_preview_content_entry_text}>{item.word}</Text>
+                  <Text style={styles.words_preview_content_entry_text}>
+                    {item.word}
+                  </Text>
                 </View>
               </View>
             ))}
@@ -99,7 +96,9 @@ class WordsPreviewView extends Component {
           >
             <View style={styles.words_preview_button}>
               <Text style={styles.words_preview_button_text}>
-                {buttonCountdownTime > 0 ? buttonCountdownTime / 1000 : translate('done')}
+                {buttonCountdownTime > 0
+                  ? buttonCountdownTime / 1000
+                  : translate('done')}
               </Text>
             </View>
           </TouchableOpacity>

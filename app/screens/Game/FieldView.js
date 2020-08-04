@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import {
-  View,
-  PanResponder,
-} from 'react-native';
+import { View, PanResponder } from 'react-native';
 import CellContainer from './CellContainer';
 import styles from './styles';
 
@@ -15,34 +12,25 @@ class FieldView extends Component {
     return isAbove || isBelow || isLeft || isRight;
   };
 
-  static findCellIndex = (x0, y0, cells) => cells.findIndex(
-    (cell) => {
-      const {
-        x,
-        y,
-        width,
-        height,
-        selected,
-        flipped,
-      } = cell;
+  static findCellIndex = (x0, y0, cells) =>
+    cells.findIndex(cell => {
+      const { x, y, width, height, selected, flipped } = cell;
       return (
-        !selected
-        && !flipped
-        && x0 >= x
-        && y0 >= y
-        && x0 <= x + width
-        && y0 <= y + height
+        !selected &&
+        !flipped &&
+        x0 >= x &&
+        y0 >= y &&
+        x0 <= x + width &&
+        y0 <= y + height
       );
-    },
-  );
+    });
 
-  static isSelectable = (cellIndex, lastSelectedCellIndex, cells) => (
-    cellIndex !== -1
-    && lastSelectedCellIndex !== -1
-    && lastSelectedCellIndex !== undefined
-    && cellIndex !== lastSelectedCellIndex
-    && FieldView.isNeighbour(cells[cellIndex], cells[lastSelectedCellIndex])
-  );
+  static isSelectable = (cellIndex, lastSelectedCellIndex, cells) =>
+    cellIndex !== -1 &&
+    lastSelectedCellIndex !== -1 &&
+    lastSelectedCellIndex !== undefined &&
+    cellIndex !== lastSelectedCellIndex &&
+    FieldView.isNeighbour(cells[cellIndex], cells[lastSelectedCellIndex]);
 
   state = {
     layout: null,
@@ -64,10 +52,7 @@ class FieldView extends Component {
       onPanResponderGrant: (evt, gestureState) => {
         // The gesture has started.
         // Checking that gesture happens inside a cell
-        const {
-          cells,
-          selectCell,
-        } = this.props;
+        const { cells, selectCell } = this.props;
 
         const { layout } = this.state;
 
@@ -83,11 +68,7 @@ class FieldView extends Component {
         // The most recent move distance is gestureState.move{X,Y}
         // The accumulated gesture distance since becoming responder is gestureState.d{x,y}
         // Checking that every newly selected cell is a neighbour of the previous one
-        const {
-          cells,
-          selectedCells,
-          selectCell,
-        } = this.props;
+        const { cells, selectedCells, selectCell } = this.props;
 
         const { layout } = this.state;
 
@@ -117,10 +98,13 @@ class FieldView extends Component {
         const currentWordConnections = connections[currentWord.key];
 
         if (selectedCells.length === currentWordConnections.length) {
-          if (selectedCells.every((selectedCell, idx) => (
-            cells[selectedCell].row === currentWordConnections[idx][0]
-            && cells[selectedCell].col === currentWordConnections[idx][1]
-          ))) {
+          if (
+            selectedCells.every(
+              (selectedCell, idx) =>
+                cells[selectedCell].row === currentWordConnections[idx][0] &&
+                cells[selectedCell].col === currentWordConnections[idx][1],
+            )
+          ) {
             guessWord();
           }
         }
@@ -138,16 +122,21 @@ class FieldView extends Component {
     });
   }
 
-  onLayout = ({ nativeEvent: { layout }}) => {
+  onLayout = ({ nativeEvent: { layout } }) => {
     this.setState({ layout });
-  }
+  };
 
   render() {
     const { cells, fieldStyle } = this.props;
-    console.log('fieldStyle', fieldStyle);
     return (
-      <View style={[styles.field, fieldStyle]} {...this.panResponder.panHandlers} onLayout={this.onLayout}>
-        {cells.map((item, index) => <CellContainer key={`${item.row}${item.col}`} cellIndex={index} />)}
+      <View
+        style={[styles.field, fieldStyle]}
+        {...this.panResponder.panHandlers}
+        onLayout={this.onLayout}
+      >
+        {cells.map((item, index) => (
+          <CellContainer key={`${item.row}${item.col}`} cellIndex={index} />
+        ))}
       </View>
     );
   }

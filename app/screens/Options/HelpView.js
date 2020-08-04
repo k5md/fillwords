@@ -1,20 +1,12 @@
 import React from 'react';
-import {
-  Text,
-  TouchableOpacity,
-  View,
-  ScrollView,
-} from 'react-native';
+import { Text, TouchableOpacity, View, ScrollView } from 'react-native';
 import PropTypes from 'prop-types';
 import Modal from 'react-native-modalbox';
 import styles from './styles';
 import { translate } from '../../localizations';
 
-const HelpView = (props) => {
-  const {
-    showHelp,
-    toggleShowHelp,
-  } = props;
+const HelpView = props => {
+  const { showHelp, toggleShowHelp } = props;
 
   return (
     <Modal
@@ -35,14 +27,10 @@ const HelpView = (props) => {
         <View style={styles.words_preview_title_hairline} />
         <ScrollView style={styles.container}>
           <View style={[styles.container, styles.body_item]}>
-            <Text style={styles.help_text}>
-              {translate('helpText')}
-            </Text>
+            <Text style={styles.help_text}>{translate('helpText')}</Text>
           </View>
         </ScrollView>
-        <TouchableOpacity
-          onPress={() => toggleShowHelp()}
-        >
+        <TouchableOpacity onPress={() => toggleShowHelp()}>
           <View style={[styles.words_preview_button, styles.body_item]}>
             <Text style={styles.words_preview_button_text}>
               {translate('done')}

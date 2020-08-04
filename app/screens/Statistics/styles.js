@@ -53,9 +53,7 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: color.COLOR_BLACK_TRANSP,
   },
-  header_button_back: {
-
-  },
+  header_button_back: {},
   header_item: {
     flex: 1,
   },

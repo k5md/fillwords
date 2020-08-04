@@ -1,6 +1,6 @@
 /* eslint camelcase: 0 global-require: 0 */
 
-export default (dictionaryName) => {
+export default dictionaryName => {
   switch (dictionaryName) {
     case 'eng_rus':
       return require('./eng_rus');

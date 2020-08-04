@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import * as gameActions from '../../actions/gameActions';
 import WordsPreviewView from './WordsPreviewView';
 
-const WordsPreviewContainer = props => (<WordsPreviewView {...props} />);
+const WordsPreviewContainer = props => <WordsPreviewView {...props} />;
 
 const mapStateToProps = state => ({
   words: state.gameReducer.words,

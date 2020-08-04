@@ -51,12 +51,21 @@ class Dictionaries {
     // console.log(`prepopulating ${dictionaryName}`);
 
     try {
-      const countResults = await db.executeSql(`SELECT COUNT(*) FROM ${dictionaryName}`, []);
+      const countResults = await db.executeSql(
+        `SELECT COUNT(*) FROM ${dictionaryName}`,
+        [],
+      );
       const count = Object.values(countResults[0].rows.item(0))[0];
       // console.log('number of entries in', dictionaryName, count);
 
-      if (count !== dictionariesConfig.DICTIONARIES[dictionaryName].entriesCount) {
-        throw new Error('entries count mismatch', count, dictionariesConfig.DICTIONARIES[dictionaryName].entriesCount);
+      if (
+        count !== dictionariesConfig.DICTIONARIES[dictionaryName].entriesCount
+      ) {
+        throw new Error(
+          'entries count mismatch',
+          count,
+          dictionariesConfig.DICTIONARIES[dictionaryName].entriesCount,
+        );
       }
     } catch (e) {
       // console.log(e);
@@ -64,7 +73,11 @@ class Dictionaries {
       const dictionary = dictionaries(dictionaryName);
 
       await db.executeSql(`DROP TABLE IF EXISTS ${dictionaryName};`);
-      await db.executeSql(`CREATE TABLE IF NOT EXISTS ${dictionaryName}(${fields.map(entry => entry.join(' ')).join(',')});",`);
+      await db.executeSql(
+        `CREATE TABLE IF NOT EXISTS ${dictionaryName}(${fields
+          .map(entry => entry.join(' '))
+          .join(',')});",`,
+      );
 
       const defaultSrsStatus = 0;
       const defaultLastReviewed = Date.now();
@@ -74,8 +87,12 @@ class Dictionaries {
       const maxBatchSize = 500; // cordova-sqlite and it's derivatives crash the app if exceeded
       const transactions = [];
       for (let i = 0; i < dictionary.length; i += maxBatchSize) {
-        const transaction = db.transaction((tx) => {
-          for (let j = 0; j < maxBatchSize && j + i < dictionary.length; j += 1) {
+        const transaction = db.transaction(tx => {
+          for (
+            let j = 0;
+            j < maxBatchSize && j + i < dictionary.length;
+            j += 1
+          ) {
             tx.executeSql(insertTemplate, dictionary[i + j]);
           }
         });
@@ -83,7 +100,9 @@ class Dictionaries {
       }
       await Promise.all(transactions);
       // NOTE: consider search for not-composite words
-      await db.executeSql(`CREATE INDEX IF NOT EXISTS idx_${dictionaryName}_wordLength ON ${dictionaryName} (wordLength)`);
+      await db.executeSql(
+        `CREATE INDEX IF NOT EXISTS idx_${dictionaryName}_wordLength ON ${dictionaryName} (wordLength)`,
+      );
       store.dispatch(dbReady());
     }
   }
@@ -93,8 +112,13 @@ class Dictionaries {
   async getWord(selector, order = 'RANDOM()', limit = 1) {
     const { dictionaryName } = this;
     const db = await this.storage;
-    const specifier = Object.entries(selector).map(pair => pair.join('=')).join(',');
-    const results = await db.executeSql(`SELECT * FROM ${dictionaryName} WHERE ${specifier} ORDER BY ${order} LIMIT ${limit}`, []);
+    const specifier = Object.entries(selector)
+      .map(pair => pair.join('='))
+      .join(',');
+    const results = await db.executeSql(
+      `SELECT * FROM ${dictionaryName} WHERE ${specifier} ORDER BY ${order} LIMIT ${limit}`,
+      [],
+    );
     const entry = results[0].rows.item(0);
     // console.log(selector, specifier, entry);
     return entry;
@@ -103,8 +127,13 @@ class Dictionaries {
   async countWords(selector) {
     const { dictionaryName } = this;
     const db = await this.storage;
-    const specifier = Object.entries(selector).map(pair => pair.join('=')).join(',');
-    const countResults = await db.executeSql(`SELECT COUNT(*) FROM ${dictionaryName} WHERE ${specifier}`, []);
+    const specifier = Object.entries(selector)
+      .map(pair => pair.join('='))
+      .join(',');
+    const countResults = await db.executeSql(
+      `SELECT COUNT(*) FROM ${dictionaryName} WHERE ${specifier}`,
+      [],
+    );
     const count = Object.values(countResults[0].rows.item(0))[0];
 
     return count;
@@ -113,11 +142,16 @@ class Dictionaries {
   async updateWord(selector, update) {
     const { dictionaryName } = this;
     const db = await this.storage;
-    const modifier = Object.entries(update).map(pair => pair.join('=')).join(',');
-    const specifier = Object.entries(selector).map(
-      ([left, right]) => `${left}='${right}'`,
-    ).join(',');
-    const results = await db.executeSql(`UPDATE ${dictionaryName} SET ${modifier} WHERE ${specifier}`, []);
+    const modifier = Object.entries(update)
+      .map(pair => pair.join('='))
+      .join(',');
+    const specifier = Object.entries(selector)
+      .map(([left, right]) => `${left}='${right}'`)
+      .join(',');
+    const results = await db.executeSql(
+      `UPDATE ${dictionaryName} SET ${modifier} WHERE ${specifier}`,
+      [],
+    );
     // console.log(selector, update, results);
     return results;
   }
@@ -129,8 +163,13 @@ class Dictionaries {
       lastReviewed: Date.now(),
       srsStatus: 0,
     };
-    const modifier = Object.entries(update).map(pair => pair.join('=')).join(',');
-    const results = await db.executeSql(`UPDATE ${dictionaryName} SET ${modifier}`, []);
+    const modifier = Object.entries(update)
+      .map(pair => pair.join('='))
+      .join(',');
+    const results = await db.executeSql(
+      `UPDATE ${dictionaryName} SET ${modifier}`,
+      [],
+    );
     // console.log(selector, update, results);
     return results;
   }
@@ -143,7 +182,7 @@ const dictionary = new Dictionaries();
 observeStore(
   store,
   state => state.optionsReducer.languagePack,
-  (newDictionaryName) => {
+  newDictionaryName => {
     dictionary.dictionaryName = newDictionaryName;
   },
 );

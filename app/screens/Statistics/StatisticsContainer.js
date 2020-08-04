@@ -4,7 +4,7 @@ import StatisticsView from './StatisticsView';
 
 class StatisticsContainer extends React.Component {
   render() {
-    return (<StatisticsView {...this.props} />);
+    return <StatisticsView {...this.props} />;
   }
 }
 
@@ -16,6 +16,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-)(StatisticsContainer);
+export default connect(mapStateToProps)(StatisticsContainer);
