@@ -1,7 +1,17 @@
 import React, { Component } from 'react';
 import { View, PanResponder } from 'react-native';
 import CellContainer from './CellContainer';
-import styles from './styles';
+import AppStyles from '../../config/styles';
+import { StyleSheet } from 'react-native';
+
+const { color, fontSizes } = AppStyles;
+
+const styles = StyleSheet.create({
+  field: {
+    backgroundColor: color.COLOR_GREYISH,
+    flex: 7,
+  },
+});
 
 class FieldView extends Component {
   static isNeighbour = (cell, other) => {

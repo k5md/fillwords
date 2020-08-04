@@ -10,18 +10,40 @@ import {
   Slider,
   TouchableOpacity,
 } from 'react-native';
-import { SvgXml } from 'react-native-svg';
 import PropTypes from 'prop-types';
 import {
   handleAndroidBackButton,
   removeAndroidBackButtonHandler,
 } from '../../utils/androidBackButton';
-import images from '../../config/images';
 import dictionariesConfig from '../../config/dictionaries';
-import styles from './styles';
 import { translate } from '../../localizations';
 import dictionary from '../../utils/Dictionaries';
 import HelpContainer from './HelpContainer';
+import { StyleSheet } from 'react-native';
+import AppStyles from '../../config/styles';
+import { Footer, Header, Separator } from '../../elements';
+
+const { color, fontSizes } = AppStyles;
+
+const styles = StyleSheet.create({
+  body: {
+    backgroundColor: color.COLOR_GREYISH,
+    flex: 1,
+  },
+  body_item: {
+    backgroundColor: color.COLOR_WHITE,
+    borderRadius: 5,
+    margin: 20,
+    padding: 10,
+  },
+  body_item_text: {
+    fontFamily: 'Verdana',
+    fontSize: fontSizes.FONT_SIZE_SMALL,
+  },
+  container: {
+    flex: 1,
+  },
+});
 
 class OptionsView extends Component {
   constructor(props) {
@@ -68,19 +90,10 @@ class OptionsView extends Component {
 
     return (
       <View style={styles.container}>
-        <View style={styles.header}>
-          <View style={styles.header_item}>
-            <Text style={styles.header_text}>{translate('options')}</Text>
-          </View>
-          <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-            <SvgXml
-              width="30"
-              height="30"
-              fill="#66CCFF"
-              xml={images.icons.times}
-            />
-          </TouchableOpacity>
-        </View>
+        <Header
+          title={translate('options')}
+          onClose={() => navigation.navigate('Home')}
+        />
         <ScrollView style={[styles.container, styles.body]}>
           <View style={[styles.container, styles.body_item]}>
             <Text style={styles.body_item_text}>
@@ -96,7 +109,7 @@ class OptionsView extends Component {
               onValueChange={value => this.setState({ rows: value })}
               onSlidingComplete={changeNumberRows}
             />
-            <View style={styles.hairline} />
+            <Separator />
             <Text style={styles.body_item_text}>
               {`${translate('numberOfCols')}: ${cols}`}
             </Text>
@@ -164,11 +177,7 @@ class OptionsView extends Component {
             </TouchableOpacity>
           </View>
         </ScrollView>
-        <View style={styles.footer}>
-          <Text style={styles.footer_text}>
-            {`${translate('version')} 1.0`}
-          </Text>
-        </View>
+        <Footer title={`${translate('version')} 1.0`} />
         <HelpContainer />
       </View>
     );

@@ -1,7 +1,43 @@
 import React, { Component } from 'react';
 import { View, Text, Animated, Easing } from 'react-native';
 import PropTypes from 'prop-types';
-import styles from './styles';
+import AppStyles from '../../config/styles';
+import { StyleSheet } from 'react-native';
+
+const { color, fontSizes } = AppStyles;
+
+const styles = StyleSheet.create({
+  cell: {
+    alignItems: 'center',
+    backgroundColor: color.COLOR_BLACK_TRANSP,
+    borderColor: color.COLOR_BLACK_TRANSP,
+    borderRadius: 3,
+    borderWidth: 1,
+    height: '100%',
+    justifyContent: 'center',
+    width: '100%',
+  },
+  cell_backface: {},
+  cell_container: {
+    height: '100%',
+    padding: 5,
+    width: '100%',
+  },
+  cell_outer_container: {
+    alignItems: 'center',
+    backfaceVisibility: 'hidden',
+    flex: 0,
+    justifyContent: 'center',
+    position: 'absolute',
+  },
+  cell_selected: {
+    backgroundColor: color.COLOR_BLUE_LIGHT,
+  },
+  cell_text: {
+    color: color.COLOR_GREYISH,
+    fontSize: fontSizes.FONT_SIZE_NORMAL,
+  },
+});
 
 class CellView extends Component {
   state = {

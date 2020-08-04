@@ -1,13 +1,29 @@
 import React, { useEffect } from 'react';
-import { Text, ActivityIndicator, View } from 'react-native';
+import { Text, View } from 'react-native';
 import PropTypes from 'prop-types';
-import Modal from 'react-native-modalbox';
+import { Modal } from '../../elements';
 import SplashScreen from 'react-native-splash-screen';
-import styles from './styles';
 import AppStyles from '../../config/styles';
 import { translate } from '../../localizations';
+import { StyleSheet } from 'react-native';
 
-const { color } = AppStyles;
+const { fontSizes } = AppStyles;
+
+const styles = StyleSheet.create({
+  content: {
+    marginHorizontal: '5%',
+    marginVertical: '2%',
+    alignItems: 'center',
+  },
+  entry: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  entry_text: {
+    fontSize: fontSizes.FONT_SIZE_BASE,
+    lineHeight: fontSizes.FONT_SIZE_SMALL,
+  },
+});
 
 const LoadingView = props => {
   useEffect(() => {
@@ -17,26 +33,10 @@ const LoadingView = props => {
   const { isOpen } = props;
 
   return (
-    <Modal
-      isOpen={isOpen}
-      style={styles.words_preview_container}
-      position="top"
-      backdropPressToClose={false}
-      backButtonClose={false}
-      swipeArea={20}
-    >
-      <View>
-        <View style={styles.words_preview_title}>
-          <Text style={styles.words_preview_title_text}>
-            {translate('loading')}
-          </Text>
-        </View>
-        <View style={styles.words_preview_title_hairline} />
-        <View style={[styles.container, styles.body_item]}>
-          <Text style={styles.help_text}>{translate('loadingText')}</Text>
-        </View>
-        <View style={[styles.container, styles.body_item]}>
-          <ActivityIndicator size="large" color={color.COLOR_BLUE_LIGHT} />
+    <Modal isOpen={isOpen} title={translate('loading')}>
+      <View style={styles.content}>
+        <View style={styles.entry}>
+          <Text style={styles.entry_text}>{translate('loadingText')}</Text>
         </View>
       </View>
     </Modal>

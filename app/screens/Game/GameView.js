@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity } from 'react-native';
-// import firebase from 'react-native-firebase';
-import { SvgXml } from 'react-native-svg';
+import { View } from 'react-native';
 import Field from '../../lib/field';
 import dictionary from '../../utils/Dictionaries';
 import dictionariesConfig from '../../config/dictionaries';
@@ -11,12 +9,24 @@ import {
   removeAndroidBackButtonHandler,
 } from '../../utils/androidBackButton';
 import defer from '../../utils/deferredPromise';
-import styles from './styles';
-import images from '../../config/images';
 import WordsContainer from './WordsContainer';
 import FieldContainer from './FieldContainer';
 import WordsPreviewContainer from './WordsPreviewContainer';
 import GameEndContainer from './GameEndContainer';
+import { StyleSheet } from 'react-native';
+import AppStyles from '../../config/styles';
+import { Header, Separator } from '../../elements';
+
+const { color, fontSizes } = AppStyles;
+
+const styles = StyleSheet.create({
+  button_close: {
+    justifyContent: 'flex-end',
+  },
+  container: {
+    flex: 1,
+  },
+});
 
 class GameView extends Component {
   state = {
@@ -176,28 +186,15 @@ class GameView extends Component {
 
     return (
       <View style={styles.container}>
-        <View
-          style={styles.header}
+        <Header
+          onClose={() => {
+            clearGame();
+            navigation.navigate('Home');
+          }}
           onLayout={e => {
             this.measureHeaderView(e);
           }}
-        >
-          <View styles={styles.button_close}>
-            <TouchableOpacity
-              onPress={() => {
-                clearGame();
-                navigation.navigate('Home');
-              }}
-            >
-              <SvgXml
-                width="30"
-                height="30"
-                fill="#66CCFF"
-                xml={images.icons.times}
-              />
-            </TouchableOpacity>
-          </View>
-        </View>
+        />
         <FieldContainer
           fieldStyle={{
             width: this.state.fieldWidth,
@@ -205,7 +202,8 @@ class GameView extends Component {
           }}
         />
 
-        <View style={styles.hairline} />
+        <Separator color={color.COLOR_BLACK_TRANSP} />
+
         <View
           onLayout={e => {
             this.measureWordsView(e);

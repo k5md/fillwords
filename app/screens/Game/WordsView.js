@@ -11,7 +11,53 @@ import {
 } from 'react-native';
 import ViewPager from '@react-native-community/viewpager';
 import PropTypes from 'prop-types';
-import styles from './styles';
+import AppStyles from '../../config/styles';
+import { StyleSheet } from 'react-native';
+
+const { color, fontSizes } = AppStyles;
+
+const styles = StyleSheet.create({
+  button_disabled: {
+    opacity: 0,
+  },
+  button_left: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    minWidth: 50,
+    opacity: 0.7,
+  },
+  button_right: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    minWidth: 50,
+    opacity: 0.7,
+  },
+  button_text: {
+    lineHeight: fontSizes.FONT_SIZE_LARGE,
+    fontSize: fontSizes.FONT_SIZE_LARGE, // 70,
+    color: color.COLOR_BLACK_TRANSP,
+  },
+  container: {
+    flex: 1,
+  },
+  word: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  word_container: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  word_text: {
+    fontSize: fontSizes.FONT_SIZE_SMALL, // fontSize / 2,
+  },
+  words: {
+    backgroundColor: color.COLOR_GREYISH,
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+});
 
 class WordsView extends Component {
   componentDidUpdate(prevProps) {

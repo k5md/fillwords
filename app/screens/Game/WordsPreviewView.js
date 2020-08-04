@@ -1,10 +1,49 @@
 import React, { Component } from 'react';
 import { Text, TouchableOpacity, View, ScrollView } from 'react-native';
 import PropTypes from 'prop-types';
-import Modal from 'react-native-modalbox';
+import { Modal } from '../../elements';
 import _ from 'lodash';
-import styles from './styles';
 import { translate } from '../../localizations';
+import AppStyles from '../../config/styles';
+import { StyleSheet } from 'react-native';
+
+const { color, fontSizes } = AppStyles;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  words_preview_button: {
+    marginHorizontal: '10%',
+    marginVertical: '5%',
+    padding: 5,
+    borderWidth: 2,
+    borderRadius: 1,
+    borderColor: color.COLOR_BLACK_TRANSP,
+    backgroundColor: color.COLOR_WHITE,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  words_preview_button_text: {
+    fontSize: fontSizes.FONT_SIZE_BASE, // 8
+  },
+  words_preview_content_container: {
+    marginTop: '2%',
+    flex: 1,
+  },
+  words_preview_content: {
+    marginHorizontal: '5%',
+    marginVertical: '2%',
+  },
+  words_preview_content_entry: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  words_preview_content_entry_text: {
+    fontSize: fontSizes.FONT_SIZE_BASE, // 16 / 2.5,
+    lineHeight: fontSizes.FONT_SIZE_SMALL,
+  },
+});
 
 const initialCountdownTime = 30000;
 const tick = 1000;
@@ -60,50 +99,37 @@ class WordsPreviewView extends Component {
         onClosed={() => playGame()}
         isOpen={isOpen}
         style={styles.container}
-        position="top"
-        backdropPressToClose={false}
-        swipeArea={20}
+        title={translate('remember')}
       >
-        <View style={styles.words_preview_container}>
-          <View style={styles.words_preview_title}>
-            <Text style={styles.words_preview_title_text}>
-              {translate('remember')}
+        <ScrollView style={styles.words_preview_content_container}>
+          {words.map(item => (
+            <View key={_.uniqueId()} style={styles.words_preview_content_entry}>
+              <View style={styles.words_preview_content}>
+                <Text style={styles.words_preview_content_entry_text}>
+                  {item.translation}
+                </Text>
+              </View>
+              <View style={styles.words_preview_content}>
+                <Text style={styles.words_preview_content_entry_text}>
+                  {item.word}
+                </Text>
+              </View>
+            </View>
+          ))}
+        </ScrollView>
+        <TouchableOpacity
+          onPress={() => playGame()}
+          disabled={buttonCountdownTime > 0}
+          style={styles.words_preview_button}
+        >
+          <View>
+            <Text style={styles.words_preview_button_text}>
+              {buttonCountdownTime > 0
+                ? buttonCountdownTime / 1000
+                : translate('done')}
             </Text>
           </View>
-          <View style={styles.words_preview_title_hairline} />
-          <ScrollView style={styles.words_preview_content_container}>
-            {words.map(item => (
-              <View
-                key={_.uniqueId()}
-                style={styles.words_preview_content_entry}
-              >
-                <View style={styles.words_preview_content}>
-                  <Text style={styles.words_preview_content_entry_text}>
-                    {item.translation}
-                  </Text>
-                </View>
-                <View style={styles.words_preview_content}>
-                  <Text style={styles.words_preview_content_entry_text}>
-                    {item.word}
-                  </Text>
-                </View>
-              </View>
-            ))}
-          </ScrollView>
-          <TouchableOpacity
-            onPress={() => playGame()}
-            disabled={buttonCountdownTime > 0}
-            style={styles.words_preview_button}
-          >
-            <View >
-              <Text style={styles.words_preview_button_text}>
-                {buttonCountdownTime > 0
-                  ? buttonCountdownTime / 1000
-                  : translate('done')}
-              </Text>
-            </View>
-          </TouchableOpacity>
-          </View>
+        </TouchableOpacity>
       </Modal>
     );
   }

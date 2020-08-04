@@ -3,10 +3,9 @@
 import React, { Component } from 'react';
 import { View, Animated, Text } from 'react-native';
 import _ from 'lodash';
-
+import { StyleSheet } from 'react-native';
 import metrics from '../../config/metrics';
-import styles from './styles';
-import raw from '../../assets/animationAssetWords';
+import raw from '../../assets/animationAssetWords.json';
 
 const { screenHeight, screenWidth } = metrics;
 
@@ -29,7 +28,21 @@ for (let i = 0; i < words.length; i += 1) {
   arr.push(i);
 }
 
-class HomeAnimationContainer extends Component {
+const styles = StyleSheet.create({
+  background: {
+    alignItems: 'flex-start',
+    flex: 0,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    left: 0,
+    overflow: 'hidden',
+    position: 'absolute',
+    top: 0,
+  },
+});
+
+class HomeAnimation extends Component {
   constructor() {
     super();
     this.animatedValue = []; // (new Array(100)).map((value, index) => new Animated.Value(0));
@@ -86,4 +99,4 @@ class HomeAnimationContainer extends Component {
   }
 }
 
-export default HomeAnimationContainer;
+export default HomeAnimation;

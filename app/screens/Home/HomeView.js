@@ -8,12 +8,49 @@ import {
 } from '../../utils/androidBackButton';
 import AppStyles from '../../config/styles';
 import images from '../../config/images';
-import HomeAnimationContainer from './HomeAnimationContainer';
+import HomeAnimation from './HomeAnimation';
 import LoadingView from './LoadingView';
 import { translate } from '../../localizations';
-import styles from './styles';
+import { StyleSheet } from 'react-native';
 
-const { color } = AppStyles;
+const { color, fontSizes } = AppStyles;
+
+const styles = StyleSheet.create({
+  body: {
+    backgroundColor: color.COLOR_GREYISH,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
+  button: {
+    alignItems: 'center',
+    height: 100,
+    justifyContent: 'center',
+    padding: 10,
+    width: 100,
+  },
+  button_play: {
+    height: 150,
+    width: 150,
+  },
+  container: {
+    flex: 1,
+  },
+  container_buttons: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  title: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  title_sub: {},
+  title_text: {
+    color: color.COLOR_BLACK_TRANSP,
+    fontFamily: 'sans-serif-condensed',
+    fontSize: fontSizes.FONT_SIZE_LARGE,
+  },
+});
 
 class HomeView extends Component {
   componentDidMount() {
@@ -36,7 +73,7 @@ class HomeView extends Component {
     return (
       <View style={[styles.container, styles.body]}>
         <LoadingView isOpen={!isDBReady} />
-        <HomeAnimationContainer />
+        <HomeAnimation />
         <View style={[styles.container, styles.title]}>
           <Text style={styles.title_text}>FILLWORDS</Text>
         </View>

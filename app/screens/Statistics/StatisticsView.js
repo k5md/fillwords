@@ -1,17 +1,47 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
-import { SvgXml } from 'react-native-svg';
 import _ from 'lodash';
 import {
   handleAndroidBackButton,
   removeAndroidBackButtonHandler,
 } from '../../utils/androidBackButton';
-import images from '../../config/images';
 import dictionary from '../../utils/Dictionaries';
 import dictionariesConfig from '../../config/dictionaries';
 import { translate } from '../../localizations';
-import styles from './styles';
+
+import { StyleSheet } from 'react-native';
+import AppStyles from '../../config/styles';
+import { Footer, Header, Separator } from '../../elements';
+
+const { color, fontSizes } = AppStyles;
+
+const styles = StyleSheet.create({
+  body: {
+    backgroundColor: color.COLOR_GREYISH,
+    flex: 1,
+  },
+  body_item: {
+    backgroundColor: color.COLOR_WHITE,
+    borderRadius: 5,
+    margin: 20,
+    padding: 10,
+  },
+  body_item_text: {
+    fontFamily: 'Verdana',
+    fontSize: fontSizes.FONT_SIZE_SMALL, // 20px was default
+  },
+  container: {
+    flex: 1,
+  },
+  container_space_between: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  flow_right: {
+    alignItems: 'flex-end',
+  },
+});
 
 class StatisticsView extends Component {
   state = {
@@ -69,19 +99,10 @@ class StatisticsView extends Component {
 
     return (
       <View style={styles.container}>
-        <View style={styles.header}>
-          <View style={styles.header_item}>
-            <Text style={styles.header_text}>{translate('statistics')}</Text>
-          </View>
-          <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-            <SvgXml
-              width="30"
-              height="30"
-              fill="#66CCFF"
-              xml={images.icons.times}
-            />
-          </TouchableOpacity>
-        </View>
+        <Header
+          title={translate('statistics')}
+          onClose={() => navigation.navigate('Home')}
+        />
         <ScrollView style={[styles.container, styles.body]}>
           <View style={[styles.container, styles.body_item]}>
             {statisticsEntries.map(([displayName, value], itemIndex) => (
@@ -96,14 +117,12 @@ class StatisticsView extends Component {
                     </Text>
                   </View>
                 </View>
-                {itemIndex < statisticsEntries.length - 1 && (
-                  <View style={styles.hairline} />
-                )}
+                {itemIndex < statisticsEntries.length - 1 && <Separator />}
               </View>
             ))}
           </View>
         </ScrollView>
-        <View style={styles.footer} />
+        <Footer />
       </View>
     );
   }
