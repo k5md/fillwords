@@ -9,7 +9,7 @@ const { screenHeight, moderateScale } = metrics;
 const fontSizeBase = moderateScale(16);
 const fontSizeMini = fontSizeBase - 4;
 const fontSizeSmall = fontSizeBase + 4;
-const fontSizeNormal = fontSizeBase + 19;
+const fontSizeNormal = fontSizeBase + 20;
 const fontSizeLarge = fontSizeBase + 54;
 
 const AppStyles = {
