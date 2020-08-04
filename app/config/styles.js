@@ -4,9 +4,9 @@
  */
 import metrics from './metrics';
 
-const { screenHeight } = metrics;
+const { screenHeight, moderateScale } = metrics;
 
-const fontSizeBase = Math.floor(screenHeight / 60);
+const fontSizeBase = moderateScale(16);
 const fontSizeMini = fontSizeBase - 4;
 const fontSizeSmall = fontSizeBase + 4;
 const fontSizeNormal = fontSizeBase + 19;
