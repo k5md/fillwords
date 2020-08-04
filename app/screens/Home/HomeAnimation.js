@@ -5,11 +5,14 @@ import { View, Animated, Text } from 'react-native';
 import _ from 'lodash';
 import { StyleSheet } from 'react-native';
 import metrics from '../../config/metrics';
+import AppStyles from '../../config/styles';
 import raw from '../../assets/animationAssetWords.json';
+
+const { fontSizes } = AppStyles;
 
 const { screenHeight, screenWidth } = metrics;
 
-const fontSize = Math.floor(screenHeight / 40);
+const fontSize = fontSizes.FONT_SIZE_BASE;
 const lettersPerLine = Math.ceil(screenWidth / fontSize);
 const linesPerPage = Math.ceil(screenHeight / fontSize) + 13;
 const lettersPerPage = lettersPerLine * linesPerPage;

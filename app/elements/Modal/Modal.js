@@ -27,7 +27,7 @@ const Modal = ({
       <View style={styles.title}>
         <Text style={styles.title_text}>{title}</Text>
       </View>
-      <Separator style={styles.hairline}/>
+      <Separator style={styles.hairline} />
       <View style={[styles.content, contentStyle]}>{children}</View>
     </View>
   </ModalBox>
