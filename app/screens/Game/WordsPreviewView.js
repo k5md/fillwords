@@ -59,19 +59,19 @@ class WordsPreviewView extends Component {
       <Modal
         onClosed={() => playGame()}
         isOpen={isOpen}
-        style={styles.words_preview_container}
+        style={styles.container}
         position="top"
         backdropPressToClose={false}
         swipeArea={20}
       >
-        <View>
+        <View style={styles.words_preview_container}>
           <View style={styles.words_preview_title}>
             <Text style={styles.words_preview_title_text}>
               {translate('remember')}
             </Text>
           </View>
           <View style={styles.words_preview_title_hairline} />
-          <ScrollView>
+          <ScrollView style={styles.words_preview_content_container}>
             {words.map(item => (
               <View
                 key={_.uniqueId()}
@@ -93,8 +93,9 @@ class WordsPreviewView extends Component {
           <TouchableOpacity
             onPress={() => playGame()}
             disabled={buttonCountdownTime > 0}
+            style={styles.words_preview_button}
           >
-            <View style={styles.words_preview_button}>
+            <View >
               <Text style={styles.words_preview_button_text}>
                 {buttonCountdownTime > 0
                   ? buttonCountdownTime / 1000
@@ -102,7 +103,7 @@ class WordsPreviewView extends Component {
               </Text>
             </View>
           </TouchableOpacity>
-        </View>
+          </View>
       </Modal>
     );
   }

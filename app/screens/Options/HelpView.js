@@ -12,13 +12,13 @@ const HelpView = props => {
     <Modal
       isOpen={showHelp}
       onClosed={() => showHelp && toggleShowHelp()}
-      style={styles.words_preview_container}
+      style={styles.help_modal_container}
       position="top"
       backdropPressToClose={false}
       backButtonClose={false}
       swipeArea={20}
     >
-      <View>
+      <View style={styles.words_preview_container}>
         <View style={styles.words_preview_title}>
           <Text style={styles.words_preview_title_text}>
             {translate('help')}

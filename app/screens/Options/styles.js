@@ -60,6 +60,12 @@ const styles = StyleSheet.create({
   help_text: {
     fontSize: fontSizes.FONT_SIZE_BASE,
   },
+  help_modal_container: {
+    marginTop: '15%',
+    height: '80%',
+    width: '80%',
+    backgroundColor: 'transparent',
+  },
   words_preview_button: {
     alignItems: 'center',
     backgroundColor: color.COLOR_WHITE,
@@ -73,18 +79,15 @@ const styles = StyleSheet.create({
     fontSize: fontSizes.FONT_SIZE_BASE, // 8
   },
   words_preview_container: {
-    alignItems: 'center',
+    flex: 1,
     borderColor: color.COLOR_BLACK_TRANSP,
     borderRadius: 1,
     borderWidth: 2,
-    display: 'flex',
-    height: '80%',
-    justifyContent: 'center',
-    marginTop: '15%',
     shadowColor: color.COLOR_GREY_TRANSP,
     shadowOpacity: 0.4,
     shadowRadius: 10,
-    width: '80%',
+    justifyContent: 'center',
+    backgroundColor: color.COLOR_WHITE,
   },
   words_preview_title: {
     alignItems: 'center',

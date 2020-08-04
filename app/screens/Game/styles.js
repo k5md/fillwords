@@ -115,9 +115,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   words_preview_button: {
-    margin: 0,
-    marginLeft: '10%',
-    marginRight: '10%',
+    marginHorizontal: '10%',
+    marginVertical: '5%',
+    padding: 5,
     borderWidth: 2,
     borderRadius: 1,
     borderColor: color.COLOR_BLACK_TRANSP,
@@ -129,23 +129,21 @@ const styles = StyleSheet.create({
     fontSize: fontSizes.FONT_SIZE_BASE, // 8
   },
   words_preview_container: {
-    alignItems: 'center',
+    flex: 1,
     borderColor: color.COLOR_BLACK_TRANSP,
     borderRadius: 1,
     borderWidth: 2,
-    display: 'flex',
-    height: '80%',
-    justifyContent: 'center',
-    marginTop: '15%',
     shadowColor: color.COLOR_GREY_TRANSP,
     shadowOpacity: 0.4,
     shadowRadius: 10,
-    width: '80%',
+    justifyContent: 'center',
+  },
+  words_preview_content_container: {
+    flex: 1,
   },
   words_preview_content: {
-    marginLeft: '2%',
-    marginTop: '2%',
-    width: '50%',
+    marginHorizontal: '5%',
+    marginVertical: '2%',
   },
   words_preview_content_entry: {
     flexDirection: 'row',
