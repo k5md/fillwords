@@ -21,3 +21,9 @@
 
 #-keep class com.google.android.gms.** { *; }
 #-dontwarn com.google.android.gms.**
+
+-keep public class com.horcrux.svg.** { *; }
+-dontwarn com.horcrux.svg.**
+
+-keep public class com.reactnative.community.viewpager2.** { *; }
+-dontwarn com.reactnative.community.viewpager2.**
