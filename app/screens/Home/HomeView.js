@@ -64,7 +64,6 @@ class HomeView extends Component {
 
   componentWillUnmount() {
     removeAndroidBackButtonHandler();
-    // console.log('unmounting homeview');
   }
 
   render() {

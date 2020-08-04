@@ -52,9 +52,7 @@ class StatisticsView extends Component {
     const { languagePack, navigation } = this.props;
 
     handleAndroidBackButton(() => {
-      // console.log('back');
       navigation.navigate('Home');
-      // console.log('clearing');
     });
 
     const statisticsEntries = [
@@ -89,7 +87,6 @@ class StatisticsView extends Component {
   }
 
   componentWillUnmount() {
-    // console.log('unmounting statistics');
     removeAndroidBackButtonHandler();
   }
 

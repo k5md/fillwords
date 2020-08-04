@@ -1,6 +1,5 @@
 /* eslint no-underscore-dangle: ["error", { "allow": ["_dictionaryName"] }] */
 
-import { dispatch } from 'redux';
 import SQLite from 'react-native-sqlite-storage';
 import dictionariesConfig from '../config/dictionaries';
 import configureStore from '../store/configureStore';
@@ -48,7 +47,6 @@ class Dictionaries {
 
     const { dictionaryName } = this;
     const db = await this.storage;
-    // console.log(`prepopulating ${dictionaryName}`);
 
     try {
       const countResults = await db.executeSql(
@@ -56,7 +54,6 @@ class Dictionaries {
         [],
       );
       const count = Object.values(countResults[0].rows.item(0))[0];
-      // console.log('number of entries in', dictionaryName, count);
 
       if (
         count !== dictionariesConfig.DICTIONARIES[dictionaryName].entriesCount
@@ -68,7 +65,6 @@ class Dictionaries {
         );
       }
     } catch (e) {
-      // console.log(e);
       store.dispatch(dbNotReady());
       const dictionary = dictionaries(dictionaryName);
 
@@ -120,7 +116,7 @@ class Dictionaries {
       [],
     );
     const entry = results[0].rows.item(0);
-    // console.log(selector, specifier, entry);
+
     return entry;
   }
 
@@ -152,7 +148,7 @@ class Dictionaries {
       `UPDATE ${dictionaryName} SET ${modifier} WHERE ${specifier}`,
       [],
     );
-    // console.log(selector, update, results);
+
     return results;
   }
 
@@ -170,7 +166,7 @@ class Dictionaries {
       `UPDATE ${dictionaryName} SET ${modifier}`,
       [],
     );
-    // console.log(selector, update, results);
+
     return results;
   }
 }

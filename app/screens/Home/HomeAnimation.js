@@ -55,10 +55,6 @@ class HomeAnimation extends Component {
     this.animate();
   }
 
-  componentWillUnmount() {
-    // console.log('unmounting homeview animation');
-  }
-
   animate() {
     const samples = _.sampleSize(arr, 25);
 
