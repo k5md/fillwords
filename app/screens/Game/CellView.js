@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   cell_backface: {},
   cell_container: {
     height: '100%',
-    padding: 5,
+    padding: 2,
     width: '100%',
   },
   cell_outer_container: {
@@ -35,7 +35,9 @@ const styles = StyleSheet.create({
   },
   cell_text: {
     color: color.COLOR_GREYISH,
-    fontSize: fontSizes.FONT_SIZE_NORMAL,
+    fontSize: fontSizes.FONT_SIZE_SMALL,
+    textAlign: 'center',
+    textAlignVertical: 'center',
   },
 });
 

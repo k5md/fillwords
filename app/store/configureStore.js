@@ -11,7 +11,7 @@ const config = {
   key: 'not-root', // refer to redux-persist issue on rp converting arrays in root storage to plain objects
   storage: AsyncStorage,
   blacklist: ['nav', 'gameReducer'],
-  debug: __DEV__, // to get useful logging
+  debug: __DEV__,
 };
 
 const middleware = [];

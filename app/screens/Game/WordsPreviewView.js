@@ -13,34 +13,34 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  words_preview_button: {
-    marginHorizontal: '10%',
-    marginVertical: '5%',
-    padding: 5,
-    borderWidth: 2,
-    borderRadius: 1,
-    borderColor: color.COLOR_BLACK_TRANSP,
-    backgroundColor: color.COLOR_WHITE,
-    justifyContent: 'center',
+  button: {
     alignItems: 'center',
+    backgroundColor: color.COLOR_WHITE,
+    borderColor: color.COLOR_BLACK_TRANSP,
+    borderWidth: 2,
+    justifyContent: 'center',
+    borderRadius: 5,
+    marginHorizontal: 20,
+    marginTop: 10,
+    marginBottom: 20,
   },
-  words_preview_button_text: {
-    fontSize: fontSizes.FONT_SIZE_BASE, // 8
+  button_text: {
+    fontSize: fontSizes.FONT_SIZE_BASE,
   },
-  words_preview_content_container: {
+  content_container: {
     marginTop: '2%',
     flex: 1,
   },
-  words_preview_content: {
+  content: {
     marginHorizontal: '5%',
     marginVertical: '2%',
   },
-  words_preview_content_entry: {
+  content_entry: {
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  words_preview_content_entry_text: {
-    fontSize: fontSizes.FONT_SIZE_BASE, // 16 / 2.5,
+  content_entry_text: {
+    fontSize: fontSizes.FONT_SIZE_BASE,
     lineHeight: fontSizes.FONT_SIZE_SMALL,
   },
 });
@@ -101,18 +101,16 @@ class WordsPreviewView extends Component {
         style={styles.container}
         title={translate('remember')}
       >
-        <ScrollView style={styles.words_preview_content_container}>
+        <ScrollView style={styles.content_container}>
           {words.map(item => (
-            <View key={_.uniqueId()} style={styles.words_preview_content_entry}>
-              <View style={styles.words_preview_content}>
-                <Text style={styles.words_preview_content_entry_text}>
+            <View key={_.uniqueId()} style={styles.content_entry}>
+              <View style={styles.content}>
+                <Text style={styles.content_entry_text}>
                   {item.translation}
                 </Text>
               </View>
-              <View style={styles.words_preview_content}>
-                <Text style={styles.words_preview_content_entry_text}>
-                  {item.word}
-                </Text>
+              <View style={styles.content}>
+                <Text style={styles.content_entry_text}>{item.word}</Text>
               </View>
             </View>
           ))}
@@ -120,10 +118,9 @@ class WordsPreviewView extends Component {
         <TouchableOpacity
           onPress={() => playGame()}
           disabled={buttonCountdownTime > 0}
-          style={styles.words_preview_button}
         >
-          <View>
-            <Text style={styles.words_preview_button_text}>
+          <View style={styles.button}>
+            <Text style={styles.button_text}>
               {buttonCountdownTime > 0
                 ? buttonCountdownTime / 1000
                 : translate('done')}

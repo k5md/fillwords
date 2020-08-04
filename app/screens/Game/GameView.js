@@ -32,9 +32,10 @@ class GameView extends Component {
   state = {
     headerView: defer(), // contains layout object after the view is mounted
     wordsView: defer(),
-    fieldWidth: 0,
-    fieldHeight: 0,
   };
+
+  fieldWidth = 0;
+  fieldHeight = 0;
 
   async componentDidMount() {
     const {
@@ -116,7 +117,8 @@ class GameView extends Component {
     const marginX = Math.floor((width - size * cols) / 2);
     const marginY = Math.floor((height - size * rows) / 2);
 
-    this.setState({ fieldHeight: height, fieldWidth: width });
+    this.fieldHeight = height;
+    this.fieldWidth = width;
 
     const cells = [];
     for (let row = 0; row < rows; row += 1) {
@@ -197,8 +199,8 @@ class GameView extends Component {
         />
         <FieldContainer
           fieldStyle={{
-            width: this.state.fieldWidth,
-            height: this.state.fieldHeight,
+            width: this.fieldWidth,
+            height: this.fieldHeight,
           }}
         />
 

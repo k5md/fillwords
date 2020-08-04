@@ -21,14 +21,16 @@ const styles = StyleSheet.create({
   body_item: {
     backgroundColor: color.COLOR_WHITE,
     borderRadius: 5,
-    margin: 20,
-    padding: 10,
+    marginHorizontal: 20,
+    marginTop: 10,
+    marginBottom: 20,
   },
   container: {
     flex: 1,
   },
   help_text: {
     fontSize: fontSizes.FONT_SIZE_BASE,
+    textAlign: 'justify',
   },
 
   button: {

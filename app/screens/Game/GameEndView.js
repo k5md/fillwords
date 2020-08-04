@@ -11,47 +11,34 @@ import { StyleSheet } from 'react-native';
 const { color, fontSizes } = AppStyles;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  words_preview_button: {
-    marginHorizontal: '10%',
-    marginVertical: '5%',
-    padding: 5,
-    borderWidth: 2,
-    borderRadius: 1,
-    borderColor: color.COLOR_BLACK_TRANSP,
-    backgroundColor: color.COLOR_WHITE,
-    justifyContent: 'center',
+  button: {
     alignItems: 'center',
-  },
-  words_preview_button_text: {
-    fontSize: fontSizes.FONT_SIZE_BASE, // 8
-  },
-  words_preview_container: {
-    flex: 1,
+    backgroundColor: color.COLOR_WHITE,
     borderColor: color.COLOR_BLACK_TRANSP,
-    borderRadius: 1,
     borderWidth: 2,
-    shadowColor: color.COLOR_GREY_TRANSP,
-    shadowOpacity: 0.4,
-    shadowRadius: 10,
     justifyContent: 'center',
+    borderRadius: 5,
+    marginHorizontal: 20,
+    marginTop: 10,
+    marginBottom: 20,
   },
-  words_preview_content_container: {
+  button_text: {
+    fontSize: fontSizes.FONT_SIZE_BASE,
+  },
+  content_container: {
     marginTop: '2%',
     flex: 1,
   },
-  words_preview_content: {
+  content: {
     marginHorizontal: '5%',
     marginVertical: '2%',
   },
-  words_preview_content_entry: {
+  content_entry: {
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  words_preview_content_entry_text: {
-    fontSize: fontSizes.FONT_SIZE_BASE, // 16 / 2.5,
+  content_entry_text: {
+    fontSize: fontSizes.FONT_SIZE_BASE,
     lineHeight: fontSizes.FONT_SIZE_SMALL,
   },
 });
@@ -87,16 +74,14 @@ class GameEndView extends Component {
         onOpened={() => this.componentDidMount()}
         title={translate('congratulations')}
       >
-        <ScrollView style={styles.words_preview_content_container}>
+        <ScrollView style={styles.content_container}>
           {words.map(item => (
-            <View key={_.uniqueId()} style={styles.words_preview_content_entry}>
-              <View style={styles.words_preview_content}>
-                <Text style={styles.words_preview_content_entry_text}>
-                  {item.word}
-                </Text>
+            <View key={_.uniqueId()} style={styles.content_entry}>
+              <View style={styles.content}>
+                <Text style={styles.content_entry_text}>{item.word}</Text>
               </View>
-              <View style={styles.words_preview_content}>
-                <Text style={styles.words_preview_content_entry_text}>
+              <View style={styles.content}>
+                <Text style={styles.content_entry_text}>
                   {`${item.srsStatus}->${
                     item.discarded ? item.srsStatus : item.srsStatus + 1
                   }`}
@@ -107,12 +92,10 @@ class GameEndView extends Component {
         </ScrollView>
         <TouchableOpacity
           onPress={() => this.closeModal()}
-          style={styles.words_preview_button}
+          style={styles.button}
         >
           <View>
-            <Text style={styles.words_preview_button_text}>
-              {translate('done')}
-            </Text>
+            <Text style={styles.button_text}>{translate('done')}</Text>
           </View>
         </TouchableOpacity>
       </Modal>

@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   },
   entry_text: {
     fontSize: fontSizes.FONT_SIZE_BASE,
-    lineHeight: fontSizes.FONT_SIZE_SMALL,
+    textAlign: 'center',
   },
 });
 
