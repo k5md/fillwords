@@ -44,6 +44,10 @@ class FieldView extends Component {
     && FieldView.isNeighbour(cells[cellIndex], cells[lastSelectedCellIndex])
   );
 
+  state = {
+    layout: null,
+  };
+
   constructor(props) {
     super(props);
 
@@ -65,9 +69,11 @@ class FieldView extends Component {
           selectCell,
         } = this.props;
 
+        const { layout } = this.state;
+
         const { x0, y0 } = gestureState;
 
-        const cellIndex = FieldView.findCellIndex(x0, y0, cells);
+        const cellIndex = FieldView.findCellIndex(x0, y0 - layout.y, cells);
 
         if (cellIndex !== -1) {
           selectCell(cellIndex);
@@ -83,9 +89,11 @@ class FieldView extends Component {
           selectCell,
         } = this.props;
 
+        const { layout } = this.state;
+
         const [x0, y0] = [gestureState.moveX, gestureState.moveY];
 
-        const cellIndex = FieldView.findCellIndex(x0, y0, cells);
+        const cellIndex = FieldView.findCellIndex(x0, y0 - layout.y, cells);
         const lastSelectedCellIndex = selectedCells[selectedCells.length - 1];
 
         if (FieldView.isSelectable(cellIndex, lastSelectedCellIndex, cells)) {
@@ -130,11 +138,15 @@ class FieldView extends Component {
     });
   }
 
+  onLayout = ({ nativeEvent: { layout }}) => {
+    this.setState({ layout });
+  }
+
   render() {
     const { cells, fieldStyle } = this.props;
-
+    console.log('fieldStyle', fieldStyle);
     return (
-      <View style={[styles.field, fieldStyle]} {...this.panResponder.panHandlers}>
+      <View style={[styles.field, fieldStyle]} {...this.panResponder.panHandlers} onLayout={this.onLayout}>
         {cells.map((item, index) => <CellContainer key={`${item.row}${item.col}`} cellIndex={index} />)}
       </View>
     );

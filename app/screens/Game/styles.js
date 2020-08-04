@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   },
   field: {
     backgroundColor: color.COLOR_GREYISH,
-    flex: 5,
+    flex: 7,
   },
   game_end_container: {
     alignItems: 'center',
@@ -96,9 +96,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     padding: 10,
-    position: 'absolute',
-    right: 0,
-    top: 0,
     width: '100%',
   },
   word: {

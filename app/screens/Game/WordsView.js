@@ -26,10 +26,6 @@ class WordsView extends Component {
     }
   }
 
-  test(e) {
-    console.log(e);
-  }
-
   render() {
     const {
       currentWordIndex,
@@ -41,7 +37,7 @@ class WordsView extends Component {
 
     return (
       words.length > 0 && (
-      <View nativeID="words" style={styles.words} onLayout={(e) => { this.test(e); }}>
+      <View nativeID="words" style={styles.words} onLayout={onLayout}>
         <View style={[styles.button_left, currentWordIndex <= 0 && styles.button_disabled]}>
           <TouchableOpacity
             onPress={() => setCurrentWordIndex(currentWordIndex - 1)}
