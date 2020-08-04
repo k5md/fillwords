@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import { SvgUri } from 'react-native-svg';
+import { SvgXml } from 'react-native-svg';
 import _ from 'lodash';
 import { handleAndroidBackButton, removeAndroidBackButtonHandler } from '../../utils/androidBackButton';
 import images from '../../config/images';
@@ -63,11 +63,11 @@ class StatisticsView extends Component {
             <TouchableOpacity
               onPress={() => navigation.navigate('Home')}
             >
-              <SvgUri
+              <SvgXml
                 width="30"
                 height="30"
                 fill="#66CCFF"
-                svgXmlData={images.icons.times}
+                xml={images.icons.times}
               />
             </TouchableOpacity>
           </View>

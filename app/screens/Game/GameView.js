@@ -4,7 +4,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 // import firebase from 'react-native-firebase';
-import { SvgUri } from 'react-native-svg';
+import { SvgXml } from 'react-native-svg';
 import Field from '../../lib/field';
 import dictionary from '../../utils/Dictionaries';
 import dictionariesConfig from '../../config/dictionaries';
@@ -195,11 +195,11 @@ class GameView extends Component {
                 navigation.navigate('Home');
               }}
             >
-              <SvgUri
+              <SvgXml
                 width="30"
                 height="30"
                 fill="#66CCFF"
-                svgXmlData={images.icons.times}
+                xml={images.icons.times}
               />
             </TouchableOpacity>
           </View>

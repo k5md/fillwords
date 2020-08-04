@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import { SvgUri } from 'react-native-svg';
+import { SvgXml } from 'react-native-svg';
 import { handleAndroidBackButton, removeAndroidBackButtonHandler } from '../../utils/androidBackButton';
 import AppStyles from '../../config/styles';
 import images from '../../config/images';
@@ -55,11 +55,11 @@ class HomeView extends Component {
             style={styles.button}
             onPress={() => navigation.navigate('Statistics')}
           >
-            <SvgUri
+            <SvgXml
               width="75"
               height="75"
               fill={color.COLOR_BLACK_TRANSP}
-              svgXmlData={images.icons.chartPie}
+              xml={images.icons.chartPie}
             />
           </TouchableOpacity>
           <TouchableOpacity
@@ -67,22 +67,22 @@ class HomeView extends Component {
             onPress={() => navigation.navigate('Game')}
             disabled={!isDBReady}
           >
-            <SvgUri
+            <SvgXml
               width="100"
               height="100"
               fill={color.COLOR_BLACK_TRANSP}
-              svgXmlData={images.icons.play}
+              xml={images.icons.play}
             />
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.button}
             onPress={() => navigation.navigate('Options')}
           >
-            <SvgUri
+            <SvgXml
               width="75"
               height="75"
               fill={color.COLOR_BLACK_TRANSP}
-              svgXmlData={images.icons.cog}
+              xml={images.icons.cog}
             />
           </TouchableOpacity>
         </View>

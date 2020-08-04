@@ -10,7 +10,7 @@ import {
   Slider,
   TouchableOpacity,
 } from 'react-native';
-import { SvgUri } from 'react-native-svg';
+import { SvgXml } from 'react-native-svg';
 import PropTypes from 'prop-types';
 import { handleAndroidBackButton, removeAndroidBackButtonHandler } from '../../utils/androidBackButton';
 import images from '../../config/images';
@@ -79,11 +79,11 @@ class OptionsView extends Component {
           <TouchableOpacity
             onPress={() => navigation.navigate('Home')}
           >
-            <SvgUri
+            <SvgXml
               width="30"
               height="30"
               fill="#66CCFF"
-              svgXmlData={images.icons.times}
+              xml={images.icons.times}
             />
           </TouchableOpacity>
         </View>
