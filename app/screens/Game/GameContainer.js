@@ -3,7 +3,11 @@ import { connect } from 'react-redux';
 import * as gameActions from '../../actions/gameActions';
 import GameView from './GameView';
 
-const GameContainer = props => (<GameView {...props} />);
+class GameContainer extends React.Component {
+  render() {
+    return (<GameView {...this.props} />);
+  }
+}
 
 function mapStateToProps(state) {
   return {

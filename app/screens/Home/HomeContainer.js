@@ -2,7 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import HomeView from './HomeView';
 
-const HomeContainer = props => (<HomeView {...props} />);
+
+class HomeContainer extends React.Component {
+  render() {
+    return (<HomeView {...this.props} />);
+  }
+}
 
 function mapStateToProps(state) {
   return {

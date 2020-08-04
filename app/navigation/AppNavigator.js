@@ -1,17 +1,6 @@
-import React, { Component } from 'react';
+import { createAppContainer } from 'react-navigation';
 import NavigationStack from './NavigationStack';
-import NavigationService from './NavigationService';
 
-class AppNavigator extends Component {
-  render() {
-    return (
-      <NavigationStack
-        ref={(navigatorRef) => {
-          NavigationService.setTopLevelNavigator(navigatorRef);
-        }}
-      />
-    );
-  }
-}
+const AppContainer = createAppContainer(NavigationStack);
 
-export default AppNavigator;
+export default AppContainer;

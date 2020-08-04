@@ -3,7 +3,11 @@ import { connect } from 'react-redux';
 import * as optionsActions from '../../actions/optionsActions';
 import OptionsView from './OptionsView';
 
-const OptionsContainer = props => (<OptionsView {...props} />);
+class OptionsContainer extends React.Component {
+  render() {
+    return (<OptionsView {...this.props} />);
+  }
+}
 
 function mapStateToProps(state) {
   return {
