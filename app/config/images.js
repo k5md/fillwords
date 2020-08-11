@@ -1,7 +1,6 @@
 /* App config for images */
 const images = {
   icons: {
-    // logo: require('../assets/images/icons/logo.png'),
     play:
       '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M 0,512 V 512 0 l 448,256" style="stroke:none;stroke-width:1;stroke-opacity:1" /></svg>',
     cog:
