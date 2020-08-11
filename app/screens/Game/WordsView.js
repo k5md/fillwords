@@ -17,20 +17,22 @@ import { StyleSheet } from 'react-native';
 const { color, fontSizes } = AppStyles;
 
 const styles = StyleSheet.create({
+  button: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    minWidth: 50,
+    opacity: 0.7,
+    backgroundColor: 'transparent',
+    position: 'absolute',
+  },
   button_disabled: {
     opacity: 0,
   },
   button_left: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    minWidth: 50,
-    opacity: 0.7,
+    left: 0,
   },
   button_right: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    minWidth: 50,
-    opacity: 0.7,
+    right: 0,
   },
   button_text: {
     lineHeight: fontSizes.FONT_SIZE_LARGE,
@@ -54,8 +56,8 @@ const styles = StyleSheet.create({
   words: {
     backgroundColor: color.COLOR_GREYISH,
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: 'column',
+    justifyContent: 'center',
   },
 });
 
@@ -82,6 +84,7 @@ class WordsView extends Component {
         <View nativeID="words" style={styles.words} onLayout={onLayout}>
           <View
             style={[
+              styles.button,
               styles.button_left,
               currentWordIndex <= 0 && styles.button_disabled,
             ]}
@@ -118,9 +121,9 @@ class WordsView extends Component {
               </View>
             ))}
           </ViewPager>
-
           <View
             style={[
+              styles.button,
               styles.button_right,
               currentWordIndex >= words.length - 1 && styles.button_disabled,
             ]}
