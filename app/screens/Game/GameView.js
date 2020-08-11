@@ -156,28 +156,20 @@ class GameView extends Component {
     removeAndroidBackButtonHandler();
   }
 
-  measureHeaderView = e => {
-    const {
-      nativeEvent: { layout },
-    } = e;
+  measureHeaderView = ({ nativeEvent: { layout } }) => {
     const { headerView } = this.state;
-    if (headerView) {
-      this.setState({
-        headerView: headerView.resolve({ layout }),
-      });
+    if (!headerView) {
+      return;
     }
+    this.setState({ headerView: headerView.resolve({ layout }) });
   };
 
-  measureWordsView = e => {
-    const {
-      nativeEvent: { layout },
-    } = e;
+  measureWordsView = ({ nativeEvent: { layout } }) => {
     const { wordsView } = this.state;
-    if (wordsView) {
-      this.setState({
-        wordsView: wordsView.resolve({ layout }),
-      });
+    if (!wordsView) {
+      return;
     }
+    this.setState({ wordsView: wordsView.resolve({ layout }) });
   };
 
   render() {
@@ -193,9 +185,7 @@ class GameView extends Component {
             clearGame();
             navigation.navigate('Home');
           }}
-          onLayout={e => {
-            this.measureHeaderView(e);
-          }}
+          onLayout={this.measureHeaderView}
         />
         <FieldContainer
           fieldStyle={{
@@ -204,14 +194,7 @@ class GameView extends Component {
           }}
         />
 
-        <Separator color={color.COLOR_BLACK_TRANSP} />
-
-        <View
-          onLayout={e => {
-            this.measureWordsView(e);
-          }}
-          style={styles.container}
-        >
+        <View onLayout={this.measureWordsView} style={styles.container}>
           <WordsContainer />
         </View>
 
