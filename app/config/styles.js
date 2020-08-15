@@ -4,13 +4,13 @@
  */
 import metrics from './metrics';
 
-const { screenHeight, moderateScale } = metrics;
+const { moderateScale } = metrics;
 
 const fontSizeBase = moderateScale(16);
 const fontSizeMini = fontSizeBase - 4;
 const fontSizeSmall = fontSizeBase + 4;
 const fontSizeNormal = fontSizeBase + 20;
-const fontSizeLarge = fontSizeBase + 54;
+const fontSizeLarge = fontSizeBase + 30;
 
 const AppStyles = {
   color: {
