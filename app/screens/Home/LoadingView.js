@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { Modal } from '../../elements';
-import SplashScreen from 'react-native-splash-screen';
+import BootSplash from "react-native-bootsplash";
 import AppStyles from '../../config/styles';
 import { translate } from '../../localizations';
 import { StyleSheet } from 'react-native';
@@ -27,8 +27,8 @@ const styles = StyleSheet.create({
 
 const LoadingView = props => {
   useEffect(() => {
-    SplashScreen.hide();
-  });
+    BootSplash.hide({ fade: true });
+  }, []);
 
   const { isOpen } = props;
 

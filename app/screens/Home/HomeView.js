@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
 
 class HomeView extends Component {
   componentDidMount() {
-    handleAndroidBackButton(() =>
+    this.backHandler = handleAndroidBackButton(() =>
       Alert.alert(translate('confirmExit'), translate('confirmExitQuestion'), [
         { text: translate('cancel'), style: 'cancel' },
         { text: translate('ok'), onPress: () => BackHandler.exitApp() },
@@ -63,7 +63,7 @@ class HomeView extends Component {
   }
 
   componentWillUnmount() {
-    removeAndroidBackButtonHandler();
+    removeAndroidBackButtonHandler(this.backHandler);
   }
 
   render() {

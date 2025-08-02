@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   // ViewPagerAndroid
 } from 'react-native';
-import ViewPager from '@react-native-community/viewpager';
+import ViewPager from 'react-native-pager-view';
 import PropTypes from 'prop-types';
 import AppStyles from '../../config/styles';
 import { StyleSheet } from 'react-native';

@@ -6,19 +6,17 @@ import { BackHandler } from 'react-native';
  * back button
  * @param  {Function} callback The function to call on click
  */
-const handleAndroidBackButton = callback => {
-  BackHandler.addEventListener('hardwareBackPress', () => {
-    callback();
-    return true;
-  });
-};
+const handleAndroidBackButton = callback => BackHandler.addEventListener('hardwareBackPress', () => {
+  callback();
+  return true;
+});
 
 /**
  * Removes the event listener in order not to add a new one
  * every time the view component re-mounts
  */
-const removeAndroidBackButtonHandler = () => {
-  BackHandler.removeEventListener('hardwareBackPress', () => {});
+const removeAndroidBackButtonHandler = (backHandler) => {
+  backHandler.remove();
 };
 
 export { handleAndroidBackButton, removeAndroidBackButtonHandler };

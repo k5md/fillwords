@@ -51,7 +51,7 @@ class StatisticsView extends Component {
   async componentDidMount() {
     const { languagePack, navigation } = this.props;
 
-    handleAndroidBackButton(() => {
+    this.backHandler = handleAndroidBackButton(() => {
       navigation.navigate('Home');
     });
 
@@ -87,7 +87,7 @@ class StatisticsView extends Component {
   }
 
   componentWillUnmount() {
-    removeAndroidBackButtonHandler();
+    removeAndroidBackButtonHandler(this.backHandler);
   }
 
   render() {

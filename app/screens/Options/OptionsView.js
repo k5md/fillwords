@@ -6,10 +6,10 @@ import {
   View,
   Text,
   ScrollView,
-  Picker,
-  Slider,
   TouchableOpacity,
 } from 'react-native';
+import Slider from '@react-native-community/slider';
+import { Picker } from '@react-native-picker/picker';
 import PropTypes from 'prop-types';
 import {
   handleAndroidBackButton,
@@ -40,6 +40,9 @@ const styles = StyleSheet.create({
     fontFamily: 'Verdana',
     fontSize: fontSizes.FONT_SIZE_SMALL,
   },
+  body_picker: {
+    color: '#000000',
+  },
   container: {
     flex: 1,
   },
@@ -57,7 +60,7 @@ class OptionsView extends Component {
   }
 
   componentDidMount() {
-    handleAndroidBackButton(() => {
+    this.backHandler = handleAndroidBackButton(() => {
       const { showHelp, toggleShowHelp, navigation } = this.props;
 
       if (showHelp) {
@@ -68,7 +71,7 @@ class OptionsView extends Component {
   }
 
   componentWillUnmount() {
-    removeAndroidBackButtonHandler();
+    removeAndroidBackButtonHandler(this.backHandler);
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
@@ -104,6 +107,7 @@ class OptionsView extends Component {
               minimumValue={5}
               maximumValue={10}
               minimumTrackTintColor="#66CCFF"
+              maximumTrackTintColor="#000000"
               thumbTintColor="#66CCFF"
               value={rows}
               onValueChange={value => this.setState({ rows: value })}
@@ -118,6 +122,7 @@ class OptionsView extends Component {
               minimumValue={5}
               maximumValue={10}
               minimumTrackTintColor="#66CCFF"
+              maximumTrackTintColor="#000000"
               thumbTintColor="#66CCFF"
               value={cols}
               onValueChange={value => this.setState({ cols: value })}
@@ -131,6 +136,8 @@ class OptionsView extends Component {
             <Picker
               selectedValue={languagePack}
               onValueChange={dictionaryKey => setLanguagePack(dictionaryKey)}
+              style={styles.body_picker}
+              dropdownIconRippleColor="#FFFFFF"
             >
               {Object.keys(dictionariesConfig.DICTIONARIES).map(
                 dictionaryKey => (
@@ -177,7 +184,7 @@ class OptionsView extends Component {
             </TouchableOpacity>
           </View>
         </ScrollView>
-        <Footer title={`${translate('version')} 1.0`} />
+        <Footer title={`${translate('version')} 1.1`} />
         <HelpContainer />
       </View>
     );

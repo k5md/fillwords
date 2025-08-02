@@ -10,6 +10,7 @@ const { color, fontSizes } = AppStyles;
 
 const styles = StyleSheet.create({
   modal_compact: {
+    flex: 0,
     marginTop: '15%',
     height: '80%',
     width: '80%',

@@ -49,7 +49,7 @@ class GameView extends Component {
 
     const { headerView, wordsView } = this.state;
 
-    handleAndroidBackButton(() => {
+    this.backHandler = handleAndroidBackButton(() => {
       navigation.navigate('Home');
       clearGame();
     });
@@ -153,7 +153,7 @@ class GameView extends Component {
   }
 
   componentWillUnmount() {
-    removeAndroidBackButtonHandler();
+    removeAndroidBackButtonHandler(this.backHandler);
   }
 
   measureHeaderView = ({ nativeEvent: { layout } }) => {

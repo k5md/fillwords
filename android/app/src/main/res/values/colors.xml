@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="splashscreen_bg">#ebebeb</color>
+    <color name="bootsplash_background">#ebebeb</color>
     <color name="app_bg">#ebebeb</color>
 </resources>

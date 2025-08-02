@@ -15,7 +15,7 @@ This game is an awesome way to improve and expand your vocabulary, it comes with
 - English - Spanish
 - Spanish - English
 
-Each of them includes thousands of words, which, together with random generated fields grants nigh infinite replayability!
+Each of them includes thousands of words, together with random generated fields it grants nigh infinite replayability!
 
 ## Views
 
@@ -27,7 +27,7 @@ Main|Game|Statistics|Settings|
 
 In order to develop the application or build android .apk from the sources one should:
 1. Clone this repository
-2. Install dependencies with `npm install`
+2. Install dependencies with `npm ci`
 3. run Metro bundler with `react-native start`
 4. Connect an emulator or physical device via adb, like this (tested with [mEMU](https://www.memuplay.com/)):
 	- `adb connect 127.0.0.1:21503`

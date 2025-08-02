@@ -2,7 +2,7 @@
 
 import { createStore, compose, applyMiddleware } from 'redux';
 import { persistStore, persistCombineReducers } from 'redux-persist';
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createLogger } from 'redux-logger';
 
 import rootReducers from '../reducers'; // where reducers is a object of reducers
