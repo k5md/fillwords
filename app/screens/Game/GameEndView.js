@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, TouchableOpacity, View, ScrollView } from 'react-native';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { Modal } from '../../elements';
+import { Modal, AdsInlineBanner } from '../../elements';
 import dictionary from '../../utils/Dictionaries';
 import { translate } from '../../localizations';
 import AppStyles from '../../config/styles';
@@ -74,6 +74,7 @@ class GameEndView extends Component {
         onOpened={() => this.componentDidMount()}
         title={translate('congratulations')}
       >
+        <AdsInlineBanner />
         <ScrollView style={styles.content_container}>
           {words.map(item => (
             <View key={_.uniqueId()} style={styles.content_entry}>
