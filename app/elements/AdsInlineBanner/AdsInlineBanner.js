@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Dimensions } from "react-native";
 import { AdRequest, AdTheme, BannerAdSize, BannerView } from "yandex-mobile-ads";
+import { adUnitId } from './adsConfig.json';
 
 const AdsInlineBanner = () => {
   const adRequest = useMemo(() => new AdRequest({
@@ -13,11 +14,11 @@ const AdsInlineBanner = () => {
     })();
   }, []);
 
-  return adSize
+  return (adSize && adUnitId)
     ? (
       <BannerView
           size={adSize}
-          adUnitId={'R-M-16551059-1'}
+          adUnitId={adUnitId}
           adRequest={adRequest}
       />
     )
